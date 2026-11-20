@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L7 CONTROL | Controle Financeiro Pessoal Inteligente</title>
+<meta name="description" content="Organize seus gastos, acompanhe seu orçamento 50/30/20 e construa seu patrimônio em um só lugar.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root {
+  --bg-main: #080808;
+  --bg-card: #141414;
+  --bg-input: #1f1f1f;
+  --gold: #d4af37;
+  --gold-glow: rgba(212, 175, 55, 0.25);
+  --green: #4CAF50;
+  --red: #F44336;
+  --yellow: #FFC107;
+  --purple: #9C27B0;
+  --blue: #03A9F4;
+  --text-main: #ffffff;
+  --text-muted: #aaaaaa;
+  --text-sub: #777777;
+  --border-color: #262626;
+  --font: 'Poppins', sans-serif;
+  --max-w: 1200px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font); }
+html { scroll-behavior: smooth; background: var(--bg-main); color: var(--text-main); }
+body { overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+a { text-decoration: none; color: inherit; transition: 0.2s; }
+button { font-family: var(--font); cursor: pointer; border: none; }
+
+/* BOTÕES SAAS */
+.btn-gold {
+  background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
+  color: #000; font-weight: 700; padding: 14px 28px; border-radius: 12px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: 0 4px 20px var(--gold-glow); transition: 0.3s; font-size: 14px;
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4); }
+.btn-outline {
+  background: transparent; border: 1px solid var(--border-color); color: var(--text-main);
+  font-weight: 600; padding: 14px 28px; border-radius: 12px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  transition: 0.3s; font-size: 14px;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* HEADER SAAS */
+header.saas-header {
+  position: fixed; top: 0; left: 0; right: 0; height: 75px;
+  background: rgba(8, 8, 8, 0.9); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color); z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+}
+.header-container {
+  width: 100%; max-width: var(--max-w); padding: 0 20px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo-brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.logo-icon {
+  width: 38px; height: 38px; background: #1c1c1c; border: 1.5px solid var(--gold);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: var(--gold); box-shadow: 0 0 12px var(--gold-glow);
+}
+.logo-name { font-size: 18px; font-weight: 800; letter-spacing: 1.5px; color: var(--gold); }
+.nav-menu { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-menu a { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+.nav-menu a:hover { color: var(--gold); }
+.hamburger { display: none; font-size: 22px; color: var(--text-main); background: none; }
+.mobile-nav {
+  display: none; position: fixed; top: 75px; left: 0; right: 0;
+  background: #0f0f0f; border-bottom: 1px solid var(--border-color);
+  padding: 20px; flex-direction: column; gap: 16px; z-index: 999;
+}
+.mobile-nav.open { display: flex; }
+
+/* ROTEAMENTO VIEWS */
+.view-page { display: none; margin-top: 75px; flex: 1; }
+.view-page.active { display: block; }
+
+/* LANDING PAGE STYLES */
+.hero {
+  padding: 70px 20px 60px; max-width: var(--max-w); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+}
+.hero-content h1 {
+  font-size: 42px; line-height: 1.2; font-weight: 800; margin-bottom: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #aaaaaa 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-content p { font-size: 16px; color: var(--text-muted); line-height: 1.6; margin-bottom: 30px; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-preview {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 20px; padding: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px var(--gold-glow);
+}
+.section-wrapper { padding: 80px 20px; max-width: var(--max-w); margin: 0 auto; }
+.section-title { text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+.section-subtitle { text-align: center; font-size: 15px; color: var(--text-muted); max-width: 600px; margin: 0 auto 50px; line-height: 1.6; }
+.problem-grid, .steps-grid, .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.problem-card, .step-card, .feature-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 26px; border-radius: 16px; }
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; max-width: 880px; margin: 0 auto; }
+.price-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 36px 28px; display: flex; flex-direction: column; position: relative; }
+.price-card.featured { border-color: var(--gold); box-shadow: 0 0 30px var(--gold-glow); }
+.price-tag { font-size: 38px; font-weight: 800; margin: 15px 0; }
+.price-features { list-style: none; margin: 20px 0 30px; display: flex; flex-direction: column; gap: 12px; flex: 1; font-size: 14px; color: var(--text-muted); }
+.price-features i { color: var(--gold); margin-right: 8px; }
+.faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; }
+.faq-question { padding: 18px 22px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 15px; }
+.faq-answer { padding: 0 22px 18px; color: var(--text-muted); font-size: 14px; display: none; line-height: 1.6; }
+.faq-item.open .faq-answer { display: block; }
+footer.saas-footer { background: #050505; border-top: 1px solid var(--border-color); padding: 60px 20px 30px; }
+.footer-container { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }
+.footer-col h4 { font-size: 14px; color: var(--gold); margin-bottom: 16px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--text-muted); }
+.footer-bottom { text-align: center; padding-top: 25px; border-top: 1px solid var(--border-color); color: var(--text-sub); font-size: 12px; }
+.auth-container { max-width: 400px; margin: 50px auto; background: var(--bg-card); border: 1px solid var(--border-color); padding: 35px; border-radius: 20px; }
+.auth-container input { width: 100%; padding: 13px; background: #0a0a0a; border: 1px solid var(--border-color); border-radius: 10px; color: white; margin: 6px 0 18px; }
+
+/* =========================================================
+   APLICATIVO FINANCEIRO (/app) - ARQUITETURA L7 CONTROL
+   ========================================================= */
+#app-container {
+  background: #080808; color: white; min-height: calc(100vh - 75px);
+  padding-bottom: 105px; max-width: 850px; margin: 0 auto;
+}
+
+/* Barra de Filtros Globais */
+.global-filter-bar {
+  background: #111; border-bottom: 1px solid #222; padding: 14px 16px;
+  position: sticky; top: 75px; z-index: 90;
+}
+.filter-mode-row { display: flex; gap: 8px; align-items: center; justify-content: space-between; }
+.filter-mode-select {
+  background: #1c1c1c; color: var(--gold); border: 1px solid #333;
+  padding: 9px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; flex: 1;
+}
+.period-nav { display: flex; align-items: center; gap: 10px; }
+.period-nav button {
+  background: #1c1c1c; border: 1px solid #333; color: var(--gold);
+  width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+}
+.period-nav span { font-size: 14px; font-weight: 600; min-width: 115px; text-align: center; text-transform: capitalize; }
+.custom-date-row {
+  display: none; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;
+}
+.custom-date-row.active { display: grid; }
+.custom-date-row input {
+  background: #1c1c1c; border: 1px solid #333; color: white;
+  padding: 8px 10px; border-radius: 8px; font-size: 12px; width: 100%;
+}
+
+/* Abas / Telas do App */
+.tela { display: none; padding: 16px; }
+.tela.ativa { display: block; }
+.sec-title { font-size: 18px; color: var(--gold); font-weight: 700; margin: 12px 0 14px; display: flex; justify-content: space-between; align-items: center; }
+
+/* Cards Superiores Resumo */
+.kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 18px; }
+.kpi-card {
+  background: #141414; border: 1px solid #222; border-radius: 16px; padding: 16px;
+}
+.kpi-card .lbl { font-size: 12px; color: #999; display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+.kpi-card .val { font-size: 18px; font-weight: 700; }
+
+/* Atalhos Rápidos na Tela Resumo */
+.shortcuts-bar { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 18px; }
+.shortcuts-bar::-webkit-scrollbar { height: 4px; }
+.shortcuts-bar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+.shortcut-chip {
+  background: #1a1812; border: 1px solid rgba(212,175,55,0.4); color: #fff;
+  padding: 10px 14px; border-radius: 12px; white-space: nowrap; font-size: 12px;
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0; transition: 0.2s;
+}
+.shortcut-chip:active { transform: scale(0.96); background: var(--gold); color: #000; }
+.shortcut-chip b { color: var(--gold); }
+
+/* Cards de Orçamento & Progresso */
+.macro-badge {
+  font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600;
+  background: #222; color: var(--gold); margin-bottom: 10px; display: inline-block;
+}
+.budget-item { background: #141414; border: 1px solid #222; border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.budget-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 14px; }
+.trend-pill { font-size: 11px; padding: 2px 7px; border-radius: 6px; font-weight: 600; margin-left: 6px; }
+.trend-up { background: rgba(244, 67, 54, 0.15); color: #F44336; }
+.trend-down { background: rgba(76, 175, 80, 0.15); color: #4CAF50; }
+.progress-bg { height: 8px; background: #2a2a2a; border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+.progress-fill { height: 100%; border-radius: 10px; transition: width 0.3s; }
+.sub-list { border-top: 1px dashed #2a2a2a; margin-top: 10px; padding-top: 8px; font-size: 12px; color: #aaa; }
+.sub-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+
+/* Extrato Cirúrgico */
+.extrato-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.extrato-filters select {
+  background: #181818; border: 1px solid #2c2c2c; color: white; padding: 10px; border-radius: 10px; font-size: 13px;
+}
+.extrato-mini-summary {
+  background: #141414; border: 1px solid #262626; border-radius: 12px; padding: 12px;
+  display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; margin-bottom: 14px; font-size: 12px;
+}
+.tx-card {
+  background: #141414; border: 1px solid #202020; border-radius: 14px; padding: 14px;
+  margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
+}
+
+/* Gráficos Otimizados Mobile */
+.chart-card {
+  background: #141414; border: 1px solid #222; border-radius: 16px; padding: 16px; margin-bottom: 16px;
+}
+.chart-card h4 { font-size: 14px; color: var(--gold); margin-bottom: 12px; }
+.chart-wrapper { position: relative; height: 215px; width: 100%; }
+
+/* Config Cards */
+.cfg-card { background: #141414; border: 1px solid #222; border-radius: 16px; padding: 18px; margin-bottom: 16px; }
+.cfg-card h3 { font-size: 15px; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.cfg-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.app-input {
+  width: 100%; background: #1f1f1f; border: 1px solid #333; color: white;
+  padding: 11px 12px; border-radius: 10px; font-size: 13px; margin-bottom: 10px;
+}
+.btn-app {
+  width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+
+/* FAB (Apenas na aba Extrato) */
+.fab-btn {
+  display: none; position: fixed; right: 20px; bottom: 95px; width: 60px; height: 60px;
+  border-radius: 50%; background: var(--gold); color: #000; font-size: 24px;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.45); z-index: 95; align-items: center; justify-content: center;
+}
+.fab-btn.visible { display: flex; }
+
+/* Menu Inferior com Scroll Horizontal */
+nav.app-bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 76px;
+  background: #0e0e0e; border-top: 1px solid #242424; z-index: 100;
+  display: flex; overflow-x: auto; align-items: center; padding: 0 8px;
+}
+nav.app-bottom-nav::-webkit-scrollbar { display: none; }
+nav.app-bottom-nav .nav-tab {
+  min-width: 74px; flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; color: #777; font-size: 10px; gap: 5px; cursor: pointer; padding: 8px 4px;
+}
+nav.app-bottom-nav .nav-tab.ativo { color: var(--gold); font-weight: 600; }
+nav.app-bottom-nav .nav-tab i { font-size: 17px; }
+
+/* Modais */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  z-index: 1100; overflow-y: auto; padding: 20px;
+}
+.modal-content {
+  background: #161616; border: 1px solid #333; border-radius: 20px;
+  max-width: 460px; margin: 20px auto; padding: 24px;
+}
+
+/* Insights List */
+.insight-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.insight-list li {
+  background: #141414; border-left: 4px solid var(--gold); padding: 14px 16px;
+  border-radius: 12px; font-size: 13px; line-height: 1.5; color: #e0e0e0;
+}
+
+@media(max-width: 850px){
+  .hero { grid-template-columns: 1fr; text-align: center; }
+  .hero-cta { justify-content: center; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .footer-container { grid-template-columns: 1fr 1fr; }
+  .nav-menu { display: none; }
+  .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     HEADER SAAS
+     ========================================================= -->
+<header class="saas-header">
+  <div class="header-container">
+    <div class="logo-brand" onclick="navegarPara('/')">
+      <div class="logo-icon"><i class="fa-solid fa-crown"></i></div>
+      <div class="logo-name">L7 CONTROL</div>
+    </div>
+    <ul class="nav-menu">
+      <li><a href="#/" onclick="navegarPara('/')">Início</a></li>
+      <li><a href="#como-funciona" onclick="scrollSecao('como-funciona')">Como funciona</a></li>
+      <li><a href="#recursos" onclick="scrollSecao('recursos')">Recursos</a></li>
+      <li><a href="#/precos" onclick="navegarPara('/precos')">Preços</a></li>
+      <li><a href="#faq" onclick="scrollSecao('faq')">FAQ</a></li>
+    </ul>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="#/login" onclick="navegarPara('/login')" class="btn-outline" style="padding:8px 16px; font-size:13px;">Entrar</a>
+      <a href="#/app" onclick="navegarPara('/app')" class="btn-gold" style="padding:8px 18px; font-size:13px;">ABRIR APP</a>
+      <button class="hamburger" onclick="document.getElementById('mobileDrawer').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileDrawer">
+  <a href="#/" onclick="navegarPara('/'); this.parentElement.classList.remove('open');">Início</a>
+  <a href="#como-funciona" onclick="scrollSecao('como-funciona'); this.parentElement.classList.remove('open');">Como funciona</a>
+  <a href="#recursos" onclick="scrollSecao('recursos'); this.parentElement.classList.remove('open');">Recursos</a>
+  <a href="#/precos" onclick="navegarPara('/precos'); this.parentElement.classList.remove('open');">Preços</a>
+  <a href="#/app" onclick="navegarPara('/app'); this.parentElement.classList.remove('open');" style="color:var(--gold); font-weight:700;">Acessar Aplicativo</a>
+</div>
+
+<!-- =========================================================
+     VIEW 1: LANDING PAGE COMERCIAL (/)
+     ========================================================= -->
+<div id="view-landing" class="view-page active">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Seu dinheiro não deveria desaparecer antes do fim do mês.</h1>
+      <p>Organize seus gastos com a regra 50/30/20, acompanhe seu patrimônio e tenha clareza absoluta sobre suas finanças em um só lugar.</p>
+      <div class="hero-cta">
+        <a href="#/app" onclick="navegarPara('/app')" class="btn-gold"><i class="fa-solid fa-rocket"></i> COMEÇAR GRÁTIS</a>
+        <a href="#como-funciona" onclick="scrollSecao('como-funciona')" class="btn-outline">CONHECER O L7</a>
+      </div>
+    </div>
+    <div class="hero-preview">
+      <div style="display:flex; justify-content:space-between; border-bottom:1px solid #262626; padding-bottom:10px; margin-bottom:14px; font-size:11px; color:#777;">
+        <span><i class="fa-solid fa-circle" style="color:#ff5f56"></i> <i class="fa-solid fa-circle" style="color:#ffbd2e"></i> <i class="fa-solid fa-circle" style="color:#27c93f"></i></span>
+        <span>l7control.com.br/#/app</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+        <div style="background:#1c1c1c; padding:12px; border-radius:12px;">
+          <span style="font-size:11px; color:#888;">Entradas</span>
+          <div style="color:#4CAF50; font-weight:700; font-size:16px;">R$ 7.400,00</div>
+        </div>
+        <div style="background:#1c1c1c; padding:12px; border-radius:12px;">
+          <span style="font-size:11px; color:#888;">Patrimônio Acumulado</span>
+          <div style="color:#9C27B0; font-weight:700; font-size:16px;">R$ 24.850,00</div>
+        </div>
+      </div>
+      <div style="background:#1c1c1c; padding:12px; border-radius:12px; font-size:12px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+          <span><i class="fa-solid fa-house" style="color:var(--gold)"></i> Moradia & Habitação (Essencial)</span>
+          <b>78%</b>
+        </div>
+        <div style="height:6px; background:#333; border-radius:6px;"><div style="width:78%; height:100%; background:#4CAF50; border-radius:6px;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-funciona" class="section-wrapper" style="border-top:1px solid var(--border-color);">
+    <h2 class="section-title">Como funciona</h2>
+    <p class="section-subtitle">Menos complicação. Mais clareza sobre seu dinheiro em três passos.</p>
+    <div class="steps-grid">
+      <div class="step-card"><div style="font-size:36px; font-weight:800; color:var(--gold); margin-bottom:10px;">01</div><h3>Registre</h3><p style="font-size:13px; color:#aaa; margin-top:8px;">Use atalhos de 1 clique, despesas fixas no piloto automático ou importe seu extrato CSV.</p></div>
+      <div class="step-card"><div style="font-size:36px; font-weight:800; color:var(--gold); margin-bottom:10px;">02</div><h3>Entenda</h3><p style="font-size:13px; color:#aaa; margin-top:8px;">Acompanhe a divisão 50/30/20 entre gastos essenciais, variáveis e aportes.</p></div>
+      <div class="step-card"><div style="font-size:36px; font-weight:800; color:var(--gold); margin-bottom:10px;">03</div><h3>Decida</h3><p style="font-size:13px; color:#aaa; margin-top:8px;">Receba diagnósticos automáticos de taxa de poupança e evolução patrimonial.</p></div>
+    </div>
+  </section>
+
+  <section id="recursos" class="section-wrapper" style="border-top:1px solid var(--border-color);">
+    <h2 class="section-title">Recursos projetados para você</h2>
+    <p class="section-subtitle">Gestão financeira completa, do café diário aos dividendos da sua carteira.</p>
+    <div class="features-grid">
+      <div class="feature-card"><h3><i class="fa-solid fa-layer-group" style="color:var(--gold)"></i> Categorias & Subcategorias</h3><p style="font-size:13px; color:#aaa; margin-top:8px;">Detalhamento cirúrgico sem poluir o resumo geral.</p></div>
+      <div class="feature-card"><h3><i class="fa-solid fa-scale-balanced" style="color:var(--gold)"></i> Governança 50/30/20</h3><p style="font-size:13px; color:#aaa; margin-top:8px;">Separação automática entre Essenciais e Variáveis com indicador de tendência.</p></div>
+      <div class="feature-card"><h3><i class="fa-solid fa-robot" style="color:var(--gold)"></i> Piloto Automático</h3><p style="font-size:13px; color:#aaa; margin-top:8px;">Contas fixas e assinaturas lançadas sozinhas no dia escolhido.</p></div>
+      <div class="feature-card"><h3><i class="fa-solid fa-file-csv" style="color:#9C27B0"></i> Leitor de Extrato CSV</h3><p style="font-size:13px; color:#aaa; margin-top:8px;">Importação inteligente de dividendos, JCP e rendimentos.</p></div>
+    </div>
+  </section>
+
+  <section id="faq" class="section-wrapper" style="border-top:1px solid var(--border-color);">
+    <h2 class="section-title">Perguntas Frequentes</h2>
+    <div class="faq-list">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-question"><span>O L7 CONTROL é gratuito?</span><i class="fa-solid fa-chevron-down"></i></div>
+        <div class="faq-answer">Sim! Você pode usar todos os recursos de controle, orçamentos 50/30/20, patrimônio e importação CSV gratuitamente.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-question"><span>Onde meus dados ficam salvos?</span><i class="fa-solid fa-chevron-down"></i></div>
+        <div class="faq-answer">Seus lançamentos ficam salvos diretamente no armazenamento seguro do seu navegador (localStorage) e você pode exportar backup em CSV a qualquer momento.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================================================
+     VIEW 2: APLICATIVO FINANCEIRO COMPLETO (/app)
+     ========================================================= -->
+<div id="view-app" class="view-page">
+  <div id="app-container">
+
+    <!-- 1. FILTROS GLOBAIS AVANÇADOS -->
+    <div class="global-filter-bar" id="globalFilterBar">
+      <div class="filter-mode-row">
+        <select id="tipoFiltroGlobal" class="filter-mode-select" onchange="alterarModoFiltro()">
+          <option value="mensal">Visão Mensal</option>
+          <option value="anual">Visão Anual</option>
+          <option value="geral">Visão Geral (Todo Histórico)</option>
+          <option value="especifico">Período Específico</option>
+        </select>
+
+        <div class="period-nav" id="navegadorPeriodo">
+          <button onclick="navegarPeriodo(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+          <span id="labelPeriodoGlobal">Novembro / 2026</span>
+          <button onclick="navegarPeriodo(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <div class="custom-date-row" id="inputsPeriodoEspecifico">
+        <div>
+          <label style="font-size:10px; color:#888;">De:</label>
+          <input type="date" id="filtroDataDe" onchange="atualizarApp()">
+        </div>
+        <div>
+          <label style="font-size:10px; color:#888;">Até:</label>
+          <input type="date" id="filtroDataAte" onchange="atualizarApp()">
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= ABA 1: RESUMO ================= -->
+    <div id="tela-resumo" class="tela ativa">
+      <div class="sec-title">
+        <span>Atalhos Rápidos (1 Clique)</span>
+        <span style="font-size:11px; color:#888; font-weight:400;" onclick="mudarAba('config')">Editar <i class="fa-solid fa-gear"></i></span>
+      </div>
+      <div class="shortcuts-bar" id="listaAtalhosResumo"></div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="lbl"><i class="fa-solid fa-arrow-trend-up" style="color:var(--green)"></i> Entradas</div>
+          <div class="val" style="color:var(--green)" id="kpiReceitas">R$ 0,00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl"><i class="fa-solid fa-arrow-trend-down" style="color:var(--red)"></i> Saídas</div>
+          <div class="val" style="color:var(--red)" id="kpiDespesas">R$ 0,00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl"><i class="fa-solid fa-wallet" style="color:var(--blue)"></i> Saldo do Período</div>
+          <div class="val" style="color:var(--blue)" id="kpiSaldo">R$ 0,00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl"><i class="fa-solid fa-gem" style="color:var(--purple)"></i> Investido no Período</div>
+          <div class="val" style="color:var(--purple)" id="kpiInvestido">R$ 0,00</div>
+        </div>
+      </div>
+
+      <div class="sec-title"><span>Resumo por Categoria</span></div>
+      <div id="resumoCategoriasLista"></div>
+    </div>
+
+    <!-- ================= ABA 2: EXTRATO CIRÚRGICO ================= -->
+    <div id="tela-extrato" class="tela">
+      <div class="sec-title"><span>Extrato Cirúrgico</span></div>
+      
+      <div class="extrato-filters">
+        <select id="filtroExtratoTipo" onchange="renderizarExtrato()">
+          <option value="todos">Todos os Tipos</option>
+          <option value="receita">Receitas</option>
+          <option value="despesa">Despesas</option>
+          <option value="investimento">Investimentos</option>
+        </select>
+        <select id="filtroExtratoCategoria" onchange="renderizarExtrato()">
+          <option value="todas">Todas as Categorias</option>
+        </select>
+      </div>
+
+      <div class="extrato-mini-summary">
+        <div><span style="color:#888; display:block;">Entradas</span><b style="color:var(--green)" id="extEntrada">R$ 0,00</b></div>
+        <div><span style="color:#888; display:block;">Saídas</span><b style="color:var(--red)" id="extSaida">R$ 0,00</b></div>
+        <div><span style="color:#888; display:block;">Saldo Filtro</span><b style="color:var(--blue)" id="extSaldo">R$ 0,00</b></div>
+      </div>
+
+      <div id="listaExtrato"></div>
+    </div>
+
+    <!-- ================= ABA 3: ORÇAMENTO (GOVERNANÇA 50/30/20) ================= -->
+    <div id="tela-orcamento" class="tela">
+      <div class="sec-title"><span>Governança 50 / 30 / 20</span></div>
+      <div id="painelRegra503020" class="cfg-card" style="margin-bottom:18px;"></div>
+
+      <span class="macro-badge"><i class="fa-solid fa-shield"></i> ESSENCIAIS (Meta: 50% da Renda)</span>
+      <div id="listaOrcamentoEssencial"></div>
+
+      <span class="macro-badge" style="margin-top:14px;"><i class="fa-solid fa-bag-shopping"></i> VARIÁVEIS / ESTILO DE VIDA (Meta: 30% da Renda)</span>
+      <div id="listaOrcamentoVariavel"></div>
+    </div>
+
+    <!-- ================= ABA 4: GRÁFICOS & ANÁLISES ================= -->
+    <div id="tela-graficos" class="tela">
+      <div class="sec-title"><span>Análises Visuais</span></div>
+
+      <div class="chart-card">
+        <h4>Distribuição Regra 50 / 30 / 20</h4>
+        <div class="chart-wrapper"><canvas id="chart503020"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <h4>Receitas, Despesas & Saldo Acumulado (Ano)</h4>
+        <div class="chart-wrapper"><canvas id="chartFluxoMisto"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <h4>Top Maiores Despesas por Categoria</h4>
+        <div class="chart-wrapper"><canvas id="chartTopDespesas"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ================= ABA 5: PATRIMÔNIO & LEITOR CSV ================= -->
+    <div id="tela-patrimonio" class="tela">
+      <div class="sec-title"><span>Gestão de Patrimônio</span></div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card" style="border-left: 4px solid var(--purple);">
+          <div class="lbl">Patrimônio Total (Histórico)</div>
+          <div class="val" style="color:var(--purple)" id="patTotalHistorico">R$ 0,00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl">Aportes no Período</div>
+          <div class="val" style="color:var(--green)" id="patAportesPeriodo">R$ 0,00</div>
+        </div>
+      </div>
+
+      <!-- Leitor CSV Inteligente -->
+      <div class="cfg-card" style="border-color: rgba(156,39,176,0.4);">
+        <h3><i class="fa-solid fa-file-csv" style="color:var(--purple)"></i> Importar Extrato (CSV)</h3>
+        <p style="font-size:12px; color:#aaa; margin-bottom:12px;">
+          Suba o arquivo CSV do seu banco ou corretora (ex: Banco Inter). O sistema identifica automaticamente linhas com <b>rendimento, juros, jcp ou dividendo</b> e lança em <i>Rendimentos e Dividendos</i>.
+        </p>
+        <input type="file" id="inputCsvExtrato" accept=".csv,.txt" style="display:none;" onchange="processarCSVImportado(event)">
+        <button class="btn-app" style="background:var(--purple); color:white;" onclick="document.getElementById('inputCsvExtrato').click()">
+          <i class="fa-solid fa-upload"></i> Selecionar Arquivo CSV
+        </button>
+        <div id="statusImportCsv" style="font-size:12px; color:var(--green); margin-top:10px; display:none;"></div>
+      </div>
+
+      <div class="chart-card">
+        <h4>Evolução Patrimonial (12 Meses)</h4>
+        <div class="chart-wrapper"><canvas id="chartPatEvolucao"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <h4>Composição: Suor (Aportes) vs Juros (Dividendos)</h4>
+        <div class="chart-wrapper"><canvas id="chartPatComposicao"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <h4>Aportes Mensais (12 Meses)</h4>
+        <div class="chart-wrapper"><canvas id="chartPatAportes"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ================= ABA 6: INSIGHTS INTELIGENTES ================= -->
+    <div id="tela-insights" class="tela">
+      <div class="sec-title"><span>Diagnóstico Financeiro Inteligente</span></div>
+      
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="lbl">Taxa de Poupança</div>
+          <div class="val" id="insTaxaPoupanca">0%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="lbl">Comprometimento da Renda</div>
+          <div class="val" id="insComprometimento">0%</div>
+        </div>
+      </div>
+
+      <div class="cfg-card">
+        <h3><i class="fa-solid fa-magnifying-glass-dollar"></i> Maior Ralo do Período</h3>
+        <div id="insMaiorRalo" style="font-size:14px; color:#ddd;">Sem gastos suficientes para análise.</div>
+      </div>
+
+      <div class="sec-title"><span>Recomendações Personalizadas</span></div>
+      <ul class="insight-list" id="listaInsightsDinamicos"></ul>
+    </div>
+
+    <!-- ================= ABA 7: CONFIGURAÇÕES & PILOTO AUTOMÁTICO ================= -->
+    <div id="tela-config" class="tela">
+      <div class="sec-title"><span>Configurações & Automação</span></div>
+
+      <!-- Card 1: Despesas Fixas / Piloto Automático -->
+      <div class="cfg-card">
+        <h3><i class="fa-solid fa-rotate"></i> Despesas Fixas (Piloto Automático)</h3>
+        <p style="font-size:12px; color:#999; margin-bottom:12px;">O app lança automaticamente no extrato todo mês quando o dia chegar.</p>
+        <div class="cfg-grid-2">
+          <select id="fixaCategoria" class="app-input" onchange="atualizarSubSelect('fixaCategoria', 'fixaSubcategoria')"></select>
+          <select id="fixaSubcategoria" class="app-input"></select>
+        </div>
+        <div class="cfg-grid-2">
+          <input type="text" id="fixaDescricao" class="app-input" placeholder="Descrição (ex: Aluguel)">
+          <input type="number" id="fixaValor" class="app-input" placeholder="Valor (R$)" step="0.01">
+        </div>
+        <div class="cfg-grid-2">
+          <input type="number" id="fixaDia" class="app-input" placeholder="Dia do mês (1-31)" min="1" max="31">
+          <button class="btn-app" style="background:var(--gold); color:#000; height:42px;" onclick="adicionarDespesaFixa()">
+            <i class="fa-solid fa-plus"></i> Adicionar Fixa
+          </button>
+        </div>
+        <div id="listaDespesasFixas" style="margin-top:10px;"></div>
+      </div>
+
+      <!-- Card 2: Atalhos de Lançamento Rápido -->
+      <div class="cfg-card">
+        <h3><i class="fa-solid fa-bolt"></i> Atalhos de 1 Clique (Tela Resumo)</h3>
+        <div class="cfg-grid-2">
+          <select id="atalhoCategoria" class="app-input" onchange="atualizarSubSelect('atalhoCategoria', 'atalhoSubcategoria')"></select>
+          <select id="atalhoSubcategoria" class="app-input"></select>
+        </div>
+        <div class="cfg-grid-2">
+          <input type="text" id="atalhoNome" class="app-input" placeholder="Nome (ex: Café)">
+          <input type="number" id="atalhoValor" class="app-input" placeholder="Valor (R$)" step="0.01">
+        </div>
+        <button class="btn-app" style="background:var(--gold); color:#000;" onclick="adicionarAtalho()">
+          <i class="fa-solid fa-plus"></i> Criar Atalho Rápido
+        </button>
+        <div id="listaAtalhosConfig" style="margin-top:10px;"></div>
+      </div>
+
+      <!-- Card 3: Limites Mensais e Classificação Macro (2 Colunas Compactas) -->
+      <div class="cfg-card">
+        <h3><i class="fa-solid fa-sliders"></i> Limites & Regra 50/30/20</h3>
+        <div id="listaLimitesConfig"></div>
+        <button class="btn-app" style="background:var(--green); color:#fff; margin-top:10px;" onclick="salvarLimitesEMacros()">
+          <i class="fa-solid fa-check"></i> Salvar Limites e Classificações
+        </button>
+      </div>
+
+      <!-- Card 4: Nova Subcategoria & Backup -->
+      <div class="cfg-card">
+        <h3><i class="fa-solid fa-folder-plus"></i> Gerenciar Subcategorias & Dados</h3>
+        <div class="cfg-grid-2">
+          <select id="novaSubPai" class="app-input"></select>
+          <input type="text" id="novaSubNome" class="app-input" placeholder="Nova subcategoria">
+        </div>
+        <button class="btn-app" style="background:#333; color:white; margin-bottom:14px;" onclick="criarSubcategoria()">
+          Adicionar Subcategoria
+        </button>
+        <div class="cfg-grid-2">
+          <button class="btn-app" style="background:var(--blue); color:white;" onclick="exportarCSV()">
+            <i class="fa-solid fa-download"></i> Exportar CSV
+          </button>
+          <button class="btn-app" style="background:var(--red); color:white;" onclick="resetarTudo()">
+            <i class="fa-solid fa-trash"></i> Resetar App
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= ABA 8: DEV ================= -->
+    <div id="tela-dev" class="tela">
+      <div class="cfg-card" style="text-align:center; padding:30px;">
+        <i class="fa-solid fa-code" style="font-size:36px; color:var(--gold); margin-bottom:12px;"></i>
+        <h2 style="color:var(--gold);">L7 CONTROL v5.0</h2>
+        <p style="font-size:13px; color:#aaa; margin:10px 0 20px;">Arquitetura de Gestão Financeira Pessoal & Patrimonial desenvolvida por <b>Luiz Fernando</b>.</p>
+        <a href="https://wa.me/5519997635790" target="_blank" class="btn-gold"><i class="fa-brands fa-whatsapp"></i> Suporte WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- BOTÃO FLUTUANTE (FAB) - VISÍVEL APENAS NA ABA EXTRATO -->
+    <button class="fab-btn" id="fabNovoLancamento" onclick="abrirModalLancamento()">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <!-- MODAL NOVO / EDITAR LANÇAMENTO -->
+    <div class="modal-overlay" id="modalLancamento">
+      <div class="modal-content">
+        <h3 style="color:var(--gold); margin-bottom:16px;" id="modalLancTitulo">Novo Lançamento</h3>
+        <input type="hidden" id="lancId">
+
+        <label style="font-size:12px; color:#aaa;">Tipo de Movimentação</label>
+        <select id="lancTipo" class="app-input" onchange="atualizarCatsModal()">
+          <option value="despesa">Despesa</option>
+          <option value="receita">Receita</option>
+          <option value="investimento">Investimento (Aporte / Rendimento)</option>
+        </select>
+
+        <label style="font-size:12px; color:#aaa;">Categoria</label>
+        <select id="lancCategoria" class="app-input" onchange="atualizarSubSelect('lancCategoria', 'lancSubcategoria')"></select>
+
+        <label style="font-size:12px; color:#aaa;">Subcategoria</label>
+        <select id="lancSubcategoria" class="app-input"></select>
+
+        <label style="font-size:12px; color:#aaa;">Descrição (Opcional)</label>
+        <input type="text" id="lancDescricao" class="app-input" placeholder="Ex: Mercado mensal, Gasolina...">
+
+        <div class="cfg-grid-2">
+          <div>
+            <label style="font-size:12px; color:#aaa;">Valor (R$)</label>
+            <input type="number" id="lancValor" class="app-input" step="0.01" placeholder="0,00">
+          </div>
+          <div>
+            <label style="font-size:12px; color:#aaa;">Data</label>
+            <input type="date" id="lancData" class="app-input">
+          </div>
+        </div>
+
+        <label style="font-size:12px; color:#aaa;">Forma de Pagamento</label>
+        <select id="lancForma" class="app-input">
+          <option>PIX</option><option>Crédito</option><option>Débito</option>
+          <option>VA/VR</option><option>Dinheiro</option><option>Boleto</option><option>Transferência</option>
+        </select>
+
+        <button class="btn-app" style="background:var(--gold); color:#000; margin-top:8px;" onclick="salvarLancamento()">Salvar Lançamento</button>
+        <button class="btn-app" style="background:#2a2a2a; color:white; margin-top:8px;" onclick="fecharModalLancamento()">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- MENU INFERIOR COM SCROLL HORIZONTAL (8 ABAS) -->
+    <nav class="app-bottom-nav">
+      <div class="nav-tab ativo" id="tab-resumo" onclick="mudarAba('resumo')"><i class="fa-solid fa-house"></i><span>Resumo</span></div>
+      <div class="nav-tab" id="tab-extrato" onclick="mudarAba('extrato')"><i class="fa-solid fa-receipt"></i><span>Extrato</span></div>
+      <div class="nav-tab" id="tab-orcamento" onclick="mudarAba('orcamento')"><i class="fa-solid fa-scale-balanced"></i><span>Orçamento</span></div>
+      <div class="nav-tab" id="tab-graficos" onclick="mudarAba('graficos')"><i class="fa-solid fa-chart-pie"></i><span>Gráficos</span></div>
+      <div class="nav-tab" id="tab-patrimonio" onclick="mudarAba('patrimonio')"><i class="fa-solid fa-gem"></i><span>Patrimônio</span></div>
+      <div class="nav-tab" id="tab-insights" onclick="mudarAba('insights')"><i class="fa-solid fa-lightbulb"></i><span>Insights</span></div>
+      <div class="nav-tab" id="tab-config" onclick="mudarAba('config')"><i class="fa-solid fa-gear"></i><span>Config</span></div>
+      <div class="nav-tab" id="tab-dev" onclick="mudarAba('dev')"><i class="fa-solid fa-code"></i><span>Dev</span></div>
+    </nav>
+  </div>
+</div>
+
+<!-- =========================================================
+     PÁGINAS AUXILIARES SAAS (/precos, /login, /cadastro)
+     ========================================================= -->
+<div id="view-precos" class="view-page">
+  <div class="section-wrapper">
+    <h1 class="section-title">Planos L7 CONTROL</h1>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>FREE</h3><div class="price-tag">R$ 0/mês</div>
+        <ul class="price-features"><li><i class="fa-solid fa-check"></i> Controle completo & 50/30/20</li><li><i class="fa-solid fa-check"></i> Importação CSV & Patrimônio</li></ul>
+        <a href="#/app" onclick="navegarPara('/app')" class="btn-outline">COMEÇAR GRÁTIS</a>
+      </div>
+      <div class="price-card featured">
+        <h3 style="color:var(--gold)">PRO</h3><div class="price-tag">R$ 9,90/mês</div>
+        <ul class="price-features"><li><i class="fa-solid fa-check"></i> Tudo do FREE + Sincronização Nuvem</li><li><i class="fa-solid fa-check"></i> Consultor Financeiro com IA</li></ul>
+        <a href="#/cadastro" onclick="navegarPara('/cadastro')" class="btn-gold">TESTAR GRÁTIS</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="view-login" class="view-page">
+  <div class="auth-container">
+    <h2 style="color:var(--gold); text-align:center; margin-bottom:20px;">Entrar no L7 CONTROL</h2>
+    <label style="font-size:12px; color:#aaa;">E-mail</label><input type="email" placeholder="seu@email.com">
+    <label style="font-size:12px; color:#aaa;">Senha</label><input type="password" placeholder="••••••••">
+    <button class="btn-gold" style="width:100%;" onclick="navegarPara('/app')">ACESSAR PAINEL</button>
+  </div>
+</div>
+
+<div id="view-cadastro" class="view-page">
+  <div class="auth-container">
+    <h2 style="color:var(--gold); text-align:center; margin-bottom:20px;">Criar Conta</h2>
+    <label style="font-size:12px; color:#aaa;">Nome</label><input type="text" placeholder="Seu nome">
+    <label style="font-size:12px; color:#aaa;">E-mail</label><input type="email" placeholder="seu@email.com">
+    <label style="font-size:12px; color:#aaa;">Senha</label><input type="password" placeholder="••••••••">
+    <button class="btn-gold" style="width:100%;" onclick="navegarPara('/app')">COMEÇAR AGORA</button>
+  </div>
+</div>
+
+<footer class="saas-footer" id="saasFooter">
+  <div class="footer-container">
+    <div><div class="logo-name" style="margin-bottom:10px;">L7 CONTROL</div><p style="font-size:13px; color:#888;">Seu dinheiro. Suas escolhas. Seu controle.</p></div>
+    <div class="footer-col"><h4>Produto</h4><ul><li><a href="#/app" onclick="navegarPara('/app')">Aplicativo</a></li><li><a href="#/precos" onclick="navegarPara('/precos')">Preços</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a href="#/">Privacidade</a></li><li><a href="#/">Termos de Uso</a></li></ul></div>
+    <div class="footer-col"><h4>Social</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">© 2026 L7 CONTROL. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+/* =========================================================
+   1. ROTEAMENTO SAAS
+   ========================================================= */
+function navegarPara(path) { window.location.hash = path; }
+function processarRota() {
+  const hash = window.location.hash.replace('#', '') || '/';
+  document.querySelectorAll('.view-page').forEach(v => v.classList.remove('active'));
+  const footer = document.getElementById('saasFooter');
+
+  if (hash === '/app') {
+    document.getElementById('view-app').classList.add('active');
+    footer.style.display = 'none';
+    executarPilotoAutomatico();
+    atualizarApp();
+  } else if (hash === '/precos') {
+    document.getElementById('view-precos').classList.add('active'); footer.style.display = 'block';
+  } else if (hash === '/login') {
+    document.getElementById('view-login').classList.add('active'); footer.style.display = 'block';
+  } else if (hash === '/cadastro') {
+    document.getElementById('view-cadastro').classList.add('active'); footer.style.display = 'block';
+  } else {
+    document.getElementById('view-landing').classList.add('active'); footer.style.display = 'block';
+  }
+  window.scrollTo({ top: 0 });
+}
+window.addEventListener('hashchange', processarRota);
+window.addEventListener('load', processarRota);
+function scrollSecao(id) {
+  navegarPara('/');
+  setTimeout(() => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }, 150);
+}
+
+/* =========================================================
+   2. BANCO DE DADOS & CATEGORIAS PRESERVADAS (50/30/20)
+   ========================================================= */
+const STORAGE_KEY = "l7control_saas_v5";
+
+const CATEGORIAS_PADRAO = {
+  // ESSENCIAIS (50%)
+  "Moradia & Habitação": {
+    icone: "fa-house", tipo: "despesa", macro: "essencial", orcamento: 1500,
+    subs: ["Aluguel / Condomínio / Prestação", "Contas de Consumo (Água/Luz/Gás/Net)", "Manutenção & Decoração"]
+  },
+  "Alimentação": {
+    icone: "fa-utensils", tipo: "despesa", macro: "essencial", orcamento: 1000,
+    subs: ["Supermercado & Feira", "Restaurantes & Delivery"]
+  },
+  "Transporte & Mobilidade": {
+    icone: "fa-car", tipo: "despesa", macro: "essencial", orcamento: 600,
+    subs: ["Combustível", "Transporte Público & Apps", "Manutenção & Documentos"]
+  },
+  "Saúde & Cuidados Pessoais": {
+    icone: "fa-heart-pulse", tipo: "despesa", macro: "essencial", orcamento: 400,
+    subs: ["Saúde & Farmácia", "Cuidados Pessoais", "Exercícios & Atividades"]
+  },
+  "Educação & Carreira": {
+    icone: "fa-graduation-cap", tipo: "despesa", macro: "essencial", orcamento: 250,
+    subs: ["Cursos & Treinamentos", "Livros & Material"]
+  },
+
+  // VARIÁVEIS (30%)
+  "Estilo de Vida & Lazer": {
+    icone: "fa-film", tipo: "despesa", macro: "variavel", orcamento: 500,
+    subs: ["Lazer & Entretenimento", "Assinaturas & Streaming", "Vestuário & Acessórios"]
+  },
+  "Dependentes & Pets": {
+    icone: "fa-paw", tipo: "despesa", macro: "variavel", orcamento: 300,
+    subs: ["Filhos / Família", "Pets"]
+  },
+  "Outros & Imprevistos": {
+    icone: "fa-tag", tipo: "despesa", macro: "variavel", orcamento: 200,
+    subs: ["Presentes & Doações", "Diversos & Imprevistos"]
+  },
+
+  // INVESTIMENTOS (20%)
+  "Aportes & Futuro": {
+    icone: "fa-piggy-bank", tipo: "investimento", macro: "investimento", orcamento: 0,
+    subs: ["Aportes & Poupança", "Previdência Privada", "Renda Fixa / Ações / FIIs"]
+  },
+  "Rendimentos e Dividendos": {
+    icone: "fa-chart-line", tipo: "investimento", macro: "investimento", orcamento: 0,
+    subs: ["Dividendos / JCP", "Rendimentos Renda Fixa", "Outros Proventos"]
+  },
+
+  // RECEITAS
+  "Rendimentos do Trabalho": {
+    icone: "fa-sack-dollar", tipo: "receita", macro: "receita", orcamento: 0,
+    subs: ["Salário", "Vale / Benefícios", "13º Salário / Bônus", "Serviços / Freelance"]
+  },
+  "Outras Receitas": {
+    icone: "fa-coins", tipo: "receita", macro: "receita", orcamento: 0,
+    subs: ["Restituição IR / Impostos", "Venda de Bens", "Geral / Diversos"]
+  }
+};
+
+let state = carregarEstado();
+let dataRef = new Date();
+let charts = {};
+
+function carregarEstado() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {}
+  return {
+    categorias: JSON.parse(JSON.stringify(CATEGORIAS_PADRAO)),
+    transacoes: [],
+    despesasFixas: [],
+    atalhos: [
+      { id: 1, nome: "Café", categoria: "Alimentação", subcategoria: "Restaurantes & Delivery", valor: 6.00 },
+      { id: 2, nome: "Combustível", categoria: "Transporte & Mobilidade", subcategoria: "Combustível", valor: 100.00 }
+    ]
+  };
+}
+
+function salvarEstado() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function fmtMoeda(v) {
+  return "R$ " + Number(v || 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function hojeISO() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+/* =========================================================
+   3. PILOTO AUTOMÁTICO (DESPESAS FIXAS)
+   ========================================================= */
+function executarPilotoAutomatico() {
+  const hoje = new Date();
+  const anoMesAtual = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}`;
+  const diaAtual = hoje.getDate();
+  let alterou = false;
+
+  state.despesasFixas.forEach(fixa => {
+    if (diaAtual >= fixa.dia && fixa.ultimoMesLancado !== anoMesAtual) {
+      const dataLanc = `${anoMesAtual}-${String(fixa.dia).padStart(2, '0')}`;
+      state.transacoes.push({
+        id: Date.now() + Math.random(),
+        tipo: "despesa",
+        categoria: fixa.categoria,
+        subcategoria: fixa.subcategoria,
+        descricao: `[Auto] ${fixa.descricao}`,
+        valor: parseFloat(fixa.valor),
+        forma: "Débito Automático",
+        data: dataLanc
+      });
+      fixa.ultimoMesLancado = anoMesAtual;
+      alterou = true;
+    }
+  });
+
+  if (alterou) salvarEstado();
+}
+
+/* =========================================================
+   4. FILTROS GLOBAIS AVANÇADOS
+   ========================================================= */
+function alterarModoFiltro() {
+  const modo = document.getElementById("tipoFiltroGlobal").value;
+  const nav = document.getElementById("navegadorPeriodo");
+  const custom = document.getElementById("inputsPeriodoEspecifico");
+
+  nav.style.display = (modo === "mensal" || modo === "anual") ? "flex" : "none";
+  custom.classList.toggle("active", modo === "especifico");
+
+  if (modo === "especifico" && !document.getElementById("filtroDataDe").value) {
+    const d = new Date();
+    document.getElementById("filtroDataDe").value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-01`;
+    document.getElementById("filtroDataAte").value = hojeISO();
+  }
+  atualizarLabelPeriodo();
+  atualizarApp();
+}
+
+function navegarPeriodo(dir) {
+  const modo = document.getElementById("tipoFiltroGlobal").value;
+  if (modo === "mensal") dataRef.setMonth(dataRef.getMonth() + dir);
+  else if (modo === "anual") dataRef.setFullYear(dataRef.getFullYear() + dir);
+  atualizarLabelPeriodo();
+  atualizarApp();
+}
+
+function atualizarLabelPeriodo() {
+  const modo = document.getElementById("tipoFiltroGlobal").value;
+  const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+  const lbl = document.getElementById("labelPeriodoGlobal");
+  if (modo === "mensal") lbl.textContent = `${meses[dataRef.getMonth()]} / ${dataRef.getFullYear()}`;
+  else if (modo === "anual") lbl.textContent = `Ano ${dataRef.getFullYear()}`;
+}
+
+function filtrarTransacoesPorPeriodo(refDate = dataRef) {
+  const modo = document.getElementById("tipoFiltroGlobal").value;
+  return state.transacoes.filter(t => {
+    const dt = new Date(t.data + "T00:00:00");
+    if (modo === "mensal") {
+      return dt.getFullYear() === refDate.getFullYear() && dt.getMonth() === refDate.getMonth();
+    } else if (modo === "anual") {
+      return dt.getFullYear() === refDate.getFullYear();
+    } else if (modo === "especifico") {
+      const de = document.getElementById("filtroDataDe").value;
+      const ate = document.getElementById("filtroDataAte").value;
+      return (!de || t.data >= de) && (!ate || t.data <= ate);
+    }
+    return true; // geral
+  });
+}
+
+function filtrarPeriodoAnterior() {
+  const modo = document.getElementById("tipoFiltroGlobal").value;
+  const prev = new Date(dataRef);
+  if (modo === "mensal") prev.setMonth(prev.getMonth() - 1);
+  else if (modo === "anual") prev.setFullYear(prev.getFullYear() - 1);
+  else return [];
+  return filtrarTransacoesPorPeriodo(prev);
+}
+
+/* =========================================================
+   5. NAVEGAÇÃO ENTRE ABAS & FAB
+   ========================================================= */
+function mudarAba(aba) {
+  document.querySelectorAll("#app-container .tela").forEach(t => t.classList.remove("ativa"));
+  document.querySelectorAll(".app-bottom-nav .nav-tab").forEach(n => n.classList.remove("ativo"));
+
+  document.getElementById("tela-" + aba).classList.add("ativa");
+  document.getElementById("tab-" + aba).classList.add("ativo");
+
+  // FAB só aparece na aba Extrato
+  document.getElementById("fabNovoLancamento").classList.toggle("visible", aba === "extrato");
+
+  // Filtro global oculto na aba Dev
+  document.getElementById("globalFilterBar").style.display = (aba === "dev") ? "none" : "block";
+
+  atualizarApp();
+}
+
+function atualizarApp() {
+  atualizarLabelPeriodo();
+  const ativa = document.querySelector("#app-container .tela.ativa")?.id.replace("tela-", "");
+  if (ativa === "resumo") renderizarResumo();
+  if (ativa === "extrato") renderizarExtrato();
+  if (ativa === "orcamento") renderizarOrcamento();
+  if (ativa === "graficos") renderizarGraficos();
+  if (ativa === "patrimonio") renderizarPatrimonio();
+  if (ativa === "insights") renderizarInsights();
+  if (ativa === "config") renderizarConfig();
+}
+
+/* =========================================================
+   6. RENDERIZAÇÃO: ABA RESUMO & ATALHOS 1 CLIQUE
+   ========================================================= */
+function renderizarResumo() {
+  // Atalhos
+  const bar = document.getElementById("listaAtalhosResumo");
+  bar.innerHTML = state.atalhos.map(a => `
+    <button class="shortcut-chip" onclick="executarAtalho(${a.id})">
+      <i class="fa-solid fa-bolt" style="color:var(--gold)"></i>
+      <span>${a.nome}</span>
+      <b>${fmtMoeda(a.valor)}</b>
+    </button>
+  `).join("");
+
+  const txs = filtrarTransacoesPorPeriodo();
+  const receitas = txs.filter(t => t.tipo === "receita").reduce((s, t) => s + t.valor, 0);
+  const despesas = txs.filter(t => t.tipo === "despesa").reduce((s, t) => s + t.valor, 0);
+  const invest = txs.filter(t => t.tipo === "investimento").reduce((s, t) => s + t.valor, 0);
+  const saldo = receitas - despesas - invest;
+
+  document.getElementById("kpiReceitas").textContent = fmtMoeda(receitas);
+  document.getElementById("kpiDespesas").textContent = fmtMoeda(despesas);
+  document.getElementById("kpiSaldo").textContent = fmtMoeda(saldo);
+  document.getElementById("kpiSaldo").style.color = saldo >= 0 ? "var(--blue)" : "var(--red)";
+  document.getElementById("kpiInvestido").textContent = fmtMoeda(invest);
+
+  const lista = document.getElementById("resumoCategoriasLista");
+  lista.innerHTML = "";
+  Object.keys(state.categorias).filter(c => state.categorias[c].tipo === "despesa").forEach(catNome => {
+    const cat = state.categorias[catNome];
+    const gasto = txs.filter(t => t.categoria === catNome && t.tipo === "despesa").reduce((s, t) => s + t.valor, 0);
+    if (gasto === 0) return;
+
+    const subsHtml = cat.subs.map(sub => {
+      const vSub = txs.filter(t => t.categoria === catNome && t.subcategoria === sub && t.tipo === "despesa").reduce((s, t) => s + t.valor, 0);
+      return vSub > 0 ? `<div class="sub-row"><span>• ${sub}</span><b>${fmtMoeda(vSub)}</b></div>` : "";
+    }).join("");
+
+    lista.innerHTML += `
+      <div class="budget-item">
+        <div class="budget-top">
+          <span><i class="fa-solid ${cat.icone}" style="color:var(--gold); width:22px;"></i> <b>${catNome}</b></span>
+          <b style="color:var(--red)">${fmtMoeda(gasto)}</b>
+        </div>
+        ${subsHtml ? `<div class="sub-list">${subsHtml}</div>` : ""}
+      </div>`;
+  });
+
+  if (!lista.innerHTML) lista.innerHTML = `<p style="text-align:center; color:#666; font-size:13px; padding:25px;">Nenhuma despesa registrada neste período.</p>`;
+}
+
+function executarAtalho(id) {
+  const a = state.atalhos.find(x => x.id === id);
+  if (!a) return;
+  state.transacoes.push({
+    id: Date.now(),
+    tipo: "despesa",
+    categoria: a.categoria,
+    subcategoria: a.subcategoria,
+    descricao: a.nome,
+    valor: parseFloat(a.valor),
+    forma: "PIX",
+    data: hojeISO()
+  });
+  salvarEstado();
+  renderizarResumo();
+}
+
+/* =========================================================
+   7. RENDERIZAÇÃO: EXTRATO CIRÚRGICO
+   ========================================================= */
+function renderizarExtrato() {
+  const selCat = document.getElementById("filtroExtratoCategoria");
+  const catAtual = selCat.value;
+  selCat.innerHTML = `<option value="todas">Todas as Categorias</option>` +
+    Object.keys(state.categorias).map(c => `<option value="${c}">${c}</option>`).join("");
+  selCat.value = catAtual || "todas";
+
+  const tipoF = document.getElementById("filtroExtratoTipo").value;
+  const catF = selCat.value;
+
+  let txs = filtrarTransacoesPorPeriodo().sort((a, b) => new Date(b.data) - new Date(a.data));
+  if (tipoF !== "todos") txs = txs.filter(t => t.tipo === tipoF);
+  if (catF !== "todas") txs = txs.filter(t => t.categoria === catF);
+
+  const ent = txs.filter(t => t.tipo === "receita").reduce((s, t) => s + t.valor, 0);
+  const sai = txs.filter(t => t.tipo !== "receita").reduce((s, t) => s + t.valor, 0);
+  document.getElementById("extEntrada").textContent = fmtMoeda(ent);
+  document.getElementById("extSaida").textContent = fmtMoeda(sai);
+  document.getElementById("extSaldo").textContent = fmtMoeda(ent - sai);
+
+  const lista = document.getElementById("listaExtrato");
+  if (txs.length === 0) {
+    lista.innerHTML = `<p style="text-align:center; color:#666; font-size:13px; padding:30px;">Nenhum lançamento encontrado para este filtro.</p>`;
+    return;
+  }
+
+  lista.innerHTML = txs.map(t => {
+    const cor = t.tipo === "receita" ? "var(--green)" : (t.tipo === "investimento" ? "var(--purple)" : "var(--red)");
+    const sinal = t.tipo === "receita" ? "+" : (t.tipo === "investimento" ? "•" : "-");
+    const dtFmt = t.data.split("-").reverse().join("/");
+    return `
+      <div class="tx-card">
+        <div>
+          <div style="font-size:13px; font-weight:600;">${t.descricao || t.subcategoria}</div>
+          <div style="font-size:11px; color:var(--gold);">${t.categoria} › ${t.subcategoria}</div>
+          <div style="font-size:11px; color:#777;">${dtFmt} · ${t.forma}</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <b style="color:${cor}; font-size:14px;">${sinal} ${fmtMoeda(t.valor)}</b>
+          <i class="fa-solid fa-pen" style="color:#888; font-size:13px; cursor:pointer;" onclick="abrirModalLancamento(${t.id})"></i>
+          <i class="fa-solid fa-trash" style="color:#555; font-size:13px; cursor:pointer;" onclick="excluirLancamento(${t.id})"></i>
+        </div>
+      </div>`;
+  }).join("");
+}
+
+/* =========================================================
+   8. RENDERIZAÇÃO: ORÇAMENTO & GOVERNANÇA 50/30/20
+   ========================================================= */
+function renderizarOrcamento() {
+  const txs = filtrarTransacoesPorPeriodo();
+  const prevTxs = filtrarPeriodoAnterior();
+
+  const rec = txs.filter(t => t.tipo === "receita").reduce((s, t) => s + t.valor, 0);
+  const ess = txs.filter(t => t.tipo === "despesa" && state.categorias[t.categoria]?.macro === "essencial").reduce((s, t) => s + t.valor, 0);
+  const varG = txs.filter(t => t.tipo === "despesa" && state.categorias[t.categoria]?.macro === "variavel").reduce((s, t) => s + t.valor, 0);
+  const inv = txs.filter(t => t.tipo === "investimento").reduce((s, t) => s + t.valor, 0);
+
+  const pEss = rec > 0 ? ((ess / rec) * 100).toFixed(0) : 0;
+  const pVar = rec > 0 ? ((varG / rec) * 100).toFixed(0) : 0;
+  const pInv = rec > 0 ? ((inv / rec) * 100).toFixed(0) : 0;
+
+  document.getElementById("painelRegra503020").innerHTML = `
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); text-align:center; gap:8px;">
+      <div><span style="font-size:11px; color:#888;">Essenciais (50%)</span><div style="font-size:16px; font-weight:700; color:${pEss > 50 ? 'var(--red)' : 'var(--green)'}">${pEss}%</div></div>
+      <div><span style="font-size:11px; color:#888;">Variáveis (30%)</span><div style="font-size:16px; font-weight:700; color:${pVar > 30 ? 'var(--red)' : 'var(--green)'}">${pVar}%</div></div>
+      <div><span style="font-size:11px; color:#888;">Investimentos (20%)</span><div style="font-size:16px; font-weight:700; color:var(--purple)">${pInv}%</div></div>
+    </div>`;
+
+  const renderGrupo = (macro, containerId) => {
+    const el = document.getElementById(containerId);
+    el.innerHTML = "";
+    Object.keys(state.categorias).filter(c => state.categorias[c].tipo === "despesa" && state.categorias[c].macro === macro).forEach(catNome => {
+      const cat = state.categorias[catNome];
+      const gasto = txs.filter(t => t.categoria === catNome && t.tipo === "despesa").reduce((s, t) => s + t.valor, 0);
+      const gastoAnt = prevTxs.filter(t => t.categoria === catNome && t.tipo === "despesa").reduce((s, t) => s + t.valor, 0);
+      const lim = Number(cat.orcamento || 0);
+
+      let cor = "var(--green)";
+      if (lim === 0) cor = "var(--yellow)";
+      else if (gasto > lim) cor = "var(--red)";
+      else if (gasto >= lim * 0.9) cor = "var(--yellow)";
+
+      const pctBar = lim > 0 ? Math.min((gasto / lim) * 100, 100) : (gasto > 0 ? 100 : 0);
+
+      // Tendência vs período anterior
+      let trendHtml = "";
+      if (gastoAnt > 0) {
+        const diffPct = (((gasto - gastoAnt) / gastoAnt) * 100).toFixed(0);
+        const cls = diffPct > 0 ? "trend-up" : "trend-down";
+        const icon = diffPct > 0 ? "▲" : "▼";
+        trendHtml = `<span class="trend-pill ${cls}">${icon} ${Math.abs(diffPct)}%</span>`;
+      }
+
+      el.innerHTML += `
+        <div class="budget-item">
+          <div class="budget-top">
+            <div><i class="fa-solid ${cat.icone}" style="color:var(--gold)"></i> <b>${catNome}</b> ${trendHtml}</div>
+            <span><b>${fmtMoeda(gasto)}</b> / ${lim > 0 ? fmtMoeda(lim) : 'Sem limite'}</span>
+          </div>
+          <div class="progress-bg"><div class="progress-fill" style="width:${pctBar}%; background:${cor};"></div></div>
+        </div>`;
+    });
+  };
+
+  renderGrupo("essencial", "listaOrcamentoEssencial");
+  renderGrupo("variavel", "listaOrcamentoVariavel");
+}
+
+/* =========================================================
+   9. GRÁFICOS OTIMIZADOS PARA MOBILE (maintainAspectRatio: false)
+   ========================================================= */
+function criarOuAtualizarChart(id, config) {
+  if (charts[id]) charts[id].destroy();
+  const ctx = document.getElementById(id).getContext("2d");
+  config.options = { ...config.options, responsive: true, maintainAspectRatio: false };
+  charts[id] = new Chart(ctx, config);
+}
+
+function renderizarGraficos() {
+  const txs = filtrarTransacoesPorPeriodo();
+  const ess = txs.filter(t => t.tipo === "despesa" && state.categorias[t.categoria]?.macro === "essencial").reduce((s, t) => s + t.valor, 0);
+  const varG = txs.filter(t => t.tipo === "despesa" && state.categorias[t.categoria]?.macro === "variavel").reduce((s, t) => s + t.valor, 0);
+  const inv = txs.filter(t => t.tipo === "investimento").reduce((s, t) => s + t.valor, 0);
+
+  // 1. Rosca 50/30/20
+  criarOuAtualizarChart("chart503020", {
+    type: "doughnut",
+    data: {
+      labels: ["Essenciais", "Variáveis", "Investimentos"],
+      datasets: [{ data: [ess, varG, inv], backgroundColor: ["#d4af37", "#03A9F4", "#9C27B0"], borderWidth: 0 }]
+    },
+    options: { plugins: { legend: { position: "right", labels: { color: "#ccc", font: { size: 11 } } } } }
+  });
+
+  // 2. Barras Mistas + Linha Saldo Acumulado (Ano Atual)
+  const ano = dataRef.getFullYear();
+  const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+  const recM = Array(12).fill(0), despM = Array(12).fill(0), saldoAc = Array(12).fill(0);
+  let acumulado = 0;
+  for (let m = 0; m < 12; m++) {
+    const doMes = state.transacoes.filter(t => {
+      const d = new Date(t.data + "T00:00:00");
+      return d.getFullYear() === ano && d.getMonth() === m;
+    });
+    recM[m] = doMes.filter(t => t.tipo === "receita").reduce((s, t) => s + t.valor, 0);
+    despM[m] = doMes.filter(t => t.tipo === "despesa").reduce((s, t) => s + t.valor, 0);
+    acumulado += (recM[m] - despM[m]);
+    saldoAc[m] = acumulado;
+  }
+
+  criarOuAtualizarChart("chartFluxoMisto", {
+    data: {
+      labels: meses,
+      datasets: [
+        { type: "line", label: "Saldo Acumulado", data: saldoAc, borderColor: "#d4af37", tension: 0.3 },
+        { type: "bar", label: "Receitas", data: recM, backgroundColor: "#4CAF50" },
+        { type: "bar", label: "Despesas", data: despM, backgroundColor: "#F44336" }
+      ]
+    },
+    options: {
+      plugins: { legend: { labels: { color: "#ccc", font: { size: 10 } } } },
+      scales: { x: { ticks: { color: "#888" } }, y: { ticks: { color: "#888" } } }
+    }
+  });
+
+  // 3. Top Despesas Horizontais
+  const catsDesp = Object.keys(state.categorias).filter(c => state.categorias[c].tipo === "despesa");
+  const ranking = catsDesp.map(c => ({
+    nome: c,
+    total: txs.filter(t => t.categoria === c && t.tipo === "despesa").reduce((s, t) => s + t.valor, 0)
+  })).filter(x => x.total > 0).sort((a, b) => b.total - a.total).slice(0, 6);
+
+  criarOuAtualizarChart("chartTopDespesas", {
+    type: "bar",
+    data: {
+      labels: ranking.map(r => r.nome),
+      datasets: [{ label: "Gasto (R$)", data: ranking.map(r => r.total), backgroundColor: "#d4af37" }]
+    },
+    options: {
+      indexAxis: "y",
+      plugins: { legend: { display: false } },
+      scales: { x: { ticks: { color: "#888" } }, y: { ticks: { color: "#ccc", font: { size: 10 } } } }
+    }
+  });
+}
+
+/* =========================================================
+   10. PATRIMÔNIO & LEITOR DE CSV INTELIGENTE
+   ========================================================= */
+function renderizarPatrimonio() {
+  const todosInvest = state.transacoes.filter(t => t.tipo === "investimento");
+  const totalHist = todosInvest.reduce((s, t) => s + t.valor, 0);
+
+  const periodoInvest = filtrarTransacoesPorPeriodo().filter(t => t.tipo === "investimento");
+  const totalPer = periodoInvest.reduce((s, t) => s + t.valor, 0);
+
+  document.getElementById("patTotalHistorico").textContent = fmtMoeda(totalHist);
+  document.getElementById("patAportesPeriodo").textContent = fmtMoeda(totalPer);
+
+  // Suor (Aportes) vs Juros (Rendimentos e Dividendos)
+  const jurosTotal = todosInvest.filter(t => t.categoria === "Rendimentos e Dividendos").reduce((s, t) => s + t.valor, 0);
+  const suorTotal = totalHist - jurosTotal;
+
+  // Últimos 12 meses
+  const labels12 = [], aportes12 = [], evolucao12 = [];
+  const base = new Date();
+  let somaAcumulada = todosInvest.filter(t => {
+    const d = new Date(t.data + "T00:00:00");
+    const limiteIni = new Date(base.getFullYear(), base.getMonth() - 11, 1);
+    return d < limiteIni;
+  }).reduce((s, t) => s + t.valor, 0);
+
+  for (let i = 11; i >= 0; i--) {
+    const d = new Date(base.getFullYear(), base.getMonth() - i, 1);
+    labels12.push(`${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getFullYear()).slice(-2)}`);
+    const doMes = todosInvest.filter(t => {
+      const dt = new Date(t.data + "T00:00:00");
+      return dt.getFullYear() === d.getFullYear() && dt.getMonth() === d.getMonth();
+    }).reduce((s, t) => s + t.valor, 0);
+    aportes12.push(doMes);
+    somaAcumulada += doMes;
+    evolucao12.push(somaAcumulada);
+  }
+
+  criarOuAtualizarChart("chartPatEvolucao", {
+    type: "line",
+    data: { labels: labels12, datasets: [{ label: "Patrimônio", data: evolucao12, borderColor: "#9C27B0", backgroundColor: "rgba(156,39,176,0.15)", fill: true, tension: 0.3 }] },
+    options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { color: "#888" } }, y: { ticks: { color: "#888" } } } }
+  });
+
+  criarOuAtualizarChart("chartPatComposicao", {
+    type: "doughnut",
+    data: { labels: ["Suor (Aportes)", "Juros & Dividendos"], datasets: [{ data: [suorTotal, jurosTotal], backgroundColor: ["#9C27B0", "#4CAF50"], borderWidth: 0 }] },
+    options: { plugins: { legend: { position: "right", labels: { color: "#ccc", font: { size: 11 } } } } }
+  });
+
+  criarOuAtualizarChart("chartPatAportes", {
+    type: "bar",
+    data: { labels: labels12, datasets: [{ label: "Aporte Mensal", data: aportes12, backgroundColor: "#9C27B0" }] },
+    options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { color: "#888" } }, y: { ticks: { color: "#888" } } } }
+  });
+}
+
+function processarCSVImportado(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const linhas = e.target.result.split(/\r?\n/);
+    const palavrasChave = ["rendimento", "juros", "jcp", "dividendo", "provento"];
+    let importados = 0;
+
+    linhas.forEach(linha => {
+      const lower = linha.toLowerCase();
+      if (palavrasChave.some(p => lower.includes(p))) {
+        // Extrai valor monetário (ex: 125,40 ou 125.40)
+        const matchValor = linha.match(/(\d+[.,]\d{2})/);
+        // Extrai data DD/MM/YYYY ou YYYY-MM-DD
+        const matchDataBR = linha.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+        const matchDataISO = linha.match(/(\d{4})-(\d{2})-(\d{2})/);
+
+        if (matchValor) {
+          const val = parseFloat(matchValor[1].replace(".", "").replace(",", "."));
+          let dataFmt = hojeISO();
+          if (matchDataBR) dataFmt = `${matchDataBR[3]}-${matchDataBR[2]}-${matchDataBR[1]}`;
+          else if (matchDataISO) dataFmt = matchDataISO[0];
+
+          if (val > 0) {
+            state.transacoes.push({
+              id: Date.now() + Math.random(),
+              tipo: "investimento",
+              categoria: "Rendimentos e Dividendos",
+              subcategoria: "Dividendos / JCP",
+              descricao: "Importado via CSV",
+              valor: val,
+              forma: "Transferência",
+              data: dataFmt
+            });
+            importados++;
+          }
+        }
+      }
+    });
+
+    salvarEstado();
+    renderizarPatrimonio();
+    const st = document.getElementById("statusImportCsv");
+    st.style.display = "block";
+    st.textContent = `${importados} lançamento(s) de rendimentos/dividendos importados com sucesso!`;
+  };
+  reader.readAsText(file);
+}
+
+/* =========================================================
+   11. INSIGHTS INTELIGENTES (DIAGNÓSTICO AUTOMÁTICO)
+   ========================================================= */
+function renderizarInsights() {
+  const txs = filtrarTransacoesPorPeriodo();
+  const rec = txs.filter(t => t.tipo === "receita").reduce((s, t) => s + t.valor, 0);
+  const desp = txs.filter(t => t.tipo === "despesa").reduce((s, t) => s + t.valor, 0);
+  const inv = txs.filter(t => t.tipo === "investimento").reduce((s, t) => s + t.valor, 0);
+
+  const taxaPoupanca = rec > 0 ? (((rec - desp) / rec) * 100) : 0;
+  const comprometimento = rec > 0 ? ((desp / rec) * 100) : 0;
+
+  document.getElementById("insTaxaPoupanca").textContent = taxaPoupanca.toFixed(1) + "%";
+  document.getElementById("insTaxaPoupanca").style.color = taxaPoupanca >= 20 ? "var(--green)" : "var(--yellow)";
+  document.getElementById("insComprometimento").textContent = comprometimento.toFixed(1) + "%";
+  document.getElementById("insComprometimento").style.color = comprometimento > 80 ? "var(--red)" : "var(--blue)";
+
+  // Maior Ralo
+  const catsDesp = Object.keys(state.categorias).filter(c => state.categorias[c].tipo === "despesa");
+  let maiorCat = "", maiorVal = 0;
+  catsDesp.forEach(c => {
+    const v = txs.filter(t => t.categoria === c && t.tipo === "despesa").reduce((s, t) => s + t.valor, 0);
+    if (v > maiorVal) { maiorVal = v; maiorCat = c; }
+  });
+
+  document.getElementById("insMaiorRalo").innerHTML = maiorVal > 0
+    ? `Sua maior saída no período foi em <b>${maiorCat}</b>, consumindo <b>${fmtMoeda(maiorVal)}</b> (${rec > 0 ? ((maiorVal/rec)*100).toFixed(1) : 0}% da sua receita).`
+    : "Nenhuma despesa registrada no período selecionado.";
+
+  const ul = document.getElementById("listaInsightsDinamicos");
+  ul.innerHTML = "";
+  const dicas = [];
+
+  if (rec === 0 && desp === 0) {
+    dicas.push("Adicione suas receitas e despesas na aba Extrato para ativar o diagnóstico financeiro.");
+  } else {
+    if (comprometimento > 100) dicas.push("⚠️ Alerta de Endividamento: Suas despesas superaram suas receitas neste período. Revise imediatamente os gastos Variáveis.");
+    else if (comprometimento > 80) dicas.push("⚡ Atenção: Você comprometeu mais de 80% da sua renda. Evite novos parcelamentos no cartão.");
+
+    if (taxaPoupanca >= 20) dicas.push(`🏆 Excelente performance! Sua taxa de poupança está em ${taxaPoupanca.toFixed(1)}%, acima da meta recomendada de 20%.`);
+    else if (taxaPoupanca > 0) dicas.push(`💡 Você economizou ${fmtMoeda(rec - desp)} neste período. Considere direcionar esse saldo para Aportes & Futuro.`);
+
+    if (inv === 0 && rec > 0) dicas.push("📈 Você ainda não registrou aportes em investimentos neste período. Lembre-se de pagar a si mesmo primeiro.");
+  }
+
+  dicas.forEach(d => { ul.innerHTML += `<li>${d}</li>`; });
+}
+
+/* =========================================================
+   12. CONFIGURAÇÕES (FIXAS, ATALHOS, LIMITES & MACROS)
+   ========================================================= */
+function renderizarConfig() {
+  const catsDesp = Object.keys(state.categorias).filter(c => state.categorias[c].tipo === "despesa");
+
+  // Preencher selects de Fixas e Atalhos
+  ["fixaCategoria", "atalhoCategoria"].forEach(id => {
+    const el = document.getElementById(id);
+    el.innerHTML = catsDesp.map(c => `<option value="${c}">${c}</option>`).join("");
+  });
+  atualizarSubSelect("fixaCategoria", "fixaSubcategoria");
+  atualizarSubSelect("atalhoCategoria", "atalhoSubcategoria");
+
+  // Select Nova Subcategoria
+  document.getElementById("novaSubPai").innerHTML = Object.keys(state.categorias).map(c => `<option value="${c}">${c}</option>`).join("");
+
+  // Listar Fixas
+  document.getElementById("listaDespesasFixas").innerHTML = state.despesasFixas.map(f => `
+    <div style="display:flex; justify-content:space-between; align-items:center; background:#1c1c1c; padding:8px 12px; border-radius:8px; margin-top:6px; font-size:12px;">
+      <span>Dia <b>${f.dia}</b> · ${f.descricao} (${fmtMoeda(f.valor)})</span>
+      <i class="fa-solid fa-trash" style="color:var(--red); cursor:pointer;" onclick="removerFixa(${f.id})"></i>
+    </div>`).join("");
+
+  // Listar Atalhos
+  document.getElementById("listaAtalhosConfig").innerHTML = state.atalhos.map(a => `
+    <div style="display:flex; justify-content:space-between; align-items:center; background:#1c1c1c; padding:8px 12px; border-radius:8px; margin-top:6px; font-size:12px;">
+      <span>⚡ <b>${a.nome}</b> · ${a.categoria} (${fmtMoeda(a.valor)})</span>
+      <i class="fa-solid fa-trash" style="color:var(--red); cursor:pointer;" onclick="removerAtalho(${a.id})"></i>
+    </div>`).join("");
+
+  // Listar Limites e Macro 50/30/20 em 2 colunas compactas
+  document.getElementById("listaLimitesConfig").innerHTML = catsDesp.map(c => {
+    const cat = state.categorias[c];
+    return `
+      <div style="border-bottom:1px solid #222; padding:8px 0;">
+        <div style="font-size:12px; font-weight:600; margin-bottom:6px;">${c}</div>
+        <div class="cfg-grid-2">
+          <input type="number" class="app-input cfg-limite-inp" data-cat="${c}" value="${cat.orcamento}" placeholder="Limite R$" style="margin:0;">
+          <select class="app-input cfg-macro-sel" data-cat="${c}" style="margin:0;">
+            <option value="essencial" ${cat.macro === "essencial" ? "selected" : ""}>Essencial (50%)</option>
+            <option value="variavel" ${cat.macro === "variavel" ? "selected" : ""}>Variável (30%)</option>
+          </select>
+        </div>
+      </div>`;
+  }).join("");
+}
+
+function atualizarSubSelect(catId, subId) {
+  const cat = document.getElementById(catId).value;
+  const subs = state.categorias[cat]?.subs || [];
+  document.getElementById(subId).innerHTML = subs.map(s => `<option value="${s}">${s}</option>`).join("");
+}
+
+function adicionarDespesaFixa() {
+  const categoria = document.getElementById("fixaCategoria").value;
+  const subcategoria = document.getElementById("fixaSubcategoria").value;
+  const descricao = document.getElementById("fixaDescricao").value.trim();
+  const valor = parseFloat(document.getElementById("fixaValor").value);
+  const dia = parseInt(document.getElementById("fixaDia").value);
+
+  if (!descricao || isNaN(valor) || valor <= 0 || isNaN(dia) || dia < 1 || dia > 31) return alert("Preencha todos os campos da despesa fixa corretamente.");
+  state.despesasFixas.push({ id: Date.now(), categoria, subcategoria, descricao, valor, dia, ultimoMesLancado: "" });
+  salvarEstado();
+  executarPilotoAutomatico();
+  renderizarConfig();
+}
+
+function removerFixa(id) {
+  state.despesasFixas = state.despesasFixas.filter(f => f.id !== id);
+  salvarEstado(); renderizarConfig();
+}
+
+function adicionarAtalho() {
+  const categoria = document.getElementById("atalhoCategoria").value;
+  const subcategoria = document.getElementById("atalhoSubcategoria").value;
+  const nome = document.getElementById("atalhoNome").value.trim();
+  const valor = parseFloat(document.getElementById("atalhoValor").value);
+
+  if (!nome || isNaN(valor) || valor <= 0) return alert("Preencha nome e valor do atalho.");
+  state.atalhos.push({ id: Date.now(), categoria, subcategoria, nome, valor });
+  salvarEstado(); renderizarConfig();
+}
+
+function removerAtalho(id) {
+  state.atalhos = state.atalhos.filter(a => a.id !== id);
+  salvarEstado(); renderizarConfig();
+}
+
+function salvarLimitesEMacros() {
+  document.querySelectorAll(".cfg-limite-inp").forEach(inp => {
+    const c = inp.getAttribute("data-cat");
+    state.categorias[c].orcamento = parseFloat(inp.value) || 0;
+  });
+  document.querySelectorAll(".cfg-macro-sel").forEach(sel => {
+    const c = sel.getAttribute("data-cat");
+    state.categorias[c].macro = sel.value;
+  });
+  salvarEstado();
+  alert("Limites e regras 50/30/20 atualizados!");
+}
+
+function criarSubcategoria() {
+  const pai = document.getElementById("novaSubPai").value;
+  const nome = document.getElementById("novaSubNome").value.trim();
+  if (!nome) return;
+  if (!state.categorias[pai].subs.includes(nome)) {
+    state.categorias[pai].subs.push(nome);
+    salvarEstado();
+    document.getElementById("novaSubNome").value = "";
+    alert(`Subcategoria "${nome}" adicionada em ${pai}!`);
+  }
+}
+
+/* =========================================================
+   13. MODAL DE LANÇAMENTO (CRUD) & EXPORTAÇÃO
+   ========================================================= */
+function abrirModalLancamento(id = null) {
+  document.getElementById("modalLancamento").style.display = "block";
+  if (id) {
+    const t = state.transacoes.find(x => x.id === id);
+    document.getElementById("modalLancTitulo").textContent = "Editar Lançamento";
+    document.getElementById("lancId").value = t.id;
+    document.getElementById("lancTipo").value = t.tipo;
+    atualizarCatsModal();
+    document.getElementById("lancCategoria").value = t.categoria;
+    atualizarSubSelect("lancCategoria", "lancSubcategoria");
+    document.getElementById("lancSubcategoria").value = t.subcategoria;
+    document.getElementById("lancDescricao").value = t.descricao || "";
+    document.getElementById("lancValor").value = t.valor;
+    document.getElementById("lancData").value = t.data;
+    document.getElementById("lancForma").value = t.forma;
+  } else {
+    document.getElementById("modalLancTitulo").textContent = "Novo Lançamento";
+    document.getElementById("lancId").value = "";
+    document.getElementById("lancTipo").value = "despesa";
+    atualizarCatsModal();
+    document.getElementById("lancDescricao").value = "";
+    document.getElementById("lancValor").value = "";
+    document.getElementById("lancData").value = hojeISO();
+  }
+}
+
+function fecharModalLancamento() {
+  document.getElementById("modalLancamento").style.display = "none";
+}
+
+function atualizarCatsModal() {
+  const tipo = document.getElementById("lancTipo").value;
+  const cats = Object.keys(state.categorias).filter(c => state.categorias[c].tipo === tipo);
+  document.getElementById("lancCategoria").innerHTML = cats.map(c => `<option value="${c}">${c}</option>`).join("");
+  atualizarSubSelect("lancCategoria", "lancSubcategoria");
+}
+
+function salvarLancamento() {
+  const id = document.getElementById("lancId").value;
+  const tipo = document.getElementById("lancTipo").value;
+  const categoria = document.getElementById("lancCategoria").value;
+  const subcategoria = document.getElementById("lancSubcategoria").value;
+  const descricao = document.getElementById("lancDescricao").value.trim();
+  const valor = parseFloat(document.getElementById("lancValor").value);
+  const data = document.getElementById("lancData").value;
+  const forma = document.getElementById("lancForma").value;
+
+  if (!categoria || isNaN(valor) || valor <= 0 || !data) return alert("Preencha o valor e a data corretamente.");
+
+  const obj = { id: id ? parseFloat(id) : Date.now(), tipo, categoria, subcategoria, descricao, valor, data, forma };
+  if (id) {
+    const idx = state.transacoes.findIndex(x => x.id === parseFloat(id));
+    if (idx !== -1) state.transacoes[idx] = obj;
+  } else {
+    state.transacoes.push(obj);
+  }
+
+  salvarEstado();
+  fecharModalLancamento();
+  atualizarApp();
+}
+
+function excluirLancamento(id) {
+  if (confirm("Excluir este lançamento?")) {
+    state.transacoes = state.transacoes.filter(x => x.id !== id);
+    salvarEstado();
+    atualizarApp();
+  }
+}
+
+function exportarCSV() {
+  if (state.transacoes.length === 0) return alert("Sem lançamentos para exportar.");
+  let csv = "sep=;\nData;Tipo;Categoria;Subcategoria;Descricao;Valor;Forma\n";
+  state.transacoes.forEach(t => {
+    csv += `${t.data};${t.tipo};"${t.categoria}";"${t.subcategoria}";"${t.descricao || ''}";${t.valor.toFixed(2).replace('.', ',')};${t.forma}\n`;
+  });
+  const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8;" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `l7_control_${hojeISO()}.csv`;
+  a.click();
+}
+
+function resetarTudo() {
+  if (confirm("Isso apagará todos os dados locais. Continuar?")) {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+}
+</script>
+</body>
+</html>
