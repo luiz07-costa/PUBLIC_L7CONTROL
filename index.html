@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,20 +18,20 @@
 
     <style>
         :root {
-            --bg-main: #09090b; --bg-card: #18181b; --bg-input: #27272a;
-            --text-main: #f8fafc; --text-muted: #94a3b8;
+            --bg-main: #000000; --bg-card: #121214; --bg-input: #1f1f22;
+            --text-main: #f8fafc; --text-muted: #a1a1aa;
             --primary: #fbbf24; --primary-hover: #f59e0b;
             --success: #22c55e; --danger: #ef4444; --info: #3b82f6; --purple: #a855f7;
-            --border: #334155;
+            --border: #27272a;
             --font-display: 'Poppins', sans-serif; --font-body: 'Inter', sans-serif;
-            --nav-height: 72px;
+            --nav-height: 76px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-main); color: var(--text-main); font-family: var(--font-body); -webkit-tap-highlight-color: transparent; overflow-x: hidden; line-height: 1.6; }
 
-        h1, h2, h3, h4, .font-display { font-family: var(--font-display); font-weight: 700; line-height: 1.2; }
+        h1, h2, h3, h4, .font-display { font-family: var(--font-display); font-weight: 700; line-height: 1.2; letter-spacing: -0.5px; }
         .text-primary { color: var(--primary); } .text-success { color: var(--success); } .text-danger { color: var(--danger); }
         .text-info { color: var(--info); } .text-purple { color: var(--purple); } .text-muted { color: var(--text-muted); }
         .text-center { text-align: center; }
@@ -40,119 +40,140 @@
         .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .w-full { width: 100%; } .hidden { display: none !important; }
 
         /* Botões Gerais */
-        button, .btn { background-color: var(--primary); color: #0f172a; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-display); font-size: 0.95rem; text-decoration: none; }
-        button:hover, .btn:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+        button, .btn { background-color: var(--primary); color: #000; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-display); font-size: 0.95rem; text-decoration: none; }
+        button:hover, .btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(251, 191, 36, 0.25); }
         button:active, .btn:active { transform: scale(0.97); }
         
-        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
-        .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: rgba(251, 191, 36, 0.05); }
-        .btn-glow { box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2); }
+        .btn-outline { background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: rgba(251, 191, 36, 0.08); }
+        .btn-glow { box-shadow: 0 4px 30px rgba(251, 191, 36, 0.25); }
 
-        input, select, textarea { width: 100%; background-color: var(--bg-input); color: var(--text-main); border: 1px solid var(--border); padding: 12px 14px; border-radius: 8px; margin-top: 6px; font-size: 0.95rem; font-family: var(--font-body); }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2); }
-        .badge-pro { background: linear-gradient(135deg, var(--primary) 0%, #fef3c7 100%); color: #0f172a; font-size: 0.65rem; padding: 4px 8px; border-radius: 4px; font-weight: 700; text-transform: uppercase; font-family: var(--font-display); letter-spacing: 0.5px; }
+        input, select, textarea { width: 100%; background-color: var(--bg-input); color: var(--text-main); border: 1px solid var(--border); padding: 14px 16px; border-radius: 10px; margin-top: 6px; font-size: 0.95rem; font-family: var(--font-body); transition: border-color 0.2s; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.15); }
+        .badge-pro { background: linear-gradient(135deg, var(--primary) 0%, #fef3c7 100%); color: #000; font-size: 0.65rem; padding: 4px 10px; border-radius: 6px; font-weight: 800; text-transform: uppercase; font-family: var(--font-display); letter-spacing: 0.5px; }
 
         /* =========================================================
-           1. PÁGINA DE VENDAS (ONE PAGE)
+           1. PÁGINA DE VENDAS (ONE PAGE - SAAS PREMIUM)
            ========================================================= */
-        .landing-page { min-height: 100vh; background: var(--bg-main); }
+        .landing-page { min-height: 100vh; background: var(--bg-main); background-image: radial-gradient(circle at top center, rgba(251, 191, 36, 0.05) 0%, transparent 50%); }
         
         /* Navbar */
-        .lp-navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; height: var(--nav-height); position: fixed; top: 0; left: 0; right: 0; background: rgba(9, 9, 11, 0.85); backdrop-filter: blur(16px); z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .lp-logo { font-size: 1.25rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; font-family: var(--font-display); letter-spacing: 0.5px; text-decoration: none; cursor: pointer; }
-        .lp-logo .icon-box { border: 1.5px solid var(--primary); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; box-shadow: 0 0 10px rgba(251,191,36,0.15); }
-        .lp-nav-links { display: flex; gap: 24px; } .lp-nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; cursor: pointer; } .lp-nav-links a:hover { color: var(--primary); }
+        .lp-navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; height: var(--nav-height); position: fixed; top: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .lp-logo { font-size: 1.25rem; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 10px; font-family: var(--font-display); letter-spacing: 0px; text-decoration: none; cursor: pointer; }
+        .lp-logo .icon-box { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: #000; box-shadow: 0 0 15px rgba(251,191,36,0.3); }
+        .lp-nav-links { display: flex; gap: 32px; } .lp-nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; cursor: pointer; } .lp-nav-links a:hover { color: var(--text-main); }
         .lp-nav-actions { display: flex; gap: 12px; align-items: center; }
 
-        /* Hero Secion */
-        .lp-hero { padding: 140px 5% 80px; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; }
-        .hero-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.2); color: var(--primary); padding: 6px 14px; border-radius: 30px; font-size: 0.78rem; font-weight: 600; margin-bottom: 20px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.5px; }
-        .hero-content h1 { font-size: clamp(2.4rem, 4vw, 3.8rem); margin-bottom: 20px; letter-spacing: -1px; line-height: 1.15; }
-        .hero-content p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 32px; line-height: 1.6; }
-        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
+        /* Hero Section */
+        .lp-hero { padding: 160px 5% 100px; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+        .hero-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); padding: 8px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; margin-bottom: 24px; font-family: var(--font-body); }
+        .hero-pill i { color: var(--primary); }
+        .hero-content h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 24px; letter-spacing: -1.5px; line-height: 1.1; }
+        .hero-content p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6; max-width: 90%; }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+        .hero-trust { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted); font-weight: 500; } .hero-trust span i { color: var(--success); margin-right: 6px; font-size: 0.9rem; }
         
-        /* Mockup Futurista (Imagem 1 Corrigida) */
-        .hero-mockup-wrapper { position: relative; width: 100%; display: flex; justify-content: center; }
-        .hero-mockup-glow { position: absolute; width: 80%; height: 80%; background: var(--primary); filter: blur(120px); opacity: 0.12; top: 10%; left: 10%; z-index: 0; border-radius: 50%; }
+        /* Mockup Glassmorphism */
+        .hero-mockup-container { position: relative; width: 100%; display: flex; justify-content: center; }
+        .hero-mockup-glow { position: absolute; width: 90%; height: 90%; background: var(--primary); filter: blur(120px); opacity: 0.15; top: 5%; left: 5%; z-index: 0; border-radius: 50%; }
         
-        .mockup-ui { background: rgba(24, 24, 27, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; width: 100%; max-width: 420px; padding: 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: relative; z-index: 1; }
-        .mockup-header { display: flex; align-items: center; gap: 8px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .mockup-ui { background: rgba(18, 18, 20, 0.7); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; width: 100%; max-width: 440px; padding: 36px; box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1); position: relative; z-index: 1; }
+        .mockup-header { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .mockup-header span { width: 12px; height: 12px; border-radius: 50%; }
-        .dot-r { background: #ef4444; } .dot-y { background: #f59e0b; } .dot-g { background: #22c55e; }
+        .dot-r { background: #FF5F56; } .dot-y { background: #FFBD2E; } .dot-g { background: #27C93F; }
         
-        .m-row { margin-bottom: 20px; display: flex; flex-direction: column; gap: 4px; }
+        .m-row { margin-bottom: 24px; display: flex; flex-direction: column; gap: 4px; }
         .m-row:last-child { margin-bottom: 0; }
         .m-title { color: var(--text-muted); font-size: 1rem; font-weight: 500; font-family: var(--font-body); }
-        .m-val { font-size: 1.5rem; font-weight: 700; font-family: var(--font-display); letter-spacing: -0.5px; }
+        .m-val { font-size: 1.6rem; font-weight: 700; font-family: var(--font-display); letter-spacing: -0.5px; line-height: 1; }
         .m-val.green { color: var(--success); }
         .m-val.red { color: var(--danger); }
         .m-val.blue { color: var(--info); }
 
         /* Estrutura de Seções */
-        .lp-section { padding: 90px 5%; max-width: 1240px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); }
-        .lp-section-tag { text-align: center; color: var(--primary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; font-family: var(--font-display); }
-        .lp-section-title { text-align: center; font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 18px; line-height: 1.2; }
-        .lp-section-subtitle { text-align: center; color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 0 auto 50px; line-height: 1.6; }
+        .lp-section { padding: 120px 5%; max-width: 1240px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); }
+        .lp-section-tag { text-align: center; color: var(--primary); font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; font-family: var(--font-display); }
+        .lp-section-title { text-align: center; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; line-height: 1.15; letter-spacing: -1px; }
+        .lp-section-subtitle { text-align: center; color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto 60px; line-height: 1.6; }
         
-        /* Slideshow / Carrossel (Substituindo o Vídeo) */
-        .carousel-wrapper { position: relative; width: 100%; max-width: 900px; margin: 0 auto; border-radius: 24px; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
-        .carousel-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 40px; text-align: center; }
-        .slide-icon { font-size: 3.5rem; color: var(--primary); margin-bottom: 24px; background: rgba(251,191,36,0.1); width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-        .slide-title { font-size: 1.8rem; font-family: var(--font-display); font-weight: 700; color: var(--text-main); margin-bottom: 16px; }
-        .slide-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 500px; line-height: 1.6; }
+        /* Carrossel de Alto Impacto */
+        .impact-slider-container { max-width: 1040px; margin: 0 auto; position: relative; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); overflow: hidden; }
+        .impact-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
+        .impact-slide { min-width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 60px; }
         
-        .carousel-controls { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); }
-        .carousel-btn { background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
-        .carousel-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); }
-        .carousel-dots { display: flex; gap: 10px; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); cursor: pointer; transition: 0.3s; }
-        .dot.active { background: var(--primary); transform: scale(1.3); }
+        .impact-content { display: flex; flex-direction: column; gap: 16px; }
+        .impact-step-badge { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; font-weight: 800; font-family: var(--font-display); padding: 6px 14px; border-radius: 20px; align-self: flex-start; letter-spacing: 1px; }
+        .impact-title { font-size: 2.2rem; font-family: var(--font-display); font-weight: 700; line-height: 1.1; color: var(--primary); letter-spacing: -0.5px; }
+        .impact-desc { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 12px; }
+        .impact-bullets { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .impact-bullets li { display: flex; align-items: center; gap: 12px; color: var(--text-main); font-size: 0.95rem; font-weight: 500; }
+        .impact-bullets li i { color: var(--success); font-size: 1.1rem; }
 
-        /* Preços (Fiel Imagens 2 e 3) */
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; max-width: 1000px; margin: 0 auto; align-items: stretch; }
-        .price-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 32px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
-        .price-card.featured { border: 2px solid var(--primary); background: linear-gradient(180deg, rgba(251,191,36,0.08) 0%, var(--bg-card) 100%); transform: scale(1.04); z-index: 2; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .price-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; font-size: 0.75rem; font-weight: 800; padding: 6px 14px; border-radius: 20px; font-family: var(--font-display); white-space: nowrap; box-shadow: 0 4px 10px rgba(251,191,36,0.3); }
-        .p-plan-name { font-size: 1.4rem; font-family: var(--font-display); font-weight: 700; margin-bottom: 4px; }
-        .p-plan-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
-        .p-price-val { font-size: 2.8rem; font-weight: 800; font-family: var(--font-display); line-height: 1; margin-bottom: 6px; } 
-        .p-price-val span { font-size: 1rem; font-weight: 500; color: var(--text-muted); }
-        .p-equiv { display: inline-block; background: rgba(34, 197, 94, 0.15); color: var(--success); font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin-bottom: 24px; }
+        .impact-visual { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 32px; display: flex; align-items: center; justify-content: center; min-height: 280px; position: relative; }
         
-        .price-list { list-style: none; margin: 0 0 32px 0; display: flex; flex-direction: column; gap: 14px; flex: 1; } 
-        .price-list li { font-size: 0.95rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 12px; } 
-        .price-list li i { color: var(--success); margin-top: 4px; font-size: 0.9rem; }
-        .price-list li strong { color: var(--text-main); }
-        .price-footer-msg { text-align: center; margin-top: 32px; color: var(--text-muted); font-size: 0.9rem; max-width: 600px; margin-inline: auto; line-height: 1.5; }
+        /* Fake UI Elements */
+        .fake-ui-btn { background: var(--bg-card); border: 1px solid rgba(251,191,36,0.3); border-radius: 16px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 320px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); animation: float 4s ease-in-out infinite; }
+        .fake-ui-chart { width: 100%; display: flex; flex-direction: column; gap: 16px; max-width: 320px; }
+        .fake-bar-bg { width: 100%; height: 12px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; }
+        .fake-bar-fill { height: 100%; border-radius: 6px; }
+        .fake-emoji-box { background: var(--bg-card); border: 1px solid var(--success); border-radius: 20px; padding: 24px; text-align: center; max-width: 300px; width: 100%; box-shadow: 0 15px 35px rgba(34,197,94,0.1); }
 
-        /* Footer Restaurado, Lindo e Persuasivo */
-        .lp-footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); padding: 80px 5% 40px; margin-top: 40px; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1240px; margin: 0 auto 50px; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+        .impact-controls { display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.05); }
+        .impact-btn { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
+        .impact-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); }
+        .impact-dots { display: flex; gap: 12px; }
+        .idot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: 0.3s; }
+        .idot.active { background: var(--primary); transform: scale(1.5); }
+
+        /* Preços (SaaS Style) */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; max-width: 1040px; margin: 0 auto; align-items: stretch; }
+        .price-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 32px; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.3s ease; }
+        .price-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-4px); }
+        .price-card.featured { border: 2px solid var(--primary); background: linear-gradient(180deg, rgba(251,191,36,0.05) 0%, var(--bg-card) 100%); transform: scale(1.05); z-index: 2; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .price-card.featured:hover { transform: scale(1.05) translateY(-4px); }
+        .price-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; font-size: 0.75rem; font-weight: 800; padding: 6px 16px; border-radius: 20px; font-family: var(--font-display); white-space: nowrap; box-shadow: 0 4px 15px rgba(251,191,36,0.3); }
+        
+        .p-plan-name { font-size: 1.4rem; font-family: var(--font-display); font-weight: 700; margin-bottom: 8px; }
+        .p-plan-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; line-height: 1.4; }
+        .p-price-val { font-size: 3rem; font-weight: 800; font-family: var(--font-display); line-height: 1; margin-bottom: 8px; letter-spacing: -1px; } 
+        .p-price-val span { font-size: 1rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0; }
+        .p-equiv { display: inline-block; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); color: var(--success); font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 8px; margin-bottom: 24px; }
+        
+        .price-list { list-style: none; margin: 0 0 36px 0; display: flex; flex-direction: column; gap: 16px; flex: 1; } 
+        .price-list li { font-size: 0.95rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; } 
+        .price-list li i { color: var(--success); margin-top: 3px; font-size: 0.9rem; }
+        .price-list li strong { color: var(--text-main); font-weight: 600; }
+        .price-footer-msg { text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 0.9rem; max-width: 600px; margin-inline: auto; line-height: 1.6; }
+
+        /* Footer Limpo e Direto (Sem LinkedIn) */
+        .lp-footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); padding: 80px 5% 40px; margin-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; max-width: 1240px; margin: 0 auto 60px; }
         .footer-col h4 { font-family: var(--font-display); font-weight: 700; color: var(--text-main); font-size: 1.1rem; margin-bottom: 24px; letter-spacing: 0.5px; }
         
-        .footer-link-normal { display: flex; align-items: center; gap: 10px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; margin-bottom: 16px; transition: color 0.2s; background: none; border: none; padding: 0; font-family: var(--font-body); cursor: pointer; text-align: left; }
-        .footer-link-normal:hover { color: var(--primary); }
-        .footer-link-normal i { font-size: 1.2rem; width: 20px; text-align: center; }
+        .footer-link-normal { display: flex; align-items: center; gap: 12px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; margin-bottom: 16px; transition: all 0.2s; background: none; border: none; padding: 0; font-family: var(--font-body); cursor: pointer; text-align: left; }
+        .footer-link-normal:hover { color: var(--primary); transform: translateX(4px); }
+        .footer-link-normal i { font-size: 1.2rem; width: 24px; text-align: center; }
 
-        .footer-bottom { max-width: 1240px; margin: 0 auto; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; color: var(--text-muted); }
+        .footer-bottom { max-width: 1240px; margin: 0 auto; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; color: var(--text-muted); }
 
-        @media (max-width: 992px) { .lp-nav-links { display: none; } .lp-hero { grid-template-columns: 1fr; text-align: center; padding-top: 120px; gap: 40px; } .hero-content p { margin-inline: auto; } .hero-buttons { justify-content: center; } .price-card.featured { transform: scale(1); } .footer-grid { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 640px) { .lp-nav-actions .btn-outline { padding: 8px 14px; font-size: 0.85rem; } .lp-nav-actions .btn-glow { padding: 8px 16px; font-size: 0.85rem; } .hero-buttons button, .hero-buttons a { width: 100%; justify-content: center; } .footer-grid { grid-template-columns: 1fr; } .carousel-slide { padding: 40px 20px; } }
+        @media (max-width: 992px) { .lp-nav-links { display: none; } .lp-hero { grid-template-columns: 1fr; text-align: center; padding-top: 140px; gap: 50px; } .hero-content p { margin-inline: auto; } .hero-buttons, .hero-trust { justify-content: center; } .price-card.featured { transform: scale(1); } .footer-grid { grid-template-columns: 1fr 1fr; } .impact-slide { grid-template-columns: 1fr; padding: 50px 30px; text-align: center; } .impact-step-badge { align-self: center; } .impact-bullets { align-items: center; } }
+        @media (max-width: 640px) { .lp-nav-actions .btn-outline { padding: 8px 16px; font-size: 0.85rem; } .lp-nav-actions .btn-glow { padding: 8px 16px; font-size: 0.85rem; } .hero-buttons button, .hero-buttons a { width: 100%; justify-content: center; } .footer-grid { grid-template-columns: 1fr; } }
 
         /* =========================================================
-           2. APP INTERNO (SPA MOBILE-FIRST) - CSS OMITIDO POR BREVIDADE (IDÊNTICO À V6, GARANTIDO)
+           2. APP INTERNO (SPA MOBILE-FIRST)
            ========================================================= */
         .app-header { padding: 48px 16px 16px; text-align: center; background-color: var(--bg-main); border-bottom: 1px solid var(--border); position: relative; }
         .app-header .logo-center { width: 44px; height: 44px; border: 1px solid var(--primary); border-radius: 10px; margin: 0 auto 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary); box-shadow: 0 0 10px rgba(251,191,36,0.1); }
-        .app-header h1 { font-size: 1.3rem; color: var(--primary); letter-spacing: 0.5px; margin-bottom: 2px; }
+        .app-header h1 { font-size: 1.3rem; color: var(--text-main); letter-spacing: 0.5px; margin-bottom: 2px; }
         .app-header p { font-size: 0.75rem; color: var(--text-muted); }
 
         .header-left-group { position: absolute; top: 12px; left: 12px; display: flex; align-items: center; gap: 6px; }
         .header-pill-btn { color: var(--text-muted); font-size: 0.75rem; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; padding: 6px 10px; border: 1px solid var(--border); border-radius: 20px; background: var(--bg-card); font-weight: 500; transition: 0.2s; border: none;}
         .header-pill-btn:hover { color: var(--text-main); }
 
-        .header-pro-cta { position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, var(--primary) 0%, #fef3c7 100%); color: #0f172a; border: none; border-radius: 10px; padding: 6px 10px; cursor: pointer; text-align: right; display: flex; flex-direction: column; align-items: flex-end; box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2); }
+        .header-pro-cta { position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, var(--primary) 0%, #fef3c7 100%); color: #000; border: none; border-radius: 10px; padding: 6px 10px; cursor: pointer; text-align: right; display: flex; flex-direction: column; align-items: flex-end; box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2); }
         .header-pro-cta .cta-top { font-family: var(--font-display); font-weight: 800; font-size: 0.7rem; display: flex; align-items: center; gap: 4px; line-height: 1.1; }
         .header-pro-cta .cta-sub { font-family: var(--font-body); font-weight: 600; font-size: 0.6rem; opacity: 0.9; line-height: 1.2; margin-top: 2px; }
         .header-pro-cta.is-pro-active { background: rgba(34, 197, 94, 0.1); border: 1px solid var(--success); color: var(--success); box-shadow: none; }
@@ -160,7 +181,7 @@
         .filter-wrapper { background-color: var(--bg-main); padding: 12px 16px; position: sticky; top: 0; z-index: 40; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .filter-select { width: 100%; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); padding: 10px 14px; border-radius: 8px; font-weight: 500; text-align: center; font-size: 0.9rem; margin: 0; }
         .month-nav { display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 8px 12px; border-radius: 8px; margin-top: 8px; border: 1px solid var(--border); }
-        .month-nav button.nav-arrow { background: var(--bg-input); color: var(--text-main); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; width: auto; border: 1px solid var(--border); }
+        .month-nav button.nav-arrow { background: var(--bg-input); color: var(--text-main); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; width: auto; border: 1px solid var(--border); cursor: pointer; }
 
         .app-container { padding: 16px 16px calc(var(--nav-height) + 40px); min-height: 100vh; max-width: 800px; margin: 0 auto; }
         .section-title { font-size: 1.15rem; color: var(--primary); margin-bottom: 16px; font-family: var(--font-display); font-weight: 600; display: flex; align-items: center; gap: 8px; }
@@ -170,45 +191,41 @@
         .card-stat.border-success { border-bottom: 2px solid var(--success); } .card-stat.border-danger { border-bottom: 2px solid var(--danger); } .card-stat.border-purple { border-bottom: 2px solid var(--purple); } .card-stat.border-info { border-bottom: 2px solid var(--info); }
         .card-stat .icon { font-size: 1.2rem; margin-bottom: 8px; } .card-stat .label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; } .card-stat .value { font-size: 1.15rem; font-weight: 600; font-family: var(--font-display); }
 
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-height); background-color: rgba(9, 9, 11, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: flex; align-items: center; overflow-x: auto; white-space: nowrap; scrollbar-width: none; z-index: 50; padding: 0 4px; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-height); background-color: rgba(9, 9, 11, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: flex; align-items: center; overflow-x: auto; white-space: nowrap; scrollbar-width: none; z-index: 50; padding: 0 4px; }
         .bottom-nav::-webkit-scrollbar { display: none; }
         .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 68px; flex: 1; color: var(--text-muted); cursor: pointer; text-decoration: none; transition: 0.2s; padding: 4px; }
         .nav-item i { font-size: 1.15rem; margin-bottom: 4px; } .nav-item span { font-size: 0.6rem; font-weight: 500; } .nav-item.active { color: var(--primary); }
-        .fab { position: fixed; bottom: calc(var(--nav-height) + 16px); right: 16px; width: 56px; height: 56px; background-color: var(--primary); color: #0f172a; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3); z-index: 45; cursor: pointer; transition: 0.2s; }
+        .fab { position: fixed; bottom: calc(var(--nav-height) + 16px); right: 16px; width: 56px; height: 56px; background-color: var(--primary); color: #000; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3); z-index: 45; cursor: pointer; transition: 0.2s; }
         .fab:active { transform: scale(0.92); }
 
         .card { background-color: var(--bg-card); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border); }
         .tx-list { list-style: none; } .tx-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); } .tx-item:last-child { border-bottom: none; }
-        .tx-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 0.95rem; flex-shrink: 0; }
-
+        
         .orcamento-card { background: var(--bg-card); padding: 14px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 10px; }
         .orc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .orc-title { font-family: var(--font-display); font-weight: 500; color: var(--text-main); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
         .orc-vals { font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; }
         .orc-track { width: 100%; height: 6px; background: var(--bg-input); border-radius: 3px; margin-bottom: 8px; overflow: hidden; }
         .orc-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
-        .orc-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-muted); }
-
+        
         .chart-wrapper { background: var(--bg-card); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border); }
         .chart-title { text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; margin-bottom: 16px; }
         .chart-container { position: relative; height: 220px; width: 100%; }
-
-        .reality-pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
-        .r-pill { background: var(--bg-input); border-radius: 8px; padding: 10px 6px; text-align: center; border: 1px solid var(--border); }
-        .r-pill-label { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 2px; font-weight: 500; } .r-pill-real { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; } .r-pill-meta { font-size: 0.65rem; color: var(--text-muted); margin-top: 2px; }
 
         .emoji-mood-card { background: var(--bg-card); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border); display: flex; align-items: center; gap: 16px; }
         .emoji-face-circle { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.02); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; }
         .speech-bubble { position: relative; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; flex: 1; }
         .speech-bubble::before { content: ''; position: absolute; left: -6px; top: 20px; width: 12px; height: 12px; background: var(--bg-input); border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); transform: rotate(45deg); }
 
-        .pat-header { text-align: center; margin-bottom: 20px; padding: 20px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); border-bottom: 3px solid var(--purple); }
-        .pat-icon { color: var(--purple); font-size: 2rem; margin-bottom: 8px; }
+        .pat-header { text-align: center; margin-bottom: 20px; padding: 24px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); border-bottom: 3px solid var(--purple); }
         .pat-total { color: var(--purple); font-size: 2rem; font-family: var(--font-display); font-weight: 700; margin-bottom: 6px; letter-spacing: -1px; }
-        .pat-desc { color: var(--text-muted); font-size: 0.75rem; }
+
+        .insight-card { background: var(--bg-card); border-radius: 10px; padding: 16px 16px 16px 20px; margin-bottom: 12px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+        .insight-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+        .insight-card.border-green::before { background: var(--success); } .insight-card.border-red::before { background: var(--danger); } .insight-card.border-gold::before { background: var(--primary); }
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; }
-        .modal-content { background: var(--bg-card); width: 100%; max-width: 400px; border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        .modal-content { background: var(--bg-card); width: 100%; max-width: 400px; border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.6); }
         .modal-close { position: absolute; top: 16px; right: 16px; font-size: 1.25rem; color: var(--text-muted); cursor: pointer; transition: 0.2s; background: none; border: none; }
         .modal-close:hover { color: var(--danger); }
     </style>
@@ -216,31 +233,31 @@
 <body>
 
     <!-- =========================================================
-         1. LANDING PAGE CORRIGIDA E IMPECÁVEL
+         1. LANDING PAGE - HIGH CONVERSION SAAS DESIGN
          ========================================================= -->
     <div id="view-landing" class="landing-page">
         
         <nav class="lp-navbar">
-            <a href="#inicio" class="lp-logo"><div class="icon-box"><i class="fas fa-crown"></i></div> L7 FINANÇAS</a>
+            <div class="lp-logo" onclick="window.scrollTo(0,0)"><div class="icon-box"><i class="fas fa-crown"></i></div> L7 FINANÇAS</div>
             <div class="lp-nav-links">
-                <a href="#inicio">Início</a>
-                <a href="#passo-a-passo">Como Funciona</a>
-                <a href="#planos">Planos</a>
+                <a onclick="document.getElementById('inicio').scrollIntoView()">Início</a>
+                <a onclick="document.getElementById('passo-a-passo').scrollIntoView()">Recursos</a>
+                <a onclick="document.getElementById('planos').scrollIntoView()">Planos</a>
             </div>
             <div class="lp-nav-actions">
-                <button type="button" class="btn-outline" onclick="authUI.open()" style="padding: 10px 16px; font-size: 0.85rem;">Entrar</button>
-                <button type="button" class="btn btn-glow" onclick="app.startApp(true)" style="padding: 10px 18px; font-size: 0.85rem;">ABRIR APP</button>
+                <button type="button" class="btn-outline" onclick="authUI.open()" style="padding: 10px 20px; font-size: 0.9rem; border-radius: 8px;">Entrar</button>
+                <button type="button" class="btn btn-glow" onclick="app.startApp(true)" style="padding: 10px 20px; font-size: 0.9rem; border-radius: 8px;">ABRIR APP</button>
             </div>
         </nav>
 
         <section class="lp-hero" id="inicio">
             <div class="hero-content">
-                <div class="hero-pill"><i class="fas fa-lock"></i> 100% Privado no seu aparelho</div>
+                <div class="hero-pill"><i class="fas fa-lock"></i> Dados seguros e processados 100% no seu aparelho</div>
                 <h1>Seu dinheiro não deveria desaparecer antes do fim do mês.</h1>
-                <p>Assuma o controle absoluto da sua vida financeira com o método <strong>50/30/20</strong>. Chega de planilhas complexas, organize tudo em segundos direto pelo celular.</p>
+                <p>Assuma o controle absoluto da sua vida financeira com o método <strong>50/30/20</strong>. Chega de planilhas complexas, organize tudo em segundos direto pelo seu celular.</p>
                 
                 <div class="hero-buttons">
-                    <button type="button" class="btn btn-glow" onclick="app.startApp(true)" style="font-size: 1.05rem; padding: 16px 32px;">
+                    <button type="button" class="btn btn-glow" onclick="app.startApp(true)" style="font-size: 1.05rem; padding: 18px 36px;">
                         <i class="fas fa-rocket"></i> COMEÇAR GRÁTIS AGORA
                     </button>
                 </div>
@@ -248,181 +265,238 @@
                 <div class="hero-trust">
                     <span><i class="fas fa-check-circle"></i> Sem burocracia</span>
                     <span><i class="fas fa-check-circle"></i> Sem anúncios</span>
-                    <span><i class="fas fa-check-circle"></i> Dados criptografados localmente</span>
+                    <span><i class="fas fa-check-circle"></i> Totalmente Privado</span>
                 </div>
             </div>
             
-            <!-- MOCKUP PREMIUM CORRIGIDO (Fiel Imagem 1) -->
             <div class="hero-mockup-container">
                 <div class="hero-mockup-glow"></div>
+                <!-- Glassmorphism Mockup -->
                 <div class="mockup-ui">
                     <div class="mockup-header">
-                        <span class="dot-r"></span>
-                        <span class="dot-y"></span>
-                        <span class="dot-g"></span>
+                        <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
                     </div>
                     <div class="m-row">
                         <span class="m-title">Entradas</span>
-                        <span class="m-val-g">R$ 5.200,00</span>
+                        <span class="m-val green">R$ 5.200,00</span>
                     </div>
                     <div class="m-row">
                         <span class="m-title">Saídas</span>
-                        <span class="m-val-r">R$ 3.850,00</span>
+                        <span class="m-val red">R$ 3.850,00</span>
                     </div>
-                    <div class="m-row">
-                        <span class="m-title">Saldo</span>
-                        <span class="m-val-b">R$ 1.350,00</span>
+                    <div class="m-row" style="margin-bottom: 0;">
+                        <span class="m-title">Saldo Livre</span>
+                        <span class="m-val blue">R$ 1.350,00</span>
                     </div>
-                    <button type="button" class="btn-outline w-full" style="margin-top: 10px; border-color: var(--border); color: var(--text-muted);" onclick="app.startApp(true)">
-                        Simular no meu celular <i class="fas fa-arrow-right"></i>
-                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- NOVO CARROSSEL (Substituindo o Vídeo) -->
-        <section class="lp-section" id="passo-a-passo" style="background: rgba(255,255,255,0.015);">
-            <div class="lp-section-tag">Tour Rápido</div>
-            <h2 class="lp-section-title">Veja como é simples usar o L7</h2>
-            <p class="lp-section-subtitle">Em menos de 1 minuto você lança seus gastos, compara com a meta e avalia sua saúde financeira.</p>
+        <!-- CARROSSEL DE ALTO IMPACTO (Estilo Linear/Stripe) -->
+        <section class="lp-section" id="passo-a-passo" style="background: rgba(255,255,255,0.01);">
+            <div class="lp-section-tag">Recursos</div>
+            <h2 class="lp-section-title">Engenharia financeira de bolso.</h2>
+            <p class="lp-section-subtitle">Em menos de 1 minuto você lança seus gastos, compara com a meta e avalia sua saúde financeira, tudo na palma da mão.</p>
 
-            <div class="carousel-wrapper">
-                <div class="carousel-track" id="carousel-track">
+            <div class="impact-slider-container">
+                <div class="impact-track" id="impact-track">
+                    
                     <!-- Slide 1 -->
-                    <div class="carousel-slide">
-                        <div class="slide-icon"><i class="fas fa-bolt"></i></div>
-                        <h3 class="slide-title">Lance com 1 Toque</h3>
-                        <p class="slide-desc">Use botões de atalho inteligentes para registrar aquele café ou almoço sem precisar preencher dezenas de campos chatos.</p>
+                    <div class="impact-slide">
+                        <div class="impact-content">
+                            <span class="impact-step-badge">AGILIDADE</span>
+                            <h3 class="impact-title">Lançamento em 1 Toque</h3>
+                            <p class="impact-desc">Chega de preencher dezenas de campos para anotar um simples café. Use atalhos inteligentes que já categorizam tudo automaticamente.</p>
+                            <ul class="impact-bullets">
+                                <li><i class="fas fa-check-circle"></i> Extrato atualizado em 2 segundos</li>
+                                <li><i class="fas fa-check-circle"></i> Categorização limpa e automática</li>
+                            </ul>
+                        </div>
+                        <div class="impact-visual">
+                            <div class="fake-ui-btn">
+                                <div style="display:flex; align-items:center; gap:16px;">
+                                    <div style="background:rgba(251,191,36,0.15); padding:12px; border-radius:10px;"><i class="fas fa-coffee text-primary" style="font-size:1.4rem;"></i></div>
+                                    <div style="text-align:left;"><div style="font-weight:700; color:#fff; font-size:1.05rem;">Café Expresso</div><div style="font-size:0.8rem; color:var(--text-muted);">Alimentação</div></div>
+                                </div>
+                                <strong class="text-primary font-display" style="font-size:1.2rem;">R$ 8,00</strong>
+                            </div>
+                        </div>
                     </div>
+
                     <!-- Slide 2 -->
-                    <div class="carousel-slide">
-                        <div class="slide-icon"><i class="fas fa-chart-pie"></i></div>
-                        <h3 class="slide-title">A Regra de Ouro (50/30/20)</h3>
-                        <p class="slide-desc">O app calcula automaticamente se você está gastando mais do que deveria com desejos variáveis ou contas fixas, mantendo seu limite sempre à vista.</p>
+                    <div class="impact-slide">
+                        <div class="impact-content">
+                            <span class="impact-step-badge">INTELIGÊNCIA</span>
+                            <h3 class="impact-title">A Regra de Ouro (50/30/20)</h3>
+                            <p class="impact-desc">O app calcula instantaneamente se você está gastando mais do que deveria com desejos variáveis ou contas fixas, mantendo seu orçamento perfeito.</p>
+                            <ul class="impact-bullets">
+                                <li><i class="fas fa-check-circle"></i> 50% Gastos Essenciais</li>
+                                <li><i class="fas fa-check-circle"></i> 30% Gastos Variáveis (Desejos)</li>
+                                <li><i class="fas fa-check-circle"></i> 20% Aportes e Investimentos</li>
+                            </ul>
+                        </div>
+                        <div class="impact-visual">
+                            <div class="fake-ui-chart">
+                                <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:6px;">
+                                    <span style="color:#fff;">Essenciais: <strong>48%</strong></span> <span class="text-success">Meta 50%</span>
+                                </div>
+                                <div class="fake-bar-bg"><div class="fake-bar-fill" style="width:48%; background:var(--success);"></div></div>
+                                
+                                <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:6px; margin-top:20px;">
+                                    <span style="color:#fff;">Variáveis: <strong>28%</strong></span> <span class="text-success">Meta 30%</span>
+                                </div>
+                                <div class="fake-bar-bg"><div class="fake-bar-fill" style="width:28%; background:var(--primary);"></div></div>
+                            </div>
+                        </div>
                     </div>
+
                     <!-- Slide 3 -->
-                    <div class="carousel-slide">
-                        <div class="slide-icon"><i class="fas fa-face-smile-beam"></i></div>
-                        <h3 class="slide-title">Termômetro Emoji</h3>
-                        <p class="slide-desc">Não gosta de ler números? Tudo bem. Nosso consultor virtual muda a expressão de acordo com a saúde real do seu dinheiro naquele mês.</p>
+                    <div class="impact-slide">
+                        <div class="impact-content">
+                            <span class="impact-step-badge">DIAGNÓSTICO</span>
+                            <h3 class="impact-title">Termômetro Visual</h3>
+                            <p class="impact-desc">Não gosta de analisar gráficos difíceis? Tudo bem. Nosso consultor visual muda a expressão de acordo com a saúde real do seu dinheiro no mês.</p>
+                            <ul class="impact-bullets">
+                                <li><i class="fas fa-check-circle"></i> Sorriso = Orçamento Saudável</li>
+                                <li><i class="fas fa-check-circle"></i> Neutro = Limites Próximos</li>
+                            </ul>
+                        </div>
+                        <div class="impact-visual">
+                            <div class="fake-emoji-box">
+                                <div style="font-size:4rem; margin-bottom:16px;">😄</div>
+                                <div style="font-size:0.95rem; color:#fff; line-height:1.5;"><strong>Orçamento Perfeito!</strong><br><span class="text-muted">Você manteve seus gastos dentro dos limites neste mês.</span></div>
+                            </div>
+                        </div>
                     </div>
+
                     <!-- Slide 4 -->
-                    <div class="carousel-slide">
-                        <div class="slide-icon"><i class="fas fa-vault"></i></div>
-                        <h3 class="slide-title">Construção de Patrimônio</h3>
-                        <p class="slide-desc">Lançou tudo? Sobrou dinheiro? Registre seus aportes. Os usuários PRO podem até importar o extrato CSV da Bolsa de Valores.</p>
+                    <div class="impact-slide">
+                        <div class="impact-content">
+                            <span class="impact-step-badge">EVOLUÇÃO</span>
+                            <h3 class="impact-title">Escala de Patrimônio</h3>
+                            <p class="impact-desc">Lançou tudo e sobrou dinheiro? Excelente. Registre seus aportes mensais e veja seu patrimônio financeiro escalar com o tempo de forma clara.</p>
+                            <ul class="impact-bullets">
+                                <li><i class="fas fa-check-circle"></i> Gráfico de histórico de 12 meses</li>
+                                <li><i class="fas fa-check-circle"></i> Importação de extratos (Bolsa de Valores)</li>
+                            </ul>
+                        </div>
+                        <div class="impact-visual">
+                            <div class="fake-emoji-box" style="border-color:var(--purple); box-shadow:0 15px 40px rgba(168,85,247,0.15);">
+                                <div style="font-size:2.5rem; color:var(--purple); margin-bottom:12px;"><i class="fas fa-vault"></i></div>
+                                <div style="font-size:0.85rem; color:var(--text-muted); text-transform:uppercase; font-weight:600;">Acumulado Total</div>
+                                <div class="font-display" style="font-size:2.2rem; font-weight:800; color:#fff; margin-top:4px;">R$ 85.400</div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
                 
-                <div class="carousel-controls">
-                    <button class="carousel-btn" onclick="lpCarousel.prev()"><i class="fas fa-chevron-left"></i></button>
-                    <div class="carousel-dots" id="carousel-dots">
-                        <div class="dot active" onclick="lpCarousel.goTo(0)"></div>
-                        <div class="dot" onclick="lpCarousel.goTo(1)"></div>
-                        <div class="dot" onclick="lpCarousel.goTo(2)"></div>
-                        <div class="dot" onclick="lpCarousel.goTo(3)"></div>
+                <div class="impact-controls">
+                    <button class="impact-btn" onclick="lpCarousel.prev()"><i class="fas fa-chevron-left"></i></button>
+                    <div class="impact-dots" id="impact-dots">
+                        <div class="idot active" onclick="lpCarousel.goTo(0)"></div>
+                        <div class="idot" onclick="lpCarousel.goTo(1)"></div>
+                        <div class="idot" onclick="lpCarousel.goTo(2)"></div>
+                        <div class="idot" onclick="lpCarousel.goTo(3)"></div>
                     </div>
-                    <button class="carousel-btn" onclick="lpCarousel.next()"><i class="fas fa-chevron-right"></i></button>
+                    <button class="impact-btn" onclick="lpCarousel.next()"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         </section>
 
-        <!-- PLANOS CORRIGIDOS (Fiel Imagens 2 e 3) -->
+        <!-- PLANOS DE ALTA CONVERSÃO -->
         <section class="lp-section" id="planos">
             <div class="lp-section-tag">Investimento Acessível</div>
             <h2 class="lp-section-title">Escolha o plano ideal para a sua liberdade</h2>
-            <p class="lp-section-subtitle">Comece gratuitamente ou vá direto para o PRO e libere o controle total sem barreiras.</p>
+            <p class="lp-section-subtitle">Comece gratuitamente para conhecer a plataforma, ou vá direto para o PRO e libere o controle total sem barreiras.</p>
             
             <div class="pricing-grid">
                 <!-- Free -->
                 <div class="price-card">
                     <div>
                         <h3 class="p-plan-name text-main">Essencial</h3>
-                        <p class="p-plan-desc">Para organizar seu mês hoje</p>
+                        <p class="p-plan-desc">Para organizar seu mês hoje.</p>
                         <div class="p-price-val text-main">Grátis</div>
                         <ul class="price-list">
                             <li><i class="fas fa-check"></i> <strong>Lançamentos ilimitados</strong></li>
-                            <li><i class="fas fa-check"></i> Orçamento 50/30/20</li>
-                            <li><i class="fas fa-check"></i> Termômetro Emoji</li>
+                            <li><i class="fas fa-check"></i> Orçamento Inteligente (50/30/20)</li>
+                            <li><i class="fas fa-check"></i> Termômetro Visual (Emoji)</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-outline w-full" onclick="app.startApp(true)">COMEÇAR GRÁTIS</button>
+                    <button type="button" class="btn-outline w-full" style="padding: 16px; border-radius: 12px;" onclick="app.startApp(true)">COMEÇAR GRÁTIS</button>
                 </div>
 
                 <!-- Mensal -->
                 <div class="price-card">
                     <div>
                         <h3 class="p-plan-name text-primary"><i class="fas fa-star"></i> PRO Mensal</h3>
-                        <p class="p-plan-desc">Flexibilidade mês a mês</p>
+                        <p class="p-plan-desc">Flexibilidade mês a mês.</p>
                         <div class="p-price-val text-primary">R$ 4,90 <span>/ mês</span></div>
                         <ul class="price-list">
-                            <li><i class="fas fa-check text-success"></i> <strong class="text-main">Tudo do Essencial</strong></li>
-                            <li><i class="fas fa-check text-success"></i> Parcelamento automático (Crédito)</li>
-                            <li><i class="fas fa-check text-success"></i> Importação de CSV (B3)</li>
+                            <li><i class="fas fa-check text-success"></i> <strong>Tudo do Essencial</strong></li>
+                            <li><i class="fas fa-check text-success"></i> Parcelamento automático (Cartão)</li>
+                            <li><i class="fas fa-check text-success"></i> Importação de CSV (B3 e Corretoras)</li>
                             <li><i class="fas fa-check text-success"></i> Atalhos de 1 clique</li>
                             <li><i class="fas fa-check text-success"></i> Temas personalizados</li>
                         </ul>
                     </div>
-                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-outline w-full" style="border-color: var(--primary); color: var(--primary);">
+                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-outline w-full" style="padding: 16px; border-radius: 12px; border-color: var(--primary); color: var(--primary);">
                         <i class="fas fa-credit-card"></i> Assinar Mensal
                     </a>
                 </div>
 
                 <!-- Anual (Featured) -->
                 <div class="price-card featured">
-                    <div class="price-badge">MAIS INTELIGENTE (2 MESES GRÁTIS)</div>
+                    <div class="price-badge">A ESCOLHA MAIS INTELIGENTE (2 MESES OFF)</div>
                     <div>
                         <h3 class="p-plan-name text-primary"><i class="fas fa-crown"></i> PRO Anual</h3>
-                        <p class="p-plan-desc">O melhor custo-benefício</p>
+                        <p class="p-plan-desc">O melhor custo-benefício, focado no longo prazo.</p>
                         <div class="p-price-val text-primary">R$ 49,90 <span>/ ano</span></div>
-                        <div class="p-equiv">Equivale a R$ 4,15/mês</div>
+                        <div class="p-equiv">Equivale a apenas R$ 4,15/mês</div>
                         <ul class="price-list">
-                            <li><i class="fas fa-check text-success"></i> <strong class="text-main">Todos os recursos PRO liberados</strong></li>
+                            <li><i class="fas fa-check text-success"></i> <strong>Todos os recursos PRO liberados</strong></li>
                             <li><i class="fas fa-check text-success"></i> Não se preocupe com faturas mensais</li>
-                            <li><i class="fas fa-check text-success"></i> Suporte VIP com o criador</li>
+                            <li><i class="fas fa-check text-success"></i> Suporte VIP direto com o desenvolvedor</li>
                         </ul>
                     </div>
-                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-glow w-full" style="background: var(--primary); color: #000;">
+                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-glow w-full" style="padding: 16px; border-radius: 12px; background: var(--primary); color: #000;">
                         <i class="fas fa-rocket"></i> Assinar Anual
                     </a>
                 </div>
             </div>
             
             <p class="price-footer-msg">
-                Após o pagamento, envie o comprovante pelo WhatsApp de suporte abaixo ou aguarde nosso time enviar o seu código de acesso premium (ex: <strong>clienteL7</strong>).
+                Após o pagamento, basta enviar o comprovante pelo WhatsApp da <strong>Equipe de Suporte</strong> abaixo para receber o seu código de acesso premium exclusivo.
             </p>
         </section>
 
-        <!-- RODAPÉ RESTAURADO E PERSUASIVO -->
+        <!-- RODAPÉ LIMPO E DIRETO (Sem LinkedIn, Fiel à Imagem) -->
         <footer class="lp-footer" id="contato">
             <div class="footer-grid">
-                <!-- Marca e Mensagem -->
-                <div class="footer-col" style="grid-column: span 2;">
-                    <div class="lp-logo" style="margin-bottom: 16px;"><div class="icon-box"><i class="fas fa-crown"></i></div> L7 FINANÇAS</div>
-                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; max-width: 400px;">
-                        Desenvolvido para quem valoriza a agilidade. O controle financeiro que você precisa, com a privacidade que você merece. Todos os dados ficam salvos de forma segura apenas no seu aparelho.
+                <!-- Marca -->
+                <div class="footer-col" style="grid-column: span 1;">
+                    <div class="lp-logo" style="margin-bottom: 20px; justify-content: flex-start;"><div class="icon-box"><i class="fas fa-crown"></i></div> L7 FINANÇAS</div>
+                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; max-width: 320px;">
+                        O controle financeiro que você precisa, com a privacidade que você merece. Todos os dados processados e seguros direto no seu aparelho.
                     </p>
                 </div>
                 
                 <!-- Links Úteis -->
                 <div class="footer-col">
                     <h4>Navegação</h4>
-                    <button type="button" class="link-btn-gold" onclick="app.startApp(true)">Entrar no App</button>
+                    <button type="button" class="footer-link-normal" onclick="app.startApp(true)"><i class="fas fa-mobile-alt"></i> Entrar no App</button>
                     <button type="button" class="footer-link-normal" onclick="authUI.open()"><i class="fas fa-user-circle"></i> Acessar Perfil</button>
-                    <a href="#planos" class="footer-link-normal"><i class="fas fa-star"></i> Assinar PRO</a>
+                    <button type="button" class="footer-link-normal" onclick="document.getElementById('planos').scrollIntoView()"><i class="fas fa-star"></i> Assinar PRO</button>
                 </div>
                 
-                <!-- Contato e Redes -->
+                <!-- Contato Direto -->
                 <div class="footer-col">
                     <h4>Fale Conosco</h4>
                     <a href="https://wa.me/5511999999999" target="_blank" class="footer-link-normal" style="color: #22c55e; font-weight: 600;">
-                        <i class="fab fa-whatsapp"></i> WhatsApp Suporte
+                        WhatsApp Suporte
                     </a>
                     <a href="https://instagram.com/seuinstagram" target="_blank" class="footer-link-normal">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </a>
-                    <a href="https://linkedin.com/in/seulinkedin" target="_blank" class="footer-link-normal">
-                        <i class="fab fa-linkedin"></i> LinkedIn
+                        Instagram
                     </a>
                     <button type="button" class="footer-link-normal" onclick="contactUI.open()">
                         <i class="fas fa-envelope"></i> E-mail Direto
@@ -431,14 +505,14 @@
             </div>
             
             <div class="footer-bottom">
-                <span>&copy; 2026 L7 Finanças. Desenvolvido por Luiz Fernando.</span>
+                <span>&copy; 2026 L7 Finanças. Todos os direitos reservados.</span>
                 <span>Feito com <i class="fas fa-heart text-danger"></i> no Brasil.</span>
             </div>
         </footer>
     </div>
 
     <!-- =========================================================
-         MODAIS GLOBAIS (100% LOCAL SAFE)
+         MODAIS GLOBAIS
          ========================================================= -->
     <!-- Login e Cadastro Local -->
     <div id="modal-auth" class="modal-overlay hidden">
@@ -478,10 +552,10 @@
                 <li><i class="fas fa-check text-success"></i> Atalhos rápidos e Temas customizados</li>
             </ul>
 
-            <div style="margin-bottom: 20px;">
-                <label class="text-muted" style="font-size: 0.8rem;">Já possui um código de ativação?</label>
-                <div class="flex gap-2" style="margin-top: 6px;">
-                    <input type="text" id="modal-pro-code" placeholder="Ex: clienteL7" style="margin: 0; font-weight: 700;">
+            <div style="margin-bottom: 24px;">
+                <label class="text-muted" style="font-size: 0.85rem; font-weight: 500;">Já possui um código de ativação?</label>
+                <div class="flex gap-2" style="margin-top: 8px;">
+                    <input type="text" id="modal-pro-code" placeholder="Digite seu código de acesso..." style="margin: 0; font-weight: 600;">
                     <button type="button" class="btn" onclick="app.activateProFromModal()" style="padding: 12px 16px;">Ativar</button>
                 </div>
             </div>
@@ -497,7 +571,7 @@
         <div class="modal-content">
             <button type="button" class="modal-close" onclick="contactUI.close()"><i class="fas fa-times"></i></button>
             <h3 class="text-primary" style="margin-bottom: 6px; font-size: 1.3rem;"><i class="fas fa-envelope"></i> Enviar Mensagem</h3>
-            <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 20px;">Envie sua dúvida diretamente para o desenvolvedor.</p>
+            <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 20px;">Envie sua dúvida diretamente para a equipe.</p>
             <form onsubmit="event.preventDefault(); contactUI.send();">
                 <input type="text" id="contact-name" placeholder="Seu nome" required style="margin-bottom: 12px;">
                 <select id="contact-subject" style="margin-bottom: 12px;">
@@ -549,7 +623,6 @@
         </div>
 
         <div class="app-container">
-            
             <!-- ABA 1: RESUMO -->
             <div id="tab-resumo" class="tab-content">
                 <div class="grid-2" style="margin-bottom: 24px;">
@@ -657,13 +730,13 @@
                 <button type="button" class="btn-outline w-full mt-4" style="border-color: #444; color: #999;" onclick="auth.logout()">Sair do Perfil Atual / Logout</button>
             </div>
 
-            <!-- ABA 8: DEV -->
+            <!-- ABA 8: DEV (Ajustado) -->
             <div id="tab-dev" class="tab-content hidden">
-                <div class="card text-center py-10">
-                    <div style="width: 70px; height: 70px; background: var(--primary); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #0f172a;">LF</div>
-                    <h2 class="mb-1 text-xl">Luiz Fernando</h2>
-                    <p class="text-primary mb-6 text-sm">Criador do L7 Control</p>
-                    <button type="button" onclick="window.open('https://wa.me/5511999999999', '_blank')" style="background: #22c55e; color: #fff; border:none; width: 100%;"><i class="fab fa-whatsapp"></i> WhatsApp Suporte</button>
+                <div class="card text-center py-10" style="padding: 40px 20px;">
+                    <div style="width: 80px; height: 80px; background: var(--primary); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: bold; color: #0f172a;">LF</div>
+                    <h2 style="font-size: 1.6rem; font-family: var(--font-display); margin-bottom: 4px;">Luiz Fernando</h2>
+                    <p class="text-primary" style="font-size: 0.95rem; margin-bottom: 32px; font-weight: 600;">Desenvolvedor do L7 Control</p>
+                    <button type="button" onclick="window.open('https://wa.me/5511999999999', '_blank')" style="background: #22c55e; color: #fff; border:none; width: 100%; padding: 16px; border-radius: 12px; font-size: 1rem;"><i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> EQUIPE DE SUPORTE</button>
                 </div>
             </div>
         </div>
@@ -731,21 +804,21 @@
     </div>
 
     <!-- =========================================================
-         SCRIPTS GLOBAIS (100% PURE JS LOCAL, ZERO BUGS)
+         SCRIPTS GLOBAIS (100% PURE JS LOCAL SAFE)
          ========================================================= -->
     <script>
-        // 1. CARROSSEL DE SLIDES (Substituto Leve do Vídeo)
+        // 1. CARROSSEL DE SLIDES (Alto Impacto)
         const lpCarousel = {
             current: 0, total: 4, timer: null,
             init() { this.update(); this.startAuto(); },
-            startAuto() { clearInterval(this.timer); this.timer = setInterval(() => this.next(), 6000); },
+            startAuto() { clearInterval(this.timer); this.timer = setInterval(() => this.next(), 7000); },
             next() { this.current = (this.current + 1) % this.total; this.update(); this.startAuto(); },
             prev() { this.current = (this.current - 1 + this.total) % this.total; this.update(); this.startAuto(); },
             goTo(i) { this.current = i; this.update(); this.startAuto(); },
             update() {
-                const track = document.getElementById('carousel-track');
+                const track = document.getElementById('impact-track');
                 if(track) track.style.transform = `translateX(-${this.current * 100}%)`;
-                document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === this.current));
+                document.querySelectorAll('.idot').forEach((d, i) => d.classList.toggle('active', i === this.current));
             }
         };
 
@@ -852,7 +925,7 @@
                     lbl.style.color = auth.currentUser ? 'var(--primary)' : 'var(--text-muted)';
                 }
                 
-                this.dataKey = 'l7financas_v7_' + (auth.currentUser ? auth.currentUser.email : 'guest');
+                this.dataKey = 'l7financas_v8_' + (auth.currentUser ? auth.currentUser.email : 'guest');
                 this.loadData();
                 this.syncPeriodDates();
                 document.getElementById('tx-date').value = new Date().toISOString().split('T')[0];
@@ -981,7 +1054,7 @@
             formatMoney: (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
 
             renderCurrentView() {
-                if(this.currentTab==='resumo') this.renderResumo(); else if(this.currentTab==='extrato') this.renderExtrato(); else if(this.currentTab==='orcamento') this.renderOrcamento(); else if(this.currentTab==='graficos') this.renderGraficos(); else if(this.currentTab==='patrimonio') this.renderPatrimonio();
+                if(this.currentTab==='resumo') this.renderResumo(); else if(this.currentTab==='extrato') this.renderExtrato(); else if(this.currentTab==='orcamento') this.renderOrcamento(); else if(this.currentTab==='graficos') this.renderGraficos(); else if(this.currentTab==='patrimonio') this.renderPatrimonio(); else if(this.currentTab==='insights') this.renderInsights();
             },
 
             renderResumo() {
@@ -1036,30 +1109,32 @@
                 });
             },
 
+            getPeriodMood(txs) {
+                let rec = 0, desp = 0;
+                txs.forEach(t => { if (t.type === 'receita') rec += t.value; else if (t.type === 'despesa') desp += t.value; });
+                const comp = rec>0 ? (desp/rec)*100 : 0;
+                if (rec === 0 && desp === 0) return { emoji: '🙂', status: 'Aguardando', color: 'var(--primary)', speech: 'Lance no Extrato!' };
+                if (desp > rec || comp > 95) return { emoji: '😭', status: 'No Vermelho', color: 'var(--danger)', speech: `Alerta! Despesas = ${comp.toFixed(1)}% da renda.` };
+                if (comp <= 80 && rec > 0) return { emoji: '😄', status: 'Saudável', color: 'var(--success)', speech: `Perfeito! Gastos = ${comp.toFixed(1)}% da renda.` };
+                return { emoji: '😐', status: 'Atenção', color: 'var(--primary)', speech: `Cuidado, gastos em ${comp.toFixed(1)}%.` };
+            },
+
             renderGraficos() {
                 Chart.defaults.color = '#94a3b8'; Chart.defaults.font.family = 'Inter';
                 const txs = this.getFilteredTransactions();
                 
-                let rec=0, desp=0, inv=0;
-                const pMap = {}; 
+                const mood = this.getPeriodMood(txs);
+                document.getElementById('graf-emoji-face').innerText = mood.emoji; document.getElementById('graf-emoji-status').innerText = mood.status; document.getElementById('graf-emoji-status').style.color = mood.color; document.getElementById('graf-emoji-msg').innerText = mood.speech;
+                
+                const pMap = {}; let e=0, v=0, i=0, r=0;
                 txs.forEach(t => { 
                     const c = this.data.categories.find(x=>x.id===t.categoryId)||{};
-                    if(t.type==='receita') rec+=t.value; else if(t.type==='investimento') inv+=t.value;
-                    else if(t.type==='despesa') { desp+=t.value; pMap[t.payMethod||'Outro'] = (pMap[t.payMethod||'Outro']||0) + t.value; }
+                    if(t.type==='receita') r+=t.value; else if(t.type==='investimento') i+=t.value;
+                    else if(t.type==='despesa') { if(c.macro==='essencial') e+=t.value; else v+=t.value; pMap[t.payMethod||'Outro'] = (pMap[t.payMethod||'Outro']||0) + t.value; }
                 });
 
-                const comp = rec>0 ? (desp/rec)*100 : 0;
-                let emoji = '🙂', status = 'Aguardando', color = 'var(--primary)', speech = 'Lance no Extrato!';
-                if(rec>0||desp>0) {
-                    if (desp > rec || comp > 95) { emoji = '😭'; status = 'No Vermelho'; color = 'var(--danger)'; speech = `Alerta! Despesas = ${comp.toFixed(1)}% da renda.`; }
-                    else if (comp <= 80 && rec > 0) { emoji = '😄'; status = 'Saudável'; color = 'var(--success)'; speech = `Perfeito! Gastos = ${comp.toFixed(1)}% da renda.`; }
-                    else { emoji = '😐'; status = 'Atenção'; color = 'var(--primary)'; speech = `Cuidado, gastos em ${comp.toFixed(1)}%.`; }
-                }
-                
-                document.getElementById('graf-emoji-face').innerText = emoji; document.getElementById('graf-emoji-status').innerText = status; document.getElementById('graf-emoji-status').style.color = color; document.getElementById('graf-emoji-msg').innerText = speech;
-
                 if(this.charts['chart-rosca']) this.charts['chart-rosca'].destroy();
-                this.charts['chart-rosca'] = new Chart(document.getElementById('chart-rosca').getContext('2d'), { type: 'doughnut', data: { labels: ['Despesas','Aportes'], datasets: [{ data: [desp,inv], backgroundColor: ['#ef4444','#22c55e'], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false } });
+                this.charts['chart-rosca'] = new Chart(document.getElementById('chart-rosca').getContext('2d'), { type: 'doughnut', data: { labels: ['Essenciais','Variáveis','Aportes'], datasets: [{ data: [e,v,i], backgroundColor: ['#ef4444','#fbbf24','#22c55e'], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false } });
 
                 const pLabs = Object.keys(pMap); const pData = Object.values(pMap);
                 if(this.charts['chart-pagamentos']) this.charts['chart-pagamentos'].destroy();
@@ -1069,6 +1144,11 @@
             renderPatrimonio() {
                 let histTotal = 0; this.data.transactions.forEach(t => { if(t.type==='investimento') histTotal += t.value; });
                 document.getElementById('pat-total-hist').innerText = this.formatMoney(histTotal);
+            },
+            
+            renderInsights() {
+                const txs = this.getFilteredTransactions(); const mood = this.getPeriodMood(txs);
+                document.getElementById('ins-emoji-face').innerText = mood.emoji; document.getElementById('ins-emoji-speech').innerText = mood.speech;
             },
 
             openTxModal() { this.updateCategoriesDropdown(); document.getElementById('modal-tx').classList.remove('hidden'); },
@@ -1109,7 +1189,7 @@
         };
 
         window.addEventListener('DOMContentLoaded', () => {
-            try { if(document.getElementById('carousel-track')) lpCarousel.init(); } catch(e) {}
+            try { if(document.getElementById('impact-track')) lpCarousel.init(); } catch(e) {}
             try { app.init(); } catch(e) {}
         });
     </script>
