@@ -49,6 +49,8 @@
         
         .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
         .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: rgba(212, 175, 55, 0.06); }
+        .btn-gold-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .btn-gold-outline:hover { background: rgba(212, 175, 55, 0.12); }
         .btn-danger { background: var(--danger); color: #fff; }
         .btn-whatsapp { background: #25D366; color: #fff; }
         .btn-glow { box-shadow: 0 4px 24px rgba(212, 175, 55, 0.3); }
@@ -66,6 +68,7 @@
         .lp-logo .icon-box { border: 1.5px solid var(--primary); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; box-shadow: 0 0 12px rgba(212,175,55,0.2); }
         .lp-nav-links { display: flex; gap: 24px; } .lp-nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; } .lp-nav-links a:hover { color: var(--primary); }
         .lp-nav-actions { display: flex; gap: 10px; align-items: center; }
+        
         .lp-hero { padding: 130px 5% 80px; max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; }
         .hero-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); color: var(--primary); padding: 6px 14px; border-radius: 30px; font-size: 0.78rem; font-weight: 600; margin-bottom: 20px; font-family: var(--font-display); }
         .hero-content h1 { font-size: clamp(2.1rem, 4vw, 3.6rem); margin-bottom: 20px; letter-spacing: -1px; line-height: 1.12; }
@@ -88,15 +91,17 @@
         .lp-step-num { font-size: 2.4rem; font-weight: 800; color: var(--primary); font-family: var(--font-display); margin-bottom: 12px; line-height: 1; }
         .lp-card-icon { font-size: 2rem; color: var(--primary); margin-bottom: 16px; }
         .lp-card h3 { font-size: 1.2rem; margin-bottom: 10px; } .lp-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; max-width: 880px; margin: 0 auto; }
-        .price-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 34px 28px; display: flex; flex-direction: column; justify-content: space-between; }
-        .price-card.featured { border: 2px solid var(--primary); background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, var(--bg-card) 100%); position: relative; }
-        .price-badge { position: absolute; top: -13px; right: 24px; background: var(--primary); color: #000; font-size: 0.72rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; font-family: var(--font-display); }
-        .price-val { font-size: 2.6rem; font-weight: 800; font-family: var(--font-display); margin: 16px 0 6px; } .price-val span { font-size: 0.95rem; font-weight: 400; color: var(--text-muted); }
-        .price-list { list-style: none; margin: 22px 0 28px; display: flex; flex-direction: column; gap: 12px; } .price-list li { font-size: 0.92rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 10px; } .price-list li i { color: var(--success); margin-top: 4px; }
         
-        @media (max-width: 960px) { .lp-nav-links { display: none; } .lp-hero { grid-template-columns: 1fr; text-align: center; padding-top: 105px; gap: 36px; } .hero-buttons, .hero-trust { justify-content: center; } }
-        @media (max-width: 600px) { .lp-nav-actions .btn-outline { padding: 8px 12px; font-size: 0.82rem; } .lp-nav-actions .btn-glow { padding: 8px 14px; font-size: 0.82rem; } .hero-buttons button { width: 100%; } }
+        /* Planos com 3 Colunas (Free, Mensal, Anual) */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+        .price-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 34px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+        .price-card.featured { border: 2px solid var(--primary); background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, var(--bg-card) 100%); position: relative; transform: scale(1.03); z-index: 2; }
+        .price-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; font-size: 0.72rem; font-weight: 800; padding: 4px 14px; border-radius: 20px; font-family: var(--font-display); white-space: nowrap; }
+        .price-val { font-size: 2.6rem; font-weight: 800; font-family: var(--font-display); margin: 16px 0 6px; } .price-val span { font-size: 0.95rem; font-weight: 400; color: var(--text-muted); }
+        .price-list { list-style: none; margin: 22px 0 28px; display: flex; flex-direction: column; gap: 12px; } .price-list li { font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 10px; } .price-list li i { color: var(--success); margin-top: 4px; }
+        
+        @media (max-width: 960px) { .lp-nav-links { display: none; } .lp-hero { grid-template-columns: 1fr; text-align: center; padding-top: 105px; gap: 36px; } .hero-buttons, .hero-trust { justify-content: center; } .price-card.featured { transform: scale(1); } }
+        @media (max-width: 600px) { .lp-nav-actions .btn-outline { padding: 8px 12px; font-size: 0.82rem; } .lp-nav-actions .btn-glow { padding: 8px 14px; font-size: 0.82rem; } .hero-buttons button, .hero-buttons a { width: 100%; justify-content: center; } }
 
         /* Estilos App Interno */
         .app-header { padding: 54px 16px 18px; text-align: center; background-color: var(--bg-main); border-bottom: 1px solid var(--primary); position: relative; }
@@ -211,6 +216,95 @@
                 </div>
             </div>
         </section>
+
+        <!-- PLANOS E PREÇOS COM MERCADO PAGO E PLANO ANUAL -->
+        <section class="lp-section" id="planos">
+            <div class="lp-section-tag">Investimento Acessível</div>
+            <h2 class="lp-section-title">Escolha o plano ideal para a sua liberdade</h2>
+            <p class="lp-section-subtitle">Comece gratuitamente ou vá direto para o PRO e libere o controle total sem barreiras.</p>
+            
+            <div class="pricing-grid">
+                
+                <!-- 1. Plano Free -->
+                <div class="price-card">
+                    <div>
+                        <h3 style="font-size: 1.3rem;">Essencial</h3>
+                        <p class="text-muted" style="font-size: 0.88rem; margin-top: 4px;">Para organizar seu mês hoje</p>
+                        <div class="price-val">Grátis</div>
+                        <ul class="price-list">
+                            <li><i class="fas fa-check"></i> Lançamentos ilimitados</li>
+                            <li><i class="fas fa-check"></i> Orçamento 50/30/20</li>
+                            <li><i class="fas fa-check"></i> Termômetro Emoji</li>
+                        </ul>
+                    </div>
+                    <button class="btn-outline w-full mt-4" onclick="app.startApp(true)">COMEÇAR GRÁTIS</button>
+                </div>
+
+                <!-- 2. Plano PRO Mensal -->
+                <div class="price-card">
+                    <div>
+                        <h3 class="text-primary" style="font-size: 1.3rem;"><i class="fas fa-star"></i> PRO Mensal</h3>
+                        <p class="text-muted" style="font-size: 0.88rem; margin-top: 4px;">Flexibilidade mês a mês</p>
+                        <div class="price-val text-primary">R$ 4,90 <span style="font-size: 0.8rem;">/ mês</span></div>
+                        <ul class="price-list">
+                            <li><i class="fas fa-check"></i> <strong>Tudo do Essencial</strong></li>
+                            <li><i class="fas fa-check"></i> Parcelamento automático de Crédito</li>
+                            <li><i class="fas fa-check"></i> Importação de CSV (B3/Corretoras)</li>
+                            <li><i class="fas fa-check"></i> Atalhos de 1 clique</li>
+                            <li><i class="fas fa-check"></i> Temas e cores personalizáveis</li>
+                        </ul>
+                    </div>
+                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-outline w-full mt-4" style="border-color: var(--primary); color: var(--primary);">
+                        <i class="fas fa-credit-card"></i> Assinar Mensal
+                    </a>
+                </div>
+
+                <!-- 3. Plano PRO Anual (Featured) -->
+                <div class="price-card featured">
+                    <div class="price-badge">MAIS INTELIGENTE (2 MESES GRÁTIS)</div>
+                    <div>
+                        <h3 class="text-primary" style="font-size: 1.3rem;"><i class="fas fa-crown"></i> PRO Anual</h3>
+                        <p class="text-muted" style="font-size: 0.88rem; margin-top: 4px;">O melhor custo-benefício</p>
+                        <div class="price-val text-primary">R$ 49,90 <span style="font-size: 0.8rem;">/ ano</span></div>
+                        <div class="text-success" style="font-size: 0.8rem; font-weight: 800; margin-bottom: 12px; background: rgba(76, 175, 80, 0.1); display: inline-block; padding: 4px 10px; border-radius: 8px;">
+                            Equivale a R$ 4,15/mês
+                        </div>
+                        <ul class="price-list">
+                            <li><i class="fas fa-check"></i> <strong>Todos os recursos PRO liberados</strong></li>
+                            <li><i class="fas fa-check"></i> Não se preocupe com faturas mensais</li>
+                            <li><i class="fas fa-check"></i> Suporte VIP diretamente com o criador</li>
+                            <li><i class="fas fa-check"></i> Acesso antecipado a novas funções</li>
+                        </ul>
+                    </div>
+                    <!-- Substitua o link abaixo pelo seu link de assinatura ANUAL no Mercado Pago futuramente -->
+                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-glow w-full mt-4">
+                        <i class="fas fa-rocket"></i> Assinar Anual
+                    </a>
+                </div>
+
+            </div>
+            <div class="text-center mt-6 text-muted" style="font-size: 0.85rem;">
+                Após o pagamento, envie o comprovante no WhatsApp de suporte (seção Contato) ou aguarde para receber o seu código premium <strong>(ex: clienteL7)</strong>.
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="lp-footer">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="lp-logo" style="margin-bottom: 14px;"><div class="icon-box"><i class="fas fa-crown"></i></div> L7 FINANÇAS</div>
+                    <p class="text-muted" style="font-size: 0.88rem; line-height: 1.6;">O controle financeiro que você precisa, com a privacidade que você merece.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Produto</h4>
+                    <button class="link-btn" onclick="app.startApp(true)">Abrir App</button>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <a href="https://wa.me/5511999999999" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Suporte</a>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- =========================================================
@@ -241,23 +335,32 @@
         </div>
     </div>
 
-    <!-- Modal Torne-se PRO -->
+    <!-- Modal Torne-se PRO (Com link Mercado Pago) -->
     <div id="modal-pro-upgrade" class="modal-overlay hidden">
         <div class="modal-content" style="border: 1.5px solid var(--primary);">
             <span class="modal-close" onclick="app.closeModal('modal-pro-upgrade')"><i class="fas fa-times"></i></span>
             <div class="text-center" style="margin-bottom: 16px;">
-                <h2 class="text-primary" style="font-size: 1.35rem;">TORNE-SE PRO</h2>
-                <p class="text-muted" style="font-size: 0.84rem; margin-top: 4px;">Controle total por <strong>R$ 4,90/mês</strong></p>
+                <h2 class="text-primary" style="font-size: 1.35rem;"><i class="fas fa-crown"></i> TORNE-SE PRO</h2>
+                <p class="text-muted" style="font-size: 0.84rem; margin-top: 4px;">Controle total da sua vida financeira</p>
             </div>
-            <div style="margin-bottom: 14px;">
-                <label class="text-muted" style="font-size: 0.78rem;">Possui um código de ativação?</label>
+            
+            <ul class="price-list" style="margin: 14px 0 18px; gap: 8px; font-size: 0.84rem;">
+                <li><i class="fas fa-check"></i> <strong>Parcelamento de Cartão Automático</strong></li>
+                <li><i class="fas fa-check"></i> Importação de extrato CSV (B3)</li>
+                <li><i class="fas fa-check"></i> Atalhos rápidos e Temas customizados</li>
+            </ul>
+
+            <div style="margin-bottom: 18px;">
+                <label class="text-muted" style="font-size: 0.78rem;">Já possui um código de ativação?</label>
                 <div class="flex gap-2" style="margin-top: 4px;">
-                    <input type="text" id="modal-pro-code" placeholder="Digite seu código" style="margin: 0; font-weight: 700;">
+                    <input type="text" id="modal-pro-code" placeholder="Ex: clienteL7" style="margin: 0; font-weight: 700;">
                     <button type="button" onclick="app.activateProFromModal()">Ativar</button>
                 </div>
             </div>
-            <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-whatsapp w-full">
-                <i class="fab fa-whatsapp"></i> Assinar via WhatsApp
+
+            <!-- Botão Direto para o Mercado Pago -->
+            <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-glow w-full" style="padding: 14px;">
+                <i class="fas fa-credit-card"></i> Assinar PRO de Forma Segura
             </a>
         </div>
     </div>
@@ -281,7 +384,6 @@
             <h1>L7 FINANÇAS</h1>
         </div>
 
-        <!-- Filtros Globais -->
         <div class="filter-wrapper" id="global-filter-wrapper">
             <select id="global-filter-type" onchange="app.handleFilterChange()" class="filter-select">
                 <option value="month">Visão Mensal</option>
@@ -349,7 +451,6 @@
             <div id="tab-config" class="tab-content hidden">
                 <h2 class="section-title">Configurações</h2>
                 
-                <!-- Card de Importação e Reset -->
                 <div class="card mb-4">
                     <h3 class="text-primary text-sm mb-2"><i class="fas fa-database"></i> Dados do Aparelho</h3>
                     <input type="file" id="import-data-input" accept=".json,.csv,.txt" class="hidden" onchange="app.handleImportData(event)">
@@ -399,7 +500,6 @@
             <select id="tx-category" class="mb-3"></select>
             <input type="text" id="tx-desc" placeholder="Descrição (Ex: Mercado)" class="mb-3">
             
-            <!-- Forma de Pagamento e Parcelas -->
             <div id="tx-payment-method-block">
                 <select id="tx-pay-method" onchange="app.handlePaymentMethodChange()" class="mb-3">
                     <option value="Pix">Dinheiro / Pix</option>
@@ -435,9 +535,7 @@
          SCRIPTS: SUPABASE + LÓGICA DO APP
          ========================================================= -->
     <script>
-        // ---------------------------------------------------------
-        // 1. INICIALIZAÇÃO SUPABASE
-        // ---------------------------------------------------------
+        // 1. INICIALIZAÇÃO SUPABASE (COM SUAS CHAVES)
         const SUPABASE_URL = 'https://tjfgwwyodicgwbwcsiwq.supabase.co'; 
         const SUPABASE_ANON_KEY = 'sb_publishable_VGqEdJCpnx77MDx9eQYxyQ_lQv2_QHF'; 
         
@@ -446,9 +544,7 @@
             supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         }
 
-        // ---------------------------------------------------------
         // 2. MÓDULO DE AUTENTICAÇÃO
-        // ---------------------------------------------------------
         const auth = {
             currentUser: null,
             async init() {
@@ -504,9 +600,7 @@
             }
         };
 
-        // ---------------------------------------------------------
         // 3. APLICATIVO L7 (LÓGICA PRINCIPAL)
-        // ---------------------------------------------------------
         const DEFAULT_CATS = [
             { id: 'c1', name: 'Moradia', type: 'despesa', macro: 'essencial', limit: 1200 },
             { id: 'c6', name: 'Lazer', type: 'despesa', macro: 'variavel', limit: 350 },
@@ -553,6 +647,40 @@
             async saveData() {
                 if(!supabase || !auth.currentUser) {
                     localStorage.setItem('l7_local_data', JSON.stringify(this.data));
+                }
+            },
+            
+            // VERIFICAÇÃO DOS CÓDIGOS DE ATIVAÇÃO PRO (ACEITA testel7 E clientel7)
+            verifyProCode(rawCode) {
+                const code = rawCode.trim().toLowerCase();
+                return code === 'testel7' || code === 'clientel7';
+            },
+
+            activateProFromModal() {
+                const code = document.getElementById('modal-pro-code').value;
+                if (this.verifyProCode(code)) {
+                    this.data.settings.isPro = true;
+                    this.saveData();
+                    this.updateProUI();
+                    this.closeModal('modal-pro-upgrade');
+                    alert('Parabéns! Plano L7 PRO ativado neste aparelho.');
+                } else {
+                    alert('Código de ativação inválido.');
+                }
+            },
+
+            updateProUI() {
+                const permPro = Boolean(this.data.settings.isPro);
+                const headerTag = document.getElementById('header-plan-tag');
+                const headerBtn = document.getElementById('btn-header-pro');
+
+                if (permPro) {
+                    if (headerTag) headerTag.innerText = 'PLANO PRO';
+                    if (headerBtn) {
+                        headerBtn.classList.add('is-pro-active');
+                        document.getElementById('header-pro-title').innerText = 'PRO ATIVADO';
+                        document.getElementById('header-pro-sub').innerText = 'Recursos Liberados';
+                    }
                 }
             },
 
@@ -693,6 +821,7 @@
                 const ul = document.getElementById('tx-list'); ul.innerHTML = '';
                 txs.forEach(t => {
                     const isIn = t.type==='receita';
+                    // Badge da Forma de Pagamento
                     let payBadge = '';
                     if(t.type==='despesa' && t.pay_method) {
                         payBadge = `<span style="font-size:0.65rem; background:#333; padding:2px 6px; border-radius:4px; margin-left:6px; color:var(--primary);">${t.pay_method}</span>`;
@@ -731,17 +860,24 @@
             renderGraficos() {
                 const txs = this.getFilteredTransactions();
                 
-                let rec = 0, desp = 0, inv = 0;
+                // Gráfico Pagamentos
                 const payMap = {};
+                txs.forEach(t => { if(t.type==='despesa') payMap[t.pay_method || 'Outro'] = (payMap[t.pay_method||'Outro']||0) + t.value; });
+                
+                const pLabels = Object.keys(payMap); const pData = Object.values(payMap);
+                if(this.charts['chart-pagamentos']) this.charts['chart-pagamentos'].destroy();
+                this.charts['chart-pagamentos'] = new Chart(document.getElementById('chart-pagamentos').getContext('2d'), {
+                    type: 'bar', data: { labels: pLabels, datasets: [{ data: pData, backgroundColor: '#d4af37', borderRadius: 4 }] },
+                    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display:false } } }
+                });
+                
+                let rec = 0, desp = 0, inv = 0;
                 txs.forEach(t => { 
                     if(t.type==='receita') rec += t.value;
                     else if (t.type==='investimento') inv += t.value;
-                    else if (t.type==='despesa') {
-                        desp += t.value;
-                        payMap[t.pay_method || 'Outro'] = (payMap[t.pay_method||'Outro']||0) + t.value; 
-                    }
+                    else if (t.type==='despesa') desp += t.value;
                 });
-
+                
                 // Humor
                 const comp = rec>0 ? (desp/rec)*100 : 0;
                 let emoji = '🙂', status = 'Neutro', color = 'var(--primary)';
@@ -750,16 +886,7 @@
                 document.getElementById('graf-emoji-face').innerText = emoji;
                 document.getElementById('graf-emoji-status').innerText = status;
                 document.getElementById('graf-emoji-status').style.color = color;
-                
-                // Gráfico Pagamentos
-                const pLabels = Object.keys(payMap); const pData = Object.values(payMap);
-                if(this.charts['chart-pagamentos']) this.charts['chart-pagamentos'].destroy();
-                this.charts['chart-pagamentos'] = new Chart(document.getElementById('chart-pagamentos').getContext('2d'), {
-                    type: 'bar', data: { labels: pLabels, datasets: [{ data: pData, backgroundColor: '#d4af37', borderRadius: 4 }] },
-                    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display:false } } }
-                });
-                
-                // Rosca (50/30/20 Simples)
+
                 if(this.charts['chart-rosca']) this.charts['chart-rosca'].destroy();
                 this.charts['chart-rosca'] = new Chart(document.getElementById('chart-rosca').getContext('2d'), {
                     type: 'doughnut', data: { labels: ['Despesas', 'Aportes'], datasets: [{ data: [desp, inv], backgroundColor: ['#F44336', '#4CAF50'], borderWidth: 0 }] },
@@ -824,6 +951,7 @@
                     });
                 }
 
+                // Salva no Supabase se logado
                 if(supabase && auth.currentUser) {
                     newTxs.forEach(t => t.user_id = auth.currentUser.id);
                     const { error } = await supabase.from('transactions').insert(newTxs);
@@ -834,7 +962,6 @@
                 this.saveData();
                 this.closeModal('modal-tx');
                 this.renderCurrentView();
-                document.getElementById('tx-desc').value=''; document.getElementById('tx-val').value='';
                 alert(inst>1 ? `Parcelado em ${inst}x salvo com sucesso!` : 'Salvo com sucesso!');
             }
         };
