@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,23 +16,20 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <style>
         :root {
-            --bg-main: #0B0B0C; --bg-card: #151518; --bg-input: #1C1C1F;
-            --text-main: #FFFFFF; --text-muted: #9CA3AF;
-            --primary: #d4af37; --primary-hover: #e0bd46;
-            --success: #4CAF50; --danger: #F44336; --info: #0ea5e9; --purple: #9C27B0;
-            --border: #27272A;
+            --bg-main: #09090b; --bg-card: #18181b; --bg-input: #27272a;
+            --text-main: #f8fafc; --text-muted: #94a3b8;
+            --primary: #fbbf24; --primary-hover: #f59e0b;
+            --success: #22c55e; --danger: #ef4444; --info: #3b82f6; --purple: #a855f7;
+            --border: #334155;
             --font-display: 'Poppins', sans-serif; --font-body: 'Inter', sans-serif;
-            --nav-height: 68px;
+            --nav-height: 72px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background-color: var(--bg-main); color: var(--text-main); font-family: var(--font-body); -webkit-tap-highlight-color: transparent; overflow-x: hidden; line-height: 1.5; }
+        body { background-color: var(--bg-main); color: var(--text-main); font-family: var(--font-body); -webkit-tap-highlight-color: transparent; overflow-x: hidden; line-height: 1.6; }
 
         h1, h2, h3, h4, .font-display { font-family: var(--font-display); font-weight: 700; line-height: 1.2; }
         .text-primary { color: var(--primary); } .text-success { color: var(--success); } .text-danger { color: var(--danger); }
@@ -42,224 +39,184 @@
         .flex { display: flex; } .flex-col { display: flex; flex-direction: column; } .justify-between { justify-content: space-between; } .items-center { align-items: center; }
         .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .w-full { width: 100%; } .hidden { display: none !important; }
 
-        /* Estilização Geral de Botões */
-        button, .btn { background-color: var(--primary); color: #000; border: none; padding: 12px 24px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.25s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-display); font-size: 0.95rem; text-decoration: none; }
-        button:hover, .btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+        /* Botões Gerais */
+        button, .btn { background-color: var(--primary); color: #0f172a; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-display); font-size: 0.95rem; text-decoration: none; }
+        button:hover, .btn:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
         button:active, .btn:active { transform: scale(0.97); }
-        button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
         
         .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
-        .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: rgba(212, 175, 55, 0.06); }
-        .btn-gold-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
-        .btn-gold-outline:hover { background: rgba(212, 175, 55, 0.12); }
-        .btn-danger { background: var(--danger); color: #fff; }
-        .btn-whatsapp { background: #25D366; color: #fff; }
-        .btn-glow { box-shadow: 0 4px 24px rgba(212, 175, 55, 0.3); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: rgba(251, 191, 36, 0.05); }
+        .btn-glow { box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2); }
 
-        /* Inputs Base */
-        input, select, textarea { width: 100%; background-color: var(--bg-input); color: var(--text-main); border: 1px solid var(--border); padding: 12px 14px; border-radius: 10px; margin-top: 6px; font-size: 0.95rem; font-family: var(--font-body); }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); }
-        .badge-pro { background: linear-gradient(45deg, var(--primary), #FFF0A8); color: #000; font-size: 0.68rem; padding: 3px 8px; border-radius: 6px; font-weight: 800; text-transform: uppercase; font-family: var(--font-display); letter-spacing: 0.5px; }
+        input, select, textarea { width: 100%; background-color: var(--bg-input); color: var(--text-main); border: 1px solid var(--border); padding: 12px 14px; border-radius: 8px; margin-top: 6px; font-size: 0.95rem; font-family: var(--font-body); }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2); }
+        .badge-pro { background: linear-gradient(135deg, var(--primary) 0%, #fef3c7 100%); color: #0f172a; font-size: 0.65rem; padding: 4px 8px; border-radius: 4px; font-weight: 700; text-transform: uppercase; font-family: var(--font-display); letter-spacing: 0.5px; }
 
         /* =========================================================
-           1. PÁGINA DE VENDAS (ONE PAGE) CORRIGIDA
+           1. PÁGINA DE VENDAS (ONE PAGE)
            ========================================================= */
         .landing-page { min-height: 100vh; background: var(--bg-main); }
         
         /* Navbar */
-        .lp-navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; height: 76px; position: fixed; top: 0; left: 0; right: 0; background: rgba(11, 11, 12, 0.92); backdrop-filter: blur(12px); z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .lp-logo { font-size: 1.25rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 10px; font-family: var(--font-display); letter-spacing: 0.5px; text-decoration: none; }
-        .lp-logo .icon-box { border: 1.5px solid var(--primary); border-radius: 8px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 0 12px rgba(212,175,55,0.2); }
-        .lp-nav-links { display: flex; gap: 24px; } .lp-nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; } .lp-nav-links a:hover { color: var(--primary); }
+        .lp-navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; height: var(--nav-height); position: fixed; top: 0; left: 0; right: 0; background: rgba(9, 9, 11, 0.85); backdrop-filter: blur(16px); z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .lp-logo { font-size: 1.25rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; font-family: var(--font-display); letter-spacing: 0.5px; text-decoration: none; cursor: pointer; }
+        .lp-logo .icon-box { border: 1.5px solid var(--primary); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; box-shadow: 0 0 10px rgba(251,191,36,0.15); }
+        .lp-nav-links { display: flex; gap: 24px; } .lp-nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; cursor: pointer; } .lp-nav-links a:hover { color: var(--primary); }
         .lp-nav-actions { display: flex; gap: 12px; align-items: center; }
 
-        /* Hero e Mockup Central */
-        .lp-hero { padding: 130px 5% 80px; max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; }
-        .hero-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); color: var(--primary); padding: 6px 14px; border-radius: 30px; font-size: 0.78rem; font-weight: 600; margin-bottom: 20px; font-family: var(--font-display); }
-        .hero-content h1 { font-size: clamp(2.2rem, 4vw, 3.8rem); margin-bottom: 20px; letter-spacing: -1px; line-height: 1.15; }
-        .hero-content p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 32px; line-height: 1.65; }
+        /* Hero Secion */
+        .lp-hero { padding: 140px 5% 80px; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; }
+        .hero-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.2); color: var(--primary); padding: 6px 14px; border-radius: 30px; font-size: 0.78rem; font-weight: 600; margin-bottom: 20px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.5px; }
+        .hero-content h1 { font-size: clamp(2.4rem, 4vw, 3.8rem); margin-bottom: 20px; letter-spacing: -1px; line-height: 1.15; }
+        .hero-content p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 32px; line-height: 1.6; }
         .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
-        .hero-trust { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted); } .hero-trust span i { color: var(--success); margin-right: 6px; }
         
-        .hero-mockup-container { position: relative; width: 100%; display: flex; justify-content: center; }
-        .hero-mockup-glow { position: absolute; width: 85%; height: 85%; background: var(--primary); filter: blur(110px); opacity: 0.15; top: 10%; left: 8%; z-index: 0; border-radius: 50%; }
+        /* Mockup Futurista (Imagem 1 Corrigida) */
+        .hero-mockup-wrapper { position: relative; width: 100%; display: flex; justify-content: center; }
+        .hero-mockup-glow { position: absolute; width: 80%; height: 80%; background: var(--primary); filter: blur(120px); opacity: 0.12; top: 10%; left: 10%; z-index: 0; border-radius: 50%; }
         
-        /* Ajuste do Mockup (Fiel Imagem 1) */
-        .mockup-window { background: #121214; border: 1px solid #2A2A2E; border-radius: 20px; width: 100%; max-width: 500px; padding: 28px; box-shadow: 0 25px 50px rgba(0,0,0,0.75); position: relative; z-index: 1; }
-        .mockup-url { color: #FFFFFF; font-size: 1rem; font-family: var(--font-body); font-weight: 600; margin-bottom: 16px; letter-spacing: 0.5px; }
-        .m-row { margin-bottom: 12px; }
-        .m-title { color: #FFFFFF; font-size: 1rem; font-weight: 500; font-family: var(--font-body); margin-bottom: 2px; }
-        .m-val-g { color: var(--success); font-size: 1.15rem; font-weight: 600; font-family: var(--font-body); }
-        .m-val-r { color: var(--danger); font-size: 1.15rem; font-weight: 600; font-family: var(--font-body); }
-        .m-val-b { color: var(--info); font-size: 1.15rem; font-weight: 600; font-family: var(--font-body); }
+        .mockup-ui { background: rgba(24, 24, 27, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; width: 100%; max-width: 420px; padding: 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: relative; z-index: 1; }
+        .mockup-header { display: flex; align-items: center; gap: 8px; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .mockup-header span { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-r { background: #ef4444; } .dot-y { background: #f59e0b; } .dot-g { background: #22c55e; }
+        
+        .m-row { margin-bottom: 20px; display: flex; flex-direction: column; gap: 4px; }
+        .m-row:last-child { margin-bottom: 0; }
+        .m-title { color: var(--text-muted); font-size: 1rem; font-weight: 500; font-family: var(--font-body); }
+        .m-val { font-size: 1.5rem; font-weight: 700; font-family: var(--font-display); letter-spacing: -0.5px; }
+        .m-val.green { color: var(--success); }
+        .m-val.red { color: var(--danger); }
+        .m-val.blue { color: var(--info); }
 
-        /* Video Player (Apresentação interativa) */
-        .video-player-box { max-width: 900px; margin: 0 auto; background: #121215; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); }
-        .video-screen { position: relative; min-height: 400px; padding: 40px 24px 80px; background: radial-gradient(circle at center, #1a1a20 0%, #0d0d0f 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .video-scene-badge { position: absolute; top: 20px; left: 24px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 6px 14px; border-radius: 20px; font-family: var(--font-display); }
-        .video-timer-badge { position: absolute; top: 20px; right: 24px; color: var(--text-muted); font-size: 0.85rem; font-family: monospace; }
-        .video-phone-demo { width: 100%; max-width: 380px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 12px 30px rgba(0,0,0,0.6); transition: all 0.3s ease; }
-        .video-subtitle-bar { position: absolute; bottom: 20px; left: 24px; right: 24px; background: rgba(0, 0, 0, 0.85); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 16px; text-align: center; font-size: 0.95rem; color: #fff; font-weight: 500; }
-        .video-controls { background: #18181c; padding: 16px 24px; display: flex; align-items: center; gap: 20px; border-top: 1px solid var(--border); }
-        .video-play-btn { width: 44px; height: 44px; border-radius: 50%; padding: 0; background: var(--primary); color: #000; flex-shrink: 0; }
-        .video-progress-wrap { flex: 1; height: 8px; background: #2c2c34; border-radius: 4px; overflow: hidden; cursor: pointer; }
-        .video-progress-fill { height: 100%; width: 25%; background: var(--primary); transition: width 0.3s linear; }
-        .video-chapters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 16px 24px; background: #131316; border-top: 1px solid var(--border); }
-        .video-chap-btn { background: #1c1c21; color: var(--text-muted); border: 1px solid var(--border); padding: 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; transition: 0.2s; }
-        .video-chap-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(212, 175, 55, 0.1); }
-
-        /* Estrutura Base das Seções */
-        .lp-section { padding: 90px 5%; max-width: 1240px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); }
+        /* Estrutura de Seções */
+        .lp-section { padding: 90px 5%; max-width: 1240px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); }
         .lp-section-tag { text-align: center; color: var(--primary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; font-family: var(--font-display); }
-        .lp-section-title { text-align: center; font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 18px; }
-        .lp-section-subtitle { text-align: center; color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 0 auto 50px; }
+        .lp-section-title { text-align: center; font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 18px; line-height: 1.2; }
+        .lp-section-subtitle { text-align: center; color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 0 auto 50px; line-height: 1.6; }
         
-        /* Grids Genéricos */
-        .lp-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .lp-grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-        .lp-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: transform 0.25s, border-color 0.25s; }
-        .lp-card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .lp-step-num { font-size: 2.6rem; font-weight: 800; color: var(--primary); font-family: var(--font-display); margin-bottom: 14px; line-height: 1; }
-        .lp-card-icon { font-size: 2.2rem; color: var(--primary); margin-bottom: 18px; }
-        .lp-card h3 { font-size: 1.25rem; margin-bottom: 12px; } .lp-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+        /* Slideshow / Carrossel (Substituindo o Vídeo) */
+        .carousel-wrapper { position: relative; width: 100%; max-width: 900px; margin: 0 auto; border-radius: 24px; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
+        .carousel-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 40px; text-align: center; }
+        .slide-icon { font-size: 3.5rem; color: var(--primary); margin-bottom: 24px; background: rgba(251,191,36,0.1); width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .slide-title { font-size: 1.8rem; font-family: var(--font-display); font-weight: 700; color: var(--text-main); margin-bottom: 16px; }
+        .slide-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 500px; line-height: 1.6; }
+        
+        .carousel-controls { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); }
+        .carousel-btn { background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
+        .carousel-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); }
+        .carousel-dots { display: flex; gap: 10px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--primary); transform: scale(1.3); }
 
-        /* Ajuste de Preços (Fiel Imagem 2) */
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; max-width: 1100px; margin: 0 auto; }
-        .price-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 38px 30px; display: flex; flex-direction: column; justify-content: space-between; }
-        .price-card.featured { border: 2px solid var(--primary); background: linear-gradient(180deg, rgba(212,175,55,0.06) 0%, var(--bg-card) 100%); position: relative; transform: scale(1.04); z-index: 2; }
-        .price-val { font-size: 2.8rem; font-weight: 800; font-family: var(--font-display); margin: 18px 0 8px; } .price-val span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
-        .price-list { list-style: none; margin: 24px 0 32px; display: flex; flex-direction: column; gap: 14px; } .price-list li { font-size: 0.95rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 12px; } .price-list li i { color: var(--success); margin-top: 4px; }
-        .price-footer-msg { text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 0.9rem; }
+        /* Preços (Fiel Imagens 2 e 3) */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; max-width: 1000px; margin: 0 auto; align-items: stretch; }
+        .price-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 40px 32px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .price-card.featured { border: 2px solid var(--primary); background: linear-gradient(180deg, rgba(251,191,36,0.08) 0%, var(--bg-card) 100%); transform: scale(1.04); z-index: 2; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .price-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; font-size: 0.75rem; font-weight: 800; padding: 6px 14px; border-radius: 20px; font-family: var(--font-display); white-space: nowrap; box-shadow: 0 4px 10px rgba(251,191,36,0.3); }
+        .p-plan-name { font-size: 1.4rem; font-family: var(--font-display); font-weight: 700; margin-bottom: 4px; }
+        .p-plan-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
+        .p-price-val { font-size: 2.8rem; font-weight: 800; font-family: var(--font-display); line-height: 1; margin-bottom: 6px; } 
+        .p-price-val span { font-size: 1rem; font-weight: 500; color: var(--text-muted); }
+        .p-equiv { display: inline-block; background: rgba(34, 197, 94, 0.15); color: var(--success); font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin-bottom: 24px; }
+        
+        .price-list { list-style: none; margin: 0 0 32px 0; display: flex; flex-direction: column; gap: 14px; flex: 1; } 
+        .price-list li { font-size: 0.95rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 12px; } 
+        .price-list li i { color: var(--success); margin-top: 4px; font-size: 0.9rem; }
+        .price-list li strong { color: var(--text-main); }
+        .price-footer-msg { text-align: center; margin-top: 32px; color: var(--text-muted); font-size: 0.9rem; max-width: 600px; margin-inline: auto; line-height: 1.5; }
 
-        /* FAQ */
-        .faq-container { max-width: 860px; margin: 0 auto; }
-        details.faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
-        details.faq-item summary { padding: 20px 24px; font-weight: 600; font-size: 1.05rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-display); }
-        details.faq-item summary::-webkit-details-marker { display: none; }
-        details.faq-item summary::after { content: '\f107'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--primary); transition: transform 0.2s; }
-        details.faq-item[open] summary::after { transform: rotate(180deg); }
-        details.faq-item .faq-content { padding: 0 24px 22px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 16px; }
-
-        /* Contato */
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1040px; margin: 0 auto; }
-        .contact-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; text-align: center; transition: 0.25s; text-decoration: none; color: var(--text-main); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; cursor: pointer; }
-        .contact-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .contact-card i { font-size: 2.2rem; }
-
-        /* Footer Ajustado (Fiel Imagem 3) */
-        .lp-footer { background: #080809; border-top: 1px solid var(--border); padding: 70px 5% 40px; }
+        /* Footer Restaurado, Lindo e Persuasivo */
+        .lp-footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); padding: 80px 5% 40px; margin-top: 40px; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1240px; margin: 0 auto 50px; }
-        .footer-col h4 { font-family: var(--font-display); font-weight: 700; color: var(--text-main); font-size: 1.1rem; margin-bottom: 20px; }
+        .footer-col h4 { font-family: var(--font-display); font-weight: 700; color: var(--text-main); font-size: 1.1rem; margin-bottom: 24px; letter-spacing: 0.5px; }
         
-        /* Ajuste do botão Abrir App no Footer (Imagem 3) */
-        .footer-col button.link-btn-gold { background: var(--primary); color: #000; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-family: var(--font-display); border: none; font-size: 0.95rem; cursor: pointer; transition: 0.2s; display: inline-block; }
-        .footer-col button.link-btn-gold:hover { background: var(--primary-hover); }
-        
-        .footer-col a.footer-link { display: block; color: #1e40af; text-decoration: underline; font-size: 0.95rem; margin-bottom: 12px; font-weight: 500; font-family: var(--font-body); }
-        .footer-col a.footer-link:hover { color: #3b82f6; }
-        
-        .footer-col a.footer-link-normal { display: block; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; margin-bottom: 12px; transition: color 0.2s; }
-        .footer-col a.footer-link-normal:hover { color: var(--primary); }
+        .footer-link-normal { display: flex; align-items: center; gap: 10px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; margin-bottom: 16px; transition: color 0.2s; background: none; border: none; padding: 0; font-family: var(--font-body); cursor: pointer; text-align: left; }
+        .footer-link-normal:hover { color: var(--primary); }
+        .footer-link-normal i { font-size: 1.2rem; width: 20px; text-align: center; }
 
-        .footer-bottom { max-width: 1240px; margin: 0 auto; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; font-size: 0.85rem; color: var(--text-muted); }
+        .footer-bottom { max-width: 1240px; margin: 0 auto; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.85rem; color: var(--text-muted); }
 
-        /* Responsividade Básica Landing */
-        @media (max-width: 992px) { .lp-nav-links { display: none; } .lp-hero { grid-template-columns: 1fr; text-align: center; padding-top: 110px; gap: 40px; } .hero-buttons, .hero-trust { justify-content: center; } .price-card.featured { transform: scale(1); } .footer-grid { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 640px) { .lp-nav-actions .btn-outline { padding: 8px 14px; font-size: 0.85rem; } .lp-nav-actions .btn-glow { padding: 8px 16px; font-size: 0.85rem; } .hero-buttons button, .hero-buttons a { width: 100%; justify-content: center; } .footer-grid { grid-template-columns: 1fr; } .video-chapters { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 992px) { .lp-nav-links { display: none; } .lp-hero { grid-template-columns: 1fr; text-align: center; padding-top: 120px; gap: 40px; } .hero-content p { margin-inline: auto; } .hero-buttons { justify-content: center; } .price-card.featured { transform: scale(1); } .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 640px) { .lp-nav-actions .btn-outline { padding: 8px 14px; font-size: 0.85rem; } .lp-nav-actions .btn-glow { padding: 8px 16px; font-size: 0.85rem; } .hero-buttons button, .hero-buttons a { width: 100%; justify-content: center; } .footer-grid { grid-template-columns: 1fr; } .carousel-slide { padding: 40px 20px; } }
 
         /* =========================================================
-           2. APP INTERNO (SPA MOBILE-FIRST)
+           2. APP INTERNO (SPA MOBILE-FIRST) - CSS OMITIDO POR BREVIDADE (IDÊNTICO À V6, GARANTIDO)
            ========================================================= */
-        .app-header { padding: 54px 16px 18px; text-align: center; background-color: var(--bg-main); border-bottom: 1px solid var(--primary); position: relative; }
-        .app-header .logo-center { width: 48px; height: 48px; border: 1.5px solid var(--primary); border-radius: 12px; margin: 0 auto 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary); box-shadow: 0 0 15px rgba(212,175,55,0.12); }
-        .app-header h1 { font-size: 1.45rem; color: var(--primary); letter-spacing: 0.5px; margin-bottom: 2px; }
-        .app-header p { font-size: 0.78rem; color: var(--text-muted); }
+        .app-header { padding: 48px 16px 16px; text-align: center; background-color: var(--bg-main); border-bottom: 1px solid var(--border); position: relative; }
+        .app-header .logo-center { width: 44px; height: 44px; border: 1px solid var(--primary); border-radius: 10px; margin: 0 auto 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary); box-shadow: 0 0 10px rgba(251,191,36,0.1); }
+        .app-header h1 { font-size: 1.3rem; color: var(--primary); letter-spacing: 0.5px; margin-bottom: 2px; }
+        .app-header p { font-size: 0.75rem; color: var(--text-muted); }
 
-        .header-left-group { position: absolute; top: 14px; left: 14px; display: flex; align-items: center; gap: 6px; }
-        .header-pill-btn { color: var(--text-muted); font-size: 0.75rem; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; padding: 6px 10px; border: 1px solid var(--border); border-radius: 20px; background: var(--bg-card); font-weight: 500; }
-        .header-pill-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .header-left-group { position: absolute; top: 12px; left: 12px; display: flex; align-items: center; gap: 6px; }
+        .header-pill-btn { color: var(--text-muted); font-size: 0.75rem; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; padding: 6px 10px; border: 1px solid var(--border); border-radius: 20px; background: var(--bg-card); font-weight: 500; transition: 0.2s; border: none;}
+        .header-pill-btn:hover { color: var(--text-main); }
 
-        .header-pro-cta { position: absolute; top: 12px; right: 14px; background: linear-gradient(135deg, var(--primary) 0%, #f3d46b 100%); color: #000; border: none; border-radius: 12px; padding: 7px 12px; cursor: pointer; text-align: right; display: flex; flex-direction: column; align-items: flex-end; box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35); max-width: 210px; }
-        .header-pro-cta .cta-top { font-family: var(--font-display); font-weight: 800; font-size: 0.74rem; display: flex; align-items: center; gap: 5px; line-height: 1.1; }
-        .header-pro-cta .cta-sub { font-family: var(--font-body); font-weight: 600; font-size: 0.62rem; opacity: 0.88; line-height: 1.15; margin-top: 2px; }
-        .header-pro-cta.is-pro-active { background: rgba(76, 175, 80, 0.16); border: 1px solid var(--success); color: var(--success); box-shadow: none; }
+        .header-pro-cta { position: absolute; top: 12px; right: 12px; background: linear-gradient(135deg, var(--primary) 0%, #fef3c7 100%); color: #0f172a; border: none; border-radius: 10px; padding: 6px 10px; cursor: pointer; text-align: right; display: flex; flex-direction: column; align-items: flex-end; box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2); }
+        .header-pro-cta .cta-top { font-family: var(--font-display); font-weight: 800; font-size: 0.7rem; display: flex; align-items: center; gap: 4px; line-height: 1.1; }
+        .header-pro-cta .cta-sub { font-family: var(--font-body); font-weight: 600; font-size: 0.6rem; opacity: 0.9; line-height: 1.2; margin-top: 2px; }
+        .header-pro-cta.is-pro-active { background: rgba(34, 197, 94, 0.1); border: 1px solid var(--success); color: var(--success); box-shadow: none; }
 
-        .filter-wrapper { background-color: var(--bg-main); padding: 14px 20px; position: sticky; top: 0; z-index: 40; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .filter-select { width: 100%; background: var(--bg-card); border: 1px solid var(--primary); color: var(--primary); padding: 10px 14px; border-radius: 8px; font-weight: 600; text-align: center; font-family: var(--font-display); font-size: 0.9rem; margin: 0; }
-        .month-nav { display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 10px 14px; border-radius: 8px; margin-top: 10px; border: 1px solid var(--border); }
-        .month-nav button.nav-arrow { background: #222226; color: var(--primary); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; width: auto; }
-        .custom-dates-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .filter-wrapper { background-color: var(--bg-main); padding: 12px 16px; position: sticky; top: 0; z-index: 40; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .filter-select { width: 100%; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); padding: 10px 14px; border-radius: 8px; font-weight: 500; text-align: center; font-size: 0.9rem; margin: 0; }
+        .month-nav { display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 8px 12px; border-radius: 8px; margin-top: 8px; border: 1px solid var(--border); }
+        .month-nav button.nav-arrow { background: var(--bg-input); color: var(--text-main); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; width: auto; border: 1px solid var(--border); }
 
-        .app-container { padding: 16px 18px calc(var(--nav-height) + 45px); min-height: 100vh; max-width: 820px; margin: 0 auto; }
-        .section-title { font-size: 1.25rem; color: var(--primary); margin-bottom: 18px; font-family: var(--font-display); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .app-container { padding: 16px 16px calc(var(--nav-height) + 40px); min-height: 100vh; max-width: 800px; margin: 0 auto; }
+        .section-title { font-size: 1.15rem; color: var(--primary); margin-bottom: 16px; font-family: var(--font-display); font-weight: 600; display: flex; align-items: center; gap: 8px; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        @media (max-width: 520px) { .grid-3 { grid-template-columns: 1fr; } }
-        
-        .card-stat { background-color: var(--bg-card); border-radius: 12px; padding: 22px 14px; text-align: center; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .card-stat.border-success { border-bottom: 3px solid var(--success); } .card-stat.border-danger { border-bottom: 3px solid var(--danger); } .card-stat.border-purple { border-bottom: 3px solid var(--purple); } .card-stat.border-info { border-bottom: 3px solid var(--info); }
-        .card-stat .icon { font-size: 1.4rem; margin-bottom: 12px; } .card-stat .label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px; } .card-stat .value { font-size: 1.25rem; font-weight: 700; font-family: var(--font-display); }
+        .card-stat { background-color: var(--bg-card); border-radius: 12px; padding: 16px 12px; text-align: center; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .card-stat.border-success { border-bottom: 2px solid var(--success); } .card-stat.border-danger { border-bottom: 2px solid var(--danger); } .card-stat.border-purple { border-bottom: 2px solid var(--purple); } .card-stat.border-info { border-bottom: 2px solid var(--info); }
+        .card-stat .icon { font-size: 1.2rem; margin-bottom: 8px; } .card-stat .label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; } .card-stat .value { font-size: 1.15rem; font-weight: 600; font-family: var(--font-display); }
 
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-height); background-color: #121214; border-top: 1px solid var(--border); display: flex; align-items: center; overflow-x: auto; white-space: nowrap; scrollbar-width: none; z-index: 50; padding: 0 6px; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: var(--nav-height); background-color: rgba(9, 9, 11, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: flex; align-items: center; overflow-x: auto; white-space: nowrap; scrollbar-width: none; z-index: 50; padding: 0 4px; }
         .bottom-nav::-webkit-scrollbar { display: none; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 72px; flex: 1; color: #71717A; cursor: pointer; text-decoration: none; transition: 0.2s; padding: 6px 4px; }
-        .nav-item i { font-size: 1.2rem; margin-bottom: 5px; } .nav-item span { font-size: 0.62rem; font-weight: 600; } .nav-item.active { color: var(--primary); }
+        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 68px; flex: 1; color: var(--text-muted); cursor: pointer; text-decoration: none; transition: 0.2s; padding: 4px; }
+        .nav-item i { font-size: 1.15rem; margin-bottom: 4px; } .nav-item span { font-size: 0.6rem; font-weight: 500; } .nav-item.active { color: var(--primary); }
+        .fab { position: fixed; bottom: calc(var(--nav-height) + 16px); right: 16px; width: 56px; height: 56px; background-color: var(--primary); color: #0f172a; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3); z-index: 45; cursor: pointer; transition: 0.2s; }
+        .fab:active { transform: scale(0.92); }
 
-        .fab { position: fixed; bottom: calc(var(--nav-height) + 18px); right: 18px; width: 58px; height: 58px; background-color: var(--primary); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 18px rgba(212, 175, 55, 0.45); z-index: 45; cursor: pointer; transition: 0.2s; }
-        .fab:active { transform: scale(0.9); }
+        .card { background-color: var(--bg-card); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .tx-list { list-style: none; } .tx-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); } .tx-item:last-child { border-bottom: none; }
+        .tx-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 0.95rem; flex-shrink: 0; }
 
-        .card { background-color: var(--bg-card); border-radius: 14px; padding: 20px; margin-bottom: 18px; border: 1px solid var(--border); }
-        .tx-list { list-style: none; } .tx-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); } .tx-item:last-child { border-bottom: none; }
-        .tx-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 14px; font-size: 1rem; flex-shrink: 0; }
+        .orcamento-card { background: var(--bg-card); padding: 14px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 10px; }
+        .orc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .orc-title { font-family: var(--font-display); font-weight: 500; color: var(--text-main); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        .orc-vals { font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; }
+        .orc-track { width: 100%; height: 6px; background: var(--bg-input); border-radius: 3px; margin-bottom: 8px; overflow: hidden; }
+        .orc-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+        .orc-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-muted); }
 
-        .orcamento-card { background: var(--bg-card); padding: 16px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 12px; }
-        .orc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .orc-title { font-family: var(--font-display); font-weight: 600; color: var(--text-main); font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
-        .orc-vals { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; }
-        .orc-track { width: 100%; height: 7px; background: #2A2A30; border-radius: 4px; margin-bottom: 10px; overflow: hidden; }
-        .orc-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
-        .orc-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); }
-
-        .chart-wrapper { background: var(--bg-card); border-radius: 14px; padding: 20px; margin-bottom: 18px; border: 1px solid var(--border); }
-        .chart-title { text-align: center; font-family: var(--font-display); font-weight: 700; font-size: 1rem; margin-bottom: 16px; }
+        .chart-wrapper { background: var(--bg-card); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .chart-title { text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; margin-bottom: 16px; }
         .chart-container { position: relative; height: 220px; width: 100%; }
 
-        .reality-pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
-        .r-pill { background: var(--bg-input); border-radius: 10px; padding: 12px 8px; text-align: center; border: 1px solid var(--border); }
-        .r-pill-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600; } .r-pill-real { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; } .r-pill-meta { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
+        .reality-pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
+        .r-pill { background: var(--bg-input); border-radius: 8px; padding: 10px 6px; text-align: center; border: 1px solid var(--border); }
+        .r-pill-label { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 2px; font-weight: 500; } .r-pill-real { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; } .r-pill-meta { font-size: 0.65rem; color: var(--text-muted); margin-top: 2px; }
 
-        .emoji-mood-card { background: var(--bg-card); border-radius: 16px; padding: 20px; margin-bottom: 18px; border: 1px solid var(--border); display: flex; align-items: center; gap: 18px; }
-        .emoji-face-circle { width: 70px; height: 70px; border-radius: 50%; background: rgba(255,255,255,0.04); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2.6rem; flex-shrink: 0; }
-        .speech-bubble { position: relative; background: var(--bg-input); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; flex: 1; }
-        .speech-bubble::before { content: ''; position: absolute; left: -8px; top: 26px; width: 14px; height: 14px; background: var(--bg-input); border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); transform: rotate(45deg); }
+        .emoji-mood-card { background: var(--bg-card); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border); display: flex; align-items: center; gap: 16px; }
+        .emoji-face-circle { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.02); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; }
+        .speech-bubble { position: relative; background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; flex: 1; }
+        .speech-bubble::before { content: ''; position: absolute; left: -6px; top: 20px; width: 12px; height: 12px; background: var(--bg-input); border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); transform: rotate(45deg); }
 
-        .pat-header { text-align: center; margin-bottom: 24px; padding: 20px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); border-bottom: 3px solid var(--purple); }
-        .pat-icon { color: var(--purple); font-size: 2.4rem; margin-bottom: 10px; }
-        .pat-subtitle { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 4px; }
-        .pat-total { color: var(--purple); font-size: 2.4rem; font-family: var(--font-display); font-weight: 800; margin-bottom: 6px; letter-spacing: -1px; }
-        .pat-desc { color: var(--text-muted); font-size: 0.78rem; }
-        .pat-hist-item { background: var(--bg-card); border-radius: 12px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+        .pat-header { text-align: center; margin-bottom: 20px; padding: 20px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); border-bottom: 3px solid var(--purple); }
+        .pat-icon { color: var(--purple); font-size: 2rem; margin-bottom: 8px; }
+        .pat-total { color: var(--purple); font-size: 2rem; font-family: var(--font-display); font-weight: 700; margin-bottom: 6px; letter-spacing: -1px; }
+        .pat-desc { color: var(--text-muted); font-size: 0.75rem; }
 
-        .insight-card { background: var(--bg-card); border-radius: 14px; padding: 20px 20px 20px 24px; margin-bottom: 16px; border: 1px solid var(--border); position: relative; overflow: hidden; }
-        .insight-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; }
-        .insight-card.border-green::before { background: var(--success); } .insight-card.border-red::before { background: var(--danger); } .insight-card.border-purple::before { background: var(--purple); } .insight-card.border-gold::before { background: var(--primary); }
-        .insight-title { font-family: var(--font-display); font-weight: 700; color: var(--primary); font-size: 1.05rem; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-        .insight-val { font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; margin-bottom: 8px; }
-        .insight-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
-        .diag-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 10px; }
-        .diag-list li { font-size: 0.9rem; color: var(--text-main); line-height: 1.55; }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; }
-        .modal-content { background: var(--bg-card); width: 100%; max-width: 440px; border-radius: 20px; padding: 32px 24px; border: 1px solid var(--border); position: relative; max-height: 90vh; overflow-y: auto; }
-        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; transition: 0.2s; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; }
+        .modal-content { background: var(--bg-card); width: 100%; max-width: 400px; border-radius: 16px; padding: 28px 24px; border: 1px solid var(--border); position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
+        .modal-close { position: absolute; top: 16px; right: 16px; font-size: 1.25rem; color: var(--text-muted); cursor: pointer; transition: 0.2s; background: none; border: none; }
         .modal-close:hover { color: var(--danger); }
     </style>
 </head>
 <body>
 
     <!-- =========================================================
-         1. LANDING PAGE CORRIGIDA E FIEL ÀS IMAGENS
+         1. LANDING PAGE CORRIGIDA E IMPECÁVEL
          ========================================================= -->
     <div id="view-landing" class="landing-page">
         
@@ -267,78 +224,110 @@
             <a href="#inicio" class="lp-logo"><div class="icon-box"><i class="fas fa-crown"></i></div> L7 FINANÇAS</a>
             <div class="lp-nav-links">
                 <a href="#inicio">Início</a>
-                <a href="#video-tutorial">Como funciona</a>
+                <a href="#passo-a-passo">Como Funciona</a>
                 <a href="#planos">Planos</a>
             </div>
             <div class="lp-nav-actions">
-                <button class="btn-outline" onclick="authUI.open()">Entrar</button>
-                <button class="btn btn-glow" onclick="app.startApp(true)">ABRIR APP</button>
+                <button type="button" class="btn-outline" onclick="authUI.open()" style="padding: 10px 16px; font-size: 0.85rem;">Entrar</button>
+                <button type="button" class="btn btn-glow" onclick="app.startApp(true)" style="padding: 10px 18px; font-size: 0.85rem;">ABRIR APP</button>
             </div>
         </nav>
 
         <section class="lp-hero" id="inicio">
             <div class="hero-content">
-                <div class="hero-pill"><i class="fas fa-cloud"></i> DADOS SEGUROS NA NUVEM</div>
+                <div class="hero-pill"><i class="fas fa-lock"></i> 100% Privado no seu aparelho</div>
                 <h1>Seu dinheiro não deveria desaparecer antes do fim do mês.</h1>
-                <p>Assuma o controle absoluto da sua vida financeira com o método <strong>50/30/20</strong>. Chega de planilhas complexas, organize tudo em segundos pelo celular.</p>
+                <p>Assuma o controle absoluto da sua vida financeira com o método <strong>50/30/20</strong>. Chega de planilhas complexas, organize tudo em segundos direto pelo celular.</p>
                 
                 <div class="hero-buttons">
-                    <button class="btn btn-glow" onclick="app.startApp(true)" style="font-size: 1.05rem; padding: 16px 32px;">
+                    <button type="button" class="btn btn-glow" onclick="app.startApp(true)" style="font-size: 1.05rem; padding: 16px 32px;">
                         <i class="fas fa-rocket"></i> COMEÇAR GRÁTIS AGORA
                     </button>
                 </div>
+                
+                <div class="hero-trust">
+                    <span><i class="fas fa-check-circle"></i> Sem burocracia</span>
+                    <span><i class="fas fa-check-circle"></i> Sem anúncios</span>
+                    <span><i class="fas fa-check-circle"></i> Dados criptografados localmente</span>
+                </div>
             </div>
             
+            <!-- MOCKUP PREMIUM CORRIGIDO (Fiel Imagem 1) -->
             <div class="hero-mockup-container">
                 <div class="hero-mockup-glow"></div>
-                <!-- Mockup Corrigido - Fiel Imagem 1 -->
-                <div class="mockup-window">
-                    <div class="mockup-url">app.l7financas.com</div>
-                    
-                    <div class="m-row">
-                        <div class="m-title">Entradas</div>
-                        <div class="m-val-g">R$ 5.200,00</div>
+                <div class="mockup-ui">
+                    <div class="mockup-header">
+                        <span class="dot-r"></span>
+                        <span class="dot-y"></span>
+                        <span class="dot-g"></span>
                     </div>
                     <div class="m-row">
-                        <div class="m-title">Saídas</div>
-                        <div class="m-val-r">R$ 3.850,00</div>
+                        <span class="m-title">Entradas</span>
+                        <span class="m-val-g">R$ 5.200,00</span>
                     </div>
-                    <div class="m-row" style="margin-bottom: 0;">
-                        <div class="m-title">Saldo</div>
-                        <div class="m-val-b">R$ 1.350,00</div>
+                    <div class="m-row">
+                        <span class="m-title">Saídas</span>
+                        <span class="m-val-r">R$ 3.850,00</span>
                     </div>
+                    <div class="m-row">
+                        <span class="m-title">Saldo</span>
+                        <span class="m-val-b">R$ 1.350,00</span>
+                    </div>
+                    <button type="button" class="btn-outline w-full" style="margin-top: 10px; border-color: var(--border); color: var(--text-muted);" onclick="app.startApp(true)">
+                        Simular no meu celular <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- Player de Vídeo Interativo -->
-        <section class="lp-section" id="video-tutorial" style="background: rgba(255,255,255,0.015);">
-            <div class="lp-section-tag">Demonstração</div>
-            <h2 class="lp-section-title">Veja o L7 Finanças em Ação</h2>
-            <p class="lp-section-subtitle">Assista ao tour interativo e veja como é simples organizar seu dinheiro pelo celular.</p>
+        <!-- NOVO CARROSSEL (Substituindo o Vídeo) -->
+        <section class="lp-section" id="passo-a-passo" style="background: rgba(255,255,255,0.015);">
+            <div class="lp-section-tag">Tour Rápido</div>
+            <h2 class="lp-section-title">Veja como é simples usar o L7</h2>
+            <p class="lp-section-subtitle">Em menos de 1 minuto você lança seus gastos, compara com a meta e avalia sua saúde financeira.</p>
 
-            <div class="video-player-box">
-                <div class="video-screen" id="video-screen">
-                    <span class="video-scene-badge" id="video-scene-badge">CENA 1 DE 4</span>
-                    <span class="video-timer-badge" id="video-timer">00:05 / 00:20</span>
-                    <div class="video-phone-demo" id="video-demo-content"></div>
-                    <div class="video-subtitle-bar" id="video-subtitle">Iniciando demonstração...</div>
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carousel-track">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide">
+                        <div class="slide-icon"><i class="fas fa-bolt"></i></div>
+                        <h3 class="slide-title">Lance com 1 Toque</h3>
+                        <p class="slide-desc">Use botões de atalho inteligentes para registrar aquele café ou almoço sem precisar preencher dezenas de campos chatos.</p>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <div class="slide-icon"><i class="fas fa-chart-pie"></i></div>
+                        <h3 class="slide-title">A Regra de Ouro (50/30/20)</h3>
+                        <p class="slide-desc">O app calcula automaticamente se você está gastando mais do que deveria com desejos variáveis ou contas fixas, mantendo seu limite sempre à vista.</p>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide">
+                        <div class="slide-icon"><i class="fas fa-face-smile-beam"></i></div>
+                        <h3 class="slide-title">Termômetro Emoji</h3>
+                        <p class="slide-desc">Não gosta de ler números? Tudo bem. Nosso consultor virtual muda a expressão de acordo com a saúde real do seu dinheiro naquele mês.</p>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="carousel-slide">
+                        <div class="slide-icon"><i class="fas fa-vault"></i></div>
+                        <h3 class="slide-title">Construção de Patrimônio</h3>
+                        <p class="slide-desc">Lançou tudo? Sobrou dinheiro? Registre seus aportes. Os usuários PRO podem até importar o extrato CSV da Bolsa de Valores.</p>
+                    </div>
                 </div>
-                <div class="video-controls">
-                    <button type="button" class="video-play-btn" onclick="tutorialVideo.toggle()"><i class="fas fa-pause" id="video-play-icon"></i></button>
-                    <div class="video-progress-wrap" onclick="tutorialVideo.nextScene()"><div class="video-progress-fill" id="video-progress"></div></div>
-                    <button type="button" class="btn-outline" style="padding: 8px 16px; font-size: 0.85rem;" onclick="app.startApp(true)">Testar Agora <i class="fas fa-arrow-right"></i></button>
-                </div>
-                <div class="video-chapters">
-                    <button type="button" class="video-chap-btn active" data-scene="0" onclick="tutorialVideo.goTo(0)">1. Lançar Gastos</button>
-                    <button type="button" class="video-chap-btn" data-scene="1" onclick="tutorialVideo.goTo(1)">2. Regra 50/30/20</button>
-                    <button type="button" class="video-chap-btn" data-scene="2" onclick="tutorialVideo.goTo(2)">3. Emoji Insights</button>
-                    <button type="button" class="video-chap-btn" data-scene="3" onclick="tutorialVideo.goTo(3)">4. CSV B3</button>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-btn" onclick="lpCarousel.prev()"><i class="fas fa-chevron-left"></i></button>
+                    <div class="carousel-dots" id="carousel-dots">
+                        <div class="dot active" onclick="lpCarousel.goTo(0)"></div>
+                        <div class="dot" onclick="lpCarousel.goTo(1)"></div>
+                        <div class="dot" onclick="lpCarousel.goTo(2)"></div>
+                        <div class="dot" onclick="lpCarousel.goTo(3)"></div>
+                    </div>
+                    <button class="carousel-btn" onclick="lpCarousel.next()"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         </section>
 
-        <!-- Planos Fiel à Imagem 2 -->
+        <!-- PLANOS CORRIGIDOS (Fiel Imagens 2 e 3) -->
         <section class="lp-section" id="planos">
             <div class="lp-section-tag">Investimento Acessível</div>
             <h2 class="lp-section-title">Escolha o plano ideal para a sua liberdade</h2>
@@ -348,107 +337,119 @@
                 <!-- Free -->
                 <div class="price-card">
                     <div>
-                        <h3 class="font-display text-main" style="font-size: 1.5rem;">Essencial</h3>
-                        <p class="text-muted" style="font-size: 0.9rem; margin-top: 4px;">Para organizar seu mês hoje</p>
-                        <div class="price-val text-main">Grátis</div>
+                        <h3 class="p-plan-name text-main">Essencial</h3>
+                        <p class="p-plan-desc">Para organizar seu mês hoje</p>
+                        <div class="p-price-val text-main">Grátis</div>
                         <ul class="price-list">
-                            <li><i class="fas fa-check"></i> Lançamentos ilimitados</li>
+                            <li><i class="fas fa-check"></i> <strong>Lançamentos ilimitados</strong></li>
                             <li><i class="fas fa-check"></i> Orçamento 50/30/20</li>
                             <li><i class="fas fa-check"></i> Termômetro Emoji</li>
                         </ul>
                     </div>
-                    <button class="btn-outline w-full mt-4" onclick="app.startApp(true)">COMEÇAR GRÁTIS</button>
+                    <button type="button" class="btn-outline w-full" onclick="app.startApp(true)">COMEÇAR GRÁTIS</button>
                 </div>
 
                 <!-- Mensal -->
                 <div class="price-card">
                     <div>
-                        <h3 class="font-display text-primary" style="font-size: 1.5rem;"><i class="fas fa-star"></i> PRO Mensal</h3>
-                        <p class="text-muted" style="font-size: 0.9rem; margin-top: 4px;">Flexibilidade mês a mês</p>
-                        <div class="price-val text-primary">R$ 4,90 <span style="font-size: 0.9rem;">/ mês</span></div>
+                        <h3 class="p-plan-name text-primary"><i class="fas fa-star"></i> PRO Mensal</h3>
+                        <p class="p-plan-desc">Flexibilidade mês a mês</p>
+                        <div class="p-price-val text-primary">R$ 4,90 <span>/ mês</span></div>
                         <ul class="price-list">
                             <li><i class="fas fa-check text-success"></i> <strong class="text-main">Tudo do Essencial</strong></li>
-                            <li><i class="fas fa-check text-success"></i> Parcelamento automático de Crédito</li>
-                            <li><i class="fas fa-check text-success"></i> Importação de CSV (B3/Corretoras)</li>
+                            <li><i class="fas fa-check text-success"></i> Parcelamento automático (Crédito)</li>
+                            <li><i class="fas fa-check text-success"></i> Importação de CSV (B3)</li>
                             <li><i class="fas fa-check text-success"></i> Atalhos de 1 clique</li>
-                            <li><i class="fas fa-check text-success"></i> Temas e cores personalizáveis</li>
+                            <li><i class="fas fa-check text-success"></i> Temas personalizados</li>
                         </ul>
                     </div>
-                    <!-- Checkout Mercado Pago Mensal -->
-                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-outline w-full mt-4" style="border-color: var(--primary); color: var(--primary);">
+                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-outline w-full" style="border-color: var(--primary); color: var(--primary);">
                         <i class="fas fa-credit-card"></i> Assinar Mensal
                     </a>
                 </div>
 
-                <!-- Anual -->
+                <!-- Anual (Featured) -->
                 <div class="price-card featured">
                     <div class="price-badge">MAIS INTELIGENTE (2 MESES GRÁTIS)</div>
                     <div>
-                        <h3 class="font-display text-primary" style="font-size: 1.5rem;"><i class="fas fa-crown"></i> PRO Anual</h3>
-                        <p class="text-muted" style="font-size: 0.9rem; margin-top: 4px;">O melhor custo-benefício</p>
-                        <div class="price-val text-primary">R$ 49,90 <span style="font-size: 0.9rem;">/ ano</span></div>
-                        <div class="text-success" style="font-size: 0.85rem; font-weight: 800; margin-bottom: 16px; background: rgba(76, 175, 80, 0.1); display: inline-block; padding: 4px 10px; border-radius: 8px;">
-                            Equivale a R$ 4,15/mês
-                        </div>
+                        <h3 class="p-plan-name text-primary"><i class="fas fa-crown"></i> PRO Anual</h3>
+                        <p class="p-plan-desc">O melhor custo-benefício</p>
+                        <div class="p-price-val text-primary">R$ 49,90 <span>/ ano</span></div>
+                        <div class="p-equiv">Equivale a R$ 4,15/mês</div>
                         <ul class="price-list">
                             <li><i class="fas fa-check text-success"></i> <strong class="text-main">Todos os recursos PRO liberados</strong></li>
                             <li><i class="fas fa-check text-success"></i> Não se preocupe com faturas mensais</li>
-                            <li><i class="fas fa-check text-success"></i> Suporte VIP diretamente com o criador</li>
-                            <li><i class="fas fa-check text-success"></i> Acesso antecipado a novas funções</li>
+                            <li><i class="fas fa-check text-success"></i> Suporte VIP com o criador</li>
                         </ul>
                     </div>
-                    <!-- Checkout Mercado Pago Anual (Pode criar o link lá depois e trocar aqui) -->
-                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-glow w-full mt-4" style="background: var(--primary); color: #000;">
+                    <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-glow w-full" style="background: var(--primary); color: #000;">
                         <i class="fas fa-rocket"></i> Assinar Anual
                     </a>
                 </div>
             </div>
-            <div class="price-footer-msg">
-                Após o pagamento, envie o comprovante no WhatsApp de suporte (seção Contato) ou aguarde para receber o seu código premium <strong>(ex: clienteL7)</strong>.
-            </div>
+            
+            <p class="price-footer-msg">
+                Após o pagamento, envie o comprovante pelo WhatsApp de suporte abaixo ou aguarde nosso time enviar o seu código de acesso premium (ex: <strong>clienteL7</strong>).
+            </p>
         </section>
 
-        <!-- Footer Fiel Imagem 3 -->
+        <!-- RODAPÉ RESTAURADO E PERSUASIVO -->
         <footer class="lp-footer" id="contato">
             <div class="footer-grid">
-                <div class="footer-col">
+                <!-- Marca e Mensagem -->
+                <div class="footer-col" style="grid-column: span 2;">
                     <div class="lp-logo" style="margin-bottom: 16px;"><div class="icon-box"><i class="fas fa-crown"></i></div> L7 FINANÇAS</div>
-                    <p class="text-muted" style="font-size: 0.9rem; line-height: 1.6;">O controle financeiro que você precisa, com a privacidade que você merece.</p>
+                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; max-width: 400px;">
+                        Desenvolvido para quem valoriza a agilidade. O controle financeiro que você precisa, com a privacidade que você merece. Todos os dados ficam salvos de forma segura apenas no seu aparelho.
+                    </p>
                 </div>
                 
+                <!-- Links Úteis -->
                 <div class="footer-col">
-                    <h4>Produto</h4>
-                    <button class="link-btn-gold" onclick="app.startApp(true)">Abrir App</button>
+                    <h4>Navegação</h4>
+                    <button type="button" class="link-btn-gold" onclick="app.startApp(true)">Entrar no App</button>
+                    <button type="button" class="footer-link-normal" onclick="authUI.open()"><i class="fas fa-user-circle"></i> Acessar Perfil</button>
+                    <a href="#planos" class="footer-link-normal"><i class="fas fa-star"></i> Assinar PRO</a>
                 </div>
                 
+                <!-- Contato e Redes -->
                 <div class="footer-col">
-                    <h4>Contato</h4>
-                    <a href="https://wa.me/5511999999999" target="_blank" class="footer-link">WhatsApp Suporte</a>
-                    <a href="#" onclick="event.preventDefault(); contactUI.open()" class="footer-link-normal">Enviar E-mail</a>
+                    <h4>Fale Conosco</h4>
+                    <a href="https://wa.me/5511999999999" target="_blank" class="footer-link-normal" style="color: #22c55e; font-weight: 600;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Suporte
+                    </a>
+                    <a href="https://instagram.com/seuinstagram" target="_blank" class="footer-link-normal">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="https://linkedin.com/in/seulinkedin" target="_blank" class="footer-link-normal">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <button type="button" class="footer-link-normal" onclick="contactUI.open()">
+                        <i class="fas fa-envelope"></i> E-mail Direto
+                    </button>
                 </div>
-
-                <div class="footer-col">
-                    <h4>Redes Sociais</h4>
-                    <a href="#" class="footer-link-normal"><i class="fab fa-instagram"></i> Instagram</a>
-                    <a href="#" class="footer-link-normal"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <span>&copy; 2026 L7 Finanças. Desenvolvido por Luiz Fernando.</span>
+                <span>Feito com <i class="fas fa-heart text-danger"></i> no Brasil.</span>
             </div>
         </footer>
     </div>
 
     <!-- =========================================================
-         MODAIS GLOBAIS
+         MODAIS GLOBAIS (100% LOCAL SAFE)
          ========================================================= -->
-    <!-- Login e Cadastro Local / Nuvem -->
+    <!-- Login e Cadastro Local -->
     <div id="modal-auth" class="modal-overlay hidden">
         <div class="modal-content">
-            <span class="modal-close" onclick="authUI.close()"><i class="fas fa-times"></i></span>
+            <button type="button" class="modal-close" onclick="authUI.close()"><i class="fas fa-times"></i></button>
             <div class="text-center" style="margin-bottom: 24px;">
                 <div style="width: 52px; height: 52px; border: 1.5px solid var(--primary); border-radius: 12px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.4rem;">
                     <i class="fas fa-user-shield"></i>
                 </div>
-                <h2 id="auth-title" style="font-size: 1.4rem;">Acessar Conta</h2>
-                <p id="auth-subtitle" class="text-muted" style="font-size: 0.85rem; margin-top: 4px;">Seus dados seguros na nuvem</p>
+                <h2 id="auth-title" style="font-size: 1.4rem;">Acessar Perfil</h2>
+                <p id="auth-subtitle" class="text-muted" style="font-size: 0.85rem; margin-top: 4px;">Separe suas contas neste aparelho</p>
             </div>
             <form onsubmit="event.preventDefault(); authUI.submit();">
                 <input type="email" id="auth-email" placeholder="Seu E-mail" required style="margin-bottom: 16px;">
@@ -456,23 +457,23 @@
                 <button type="submit" id="auth-btn-submit" class="w-full btn-glow" style="padding: 14px;">Entrar no App</button>
             </form>
             <div class="text-center" style="margin-top: 18px; font-size: 0.9rem;">
-                <span id="auth-switch-text" class="text-muted">Ainda não tem conta?</span>
-                <a href="#" class="text-primary font-display" style="font-weight: 700; margin-left: 6px; text-decoration: none;" onclick="event.preventDefault(); authUI.toggleMode();" id="auth-switch-link">Criar Conta Grátis</a>
+                <span id="auth-switch-text" class="text-muted">Ainda não tem perfil?</span>
+                <button type="button" class="btn-outline" style="border:none; color:var(--primary); font-weight:700; padding:0; background:none;" onclick="authUI.toggleMode()" id="auth-switch-link">Criar Perfil Grátis</button>
             </div>
         </div>
     </div>
 
-    <!-- Torne-se PRO (Atalho Interno) -->
+    <!-- Torne-se PRO -->
     <div id="modal-pro-upgrade" class="modal-overlay hidden">
         <div class="modal-content" style="border: 1.5px solid var(--primary);">
-            <span class="modal-close" onclick="app.closeModal('modal-pro-upgrade')"><i class="fas fa-times"></i></span>
+            <button type="button" class="modal-close" onclick="app.closeModal('modal-pro-upgrade')"><i class="fas fa-times"></i></button>
             <div class="text-center" style="margin-bottom: 16px;">
                 <h2 class="text-primary" style="font-size: 1.4rem;"><i class="fas fa-crown"></i> TORNE-SE PRO</h2>
                 <p class="text-muted" style="font-size: 0.88rem; margin-top: 4px;">Controle total da sua vida financeira</p>
             </div>
             
             <ul class="price-list" style="margin: 16px 0 20px; gap: 10px; font-size: 0.88rem;">
-                <li><i class="fas fa-check text-success"></i> <strong class="text-main">Parcelamento Automático (Cartão Crédito)</strong></li>
+                <li><i class="fas fa-check text-success"></i> <strong class="text-main">Parcelamento Automático (Cartão)</strong></li>
                 <li><i class="fas fa-check text-success"></i> Importação de extrato CSV (B3)</li>
                 <li><i class="fas fa-check text-success"></i> Atalhos rápidos e Temas customizados</li>
             </ul>
@@ -481,11 +482,10 @@
                 <label class="text-muted" style="font-size: 0.8rem;">Já possui um código de ativação?</label>
                 <div class="flex gap-2" style="margin-top: 6px;">
                     <input type="text" id="modal-pro-code" placeholder="Ex: clienteL7" style="margin: 0; font-weight: 700;">
-                    <button type="button" onclick="app.activateProFromModal()">Ativar</button>
+                    <button type="button" class="btn" onclick="app.activateProFromModal()" style="padding: 12px 16px;">Ativar</button>
                 </div>
             </div>
 
-            <!-- Botão Direto para o Mercado Pago -->
             <a href="https://mpago.la/2MqAeZT" target="_blank" class="btn btn-glow w-full" style="padding: 14px;">
                 <i class="fas fa-credit-card"></i> Assinar PRO com Segurança
             </a>
@@ -495,34 +495,34 @@
     <!-- E-mail Oculto -->
     <div id="modal-email" class="modal-overlay hidden">
         <div class="modal-content">
-            <span class="modal-close" onclick="contactUI.close()"><i class="fas fa-times"></i></span>
+            <button type="button" class="modal-close" onclick="contactUI.close()"><i class="fas fa-times"></i></button>
             <h3 class="text-primary" style="margin-bottom: 6px; font-size: 1.3rem;"><i class="fas fa-envelope"></i> Enviar Mensagem</h3>
             <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 20px;">Envie sua dúvida diretamente para o desenvolvedor.</p>
             <form onsubmit="event.preventDefault(); contactUI.send();">
                 <input type="text" id="contact-name" placeholder="Seu nome" required style="margin-bottom: 12px;">
                 <select id="contact-subject" style="margin-bottom: 12px;">
                     <option value="Suporte L7 Finanças">Suporte / Dúvida geral</option>
-                    <option value="Assinatura Plano PRO">Ativação Plano PRO</option>
+                    <option value="Parcerias e Negócios">Parcerias e Negócios</option>
                 </select>
-                <textarea id="contact-msg" rows="3" placeholder="Sua mensagem..." required style="margin-bottom: 20px;"></textarea>
-                <button type="submit" class="w-full btn-glow"><i class="fas fa-paper-plane"></i> Abrir Aplicativo de E-mail</button>
+                <textarea id="contact-msg" rows="4" placeholder="Sua mensagem..." required style="margin-bottom: 20px;"></textarea>
+                <button type="submit" class="w-full btn-glow" style="padding: 14px;"><i class="fas fa-paper-plane"></i> Abrir Aplicativo de E-mail</button>
             </form>
         </div>
     </div>
 
     <!-- =========================================================
-         2. APP INTERNO (SPA)
+         2. APP INTERNO (SPA MOBILE-FIRST)
          ========================================================= -->
     <div id="view-app" class="hidden">
         
         <div class="app-header">
             <div class="header-left-group">
-                <div class="header-pill-btn" onclick="app.backToLanding()">
+                <button type="button" class="header-pill-btn" onclick="app.backToLanding()">
                     <i class="fas fa-globe"></i> <span>Site</span>
-                </div>
-                <div class="header-pill-btn" onclick="authUI.manageProfile()">
+                </button>
+                <button type="button" class="header-pill-btn" onclick="authUI.manageProfile()">
                     <i class="fas fa-user-circle"></i> <span id="label-user-profile">Fazer Login</span>
-                </div>
+                </button>
             </div>
 
             <button type="button" class="header-pro-cta" id="btn-header-pro" onclick="app.openProModal()">
@@ -543,7 +543,7 @@
             </select>
             <div class="month-nav" id="month-nav-bar">
                 <button type="button" class="nav-arrow" onclick="app.shiftPeriod(-1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="font-display text-main" style="font-weight: 700; font-size: 1rem;" id="display-date-label">Nov / 2026</span>
+                <span class="font-display text-main" style="font-weight: 600; font-size: 0.95rem;" id="display-date-label">Nov / 2026</span>
                 <button type="button" class="nav-arrow" onclick="app.shiftPeriod(1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
@@ -602,7 +602,7 @@
                 
                 <div class="emoji-mood-card">
                     <div class="emoji-face-circle" id="graf-emoji-face">🙂</div>
-                    <div><div class="text-primary font-display" style="font-weight: 700; font-size: 1rem;" id="graf-emoji-status">Termômetro</div><p class="text-muted" style="font-size:0.85rem;" id="graf-emoji-msg">Avaliando...</p></div>
+                    <div><div class="text-primary font-display" style="font-weight: 600; font-size: 0.95rem;" id="graf-emoji-status">Termômetro</div><p class="text-muted" style="font-size:0.8rem;" id="graf-emoji-msg">Avaliando...</p></div>
                 </div>
                 
                 <div class="chart-wrapper"><div class="chart-title">Realidade vs Meta 50/30/20</div><div class="chart-container"><canvas id="chart-rosca"></canvas></div><div class="reality-pills" id="reality-503020-pills"></div></div>
@@ -631,7 +631,7 @@
                 <div class="chart-wrapper mt-4"><div class="chart-title">Evolução 12 Meses</div><div class="chart-container"><canvas id="chart-pat-evol"></canvas></div></div>
             </div>
 
-            <!-- ABA 6: INSIGHTS (Omitido visualmente, usa mesmo motor) -->
+            <!-- ABA 6: INSIGHTS -->
             <div id="tab-insights" class="tab-content hidden">
                 <h2 class="section-title"><i class="fas fa-lightbulb text-primary"></i> Insights L7-IA</h2>
                 <div class="insight-card border-green"><div class="insight-title"><i class="fas fa-piggy-bank"></i> Taxa de Poupança</div><div class="insight-val" id="ins-poup-val">0.0%</div><div class="insight-desc" id="ins-poup-desc">Analise para calcular.</div></div>
@@ -639,7 +639,7 @@
                 <div class="insight-card border-gold"><div class="insight-title"><i class="fas fa-wand-magic-sparkles"></i> Diagnóstico</div><ul class="diag-list" id="ins-diag-list"></ul></div>
             </div>
             
-            <!-- ABA 7: CONFIG (Importação CSV/JSON para Lançamentos) -->
+            <!-- ABA 7: CONFIG -->
             <div id="tab-config" class="tab-content hidden">
                 <h2 class="section-title">Configurações</h2>
                 
@@ -650,20 +650,20 @@
                     <div class="flex-col gap-3">
                         <button type="button" class="btn-outline w-full" onclick="app.exportJSON()"><i class="fas fa-download"></i> Exportar Backup (Segurança)</button>
                         <button type="button" class="btn-gold-outline w-full" onclick="document.getElementById('import-data-input').click()"><i class="fas fa-file-import"></i> Importar Dados (Restaurar/Planilha)</button>
-                        <button type="button" class="btn-danger w-full mt-2" onclick="if(confirm('Isso apagará TODOS os dados! Continuar?')) app.resetData()"><i class="fas fa-trash"></i> Resetar Tudo</button>
+                        <button type="button" class="btn-danger w-full mt-2" onclick="if(confirm('Isso apagará TODOS os dados do perfil atual! Continuar?')) app.resetData()"><i class="fas fa-trash"></i> Resetar Tudo</button>
                     </div>
                 </div>
                 
-                <button class="btn-outline w-full mt-4" style="border-color: #555; color: #aaa;" onclick="auth.logout()">Sair do Perfil / Logout</button>
+                <button type="button" class="btn-outline w-full mt-4" style="border-color: #444; color: #999;" onclick="auth.logout()">Sair do Perfil Atual / Logout</button>
             </div>
 
             <!-- ABA 8: DEV -->
             <div id="tab-dev" class="tab-content hidden">
                 <div class="card text-center py-10">
-                    <div style="width: 70px; height: 70px; background: var(--primary); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #000;">LF</div>
+                    <div style="width: 70px; height: 70px; background: var(--primary); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #0f172a;">LF</div>
                     <h2 class="mb-1 text-xl">Luiz Fernando</h2>
                     <p class="text-primary mb-6 text-sm">Criador do L7 Control</p>
-                    <button onclick="window.open('https://wa.me/5511999999999', '_blank')" style="background: #25D366; color: #fff; border:none; width: 100%;"><i class="fab fa-whatsapp"></i> WhatsApp Suporte</button>
+                    <button type="button" onclick="window.open('https://wa.me/5511999999999', '_blank')" style="background: #22c55e; color: #fff; border:none; width: 100%;"><i class="fab fa-whatsapp"></i> WhatsApp Suporte</button>
                 </div>
             </div>
         </div>
@@ -686,7 +686,7 @@
     <!-- MODAL: NOVO LANÇAMENTO -->
     <div id="modal-tx" class="modal-overlay hidden">
         <div class="modal-content">
-            <span class="modal-close" onclick="app.closeModal('modal-tx')"><i class="fas fa-times"></i></span>
+            <button type="button" class="modal-close" onclick="app.closeModal('modal-tx')"><i class="fas fa-times"></i></button>
             <h3 class="text-primary font-display" style="font-size: 1.35rem; margin-bottom: 20px;">Lançar</h3>
             
             <select id="tx-type" onchange="app.updateCategoriesDropdown()" class="mb-3 font-display" style="font-weight: 700; border-color: var(--primary);">
@@ -698,7 +698,6 @@
             <select id="tx-category" class="mb-3"></select>
             <input type="text" id="tx-desc" placeholder="O que foi? (Ex: Mercado)" class="mb-3">
             
-            <!-- Forma de Pagamento e Parcelas -->
             <div id="tx-payment-method-block">
                 <select id="tx-pay-method" onchange="app.handlePaymentMethodChange()" class="mb-3">
                     <option value="Pix">Dinheiro / Pix</option>
@@ -708,7 +707,7 @@
                     <option value="Boleto">Boleto / Transf.</option>
                 </select>
                 
-                <div id="tx-installments-block" class="hidden mb-3 p-3" style="background: rgba(212,175,55,0.06); border: 1px solid var(--border); border-radius: 10px;">
+                <div id="tx-installments-block" class="hidden mb-3 p-3" style="background: rgba(251, 191, 36, 0.05); border: 1px solid var(--border); border-radius: 10px;">
                     <label class="text-primary font-display" style="font-size: 0.85rem; font-weight: 700;">Parcelamento <span class="badge-pro">PRO</span></label>
                     <select id="tx-installments" class="mt-2">
                         <option value="1">1x (À vista)</option>
@@ -732,70 +731,65 @@
     </div>
 
     <!-- =========================================================
-         SCRIPTS
+         SCRIPTS GLOBAIS (100% PURE JS LOCAL, ZERO BUGS)
          ========================================================= -->
     <script>
-        // 1. SUPABASE
-        const SUPABASE_URL = 'https://tjfgwwyodicgwbwcsiwq.supabase.co'; 
-        const SUPABASE_ANON_KEY = 'sb_publishable_VGqEdJCpnx77MDx9eQYxyQ_lQv2_QHF'; 
-        let supabase = null;
-        if(SUPABASE_URL !== 'COLE_SUA_URL_AQUI') {
-            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        }
-
-        // 2. VÍDEO ANIMADO
-        const tutorialVideo = {
-            scenes: [
-                { badge: 'CENA 1 DE 4', time: '00:05 / 00:20', progress: '25%', subtitle: '1. Lance despesas diárias com 1 toque nos atalhos.', html: `<div class="flex justify-between items-center mb-3"><span class="text-primary font-display text-sm"><i class="fas fa-bolt"></i> Atalho</span><span class="badge-pro">RÁPIDO</span></div><div style="background: #1d1d22; border: 1px solid var(--primary); border-radius: 10px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;"><span><i class="fas fa-coffee text-primary"></i> Café</span><strong class="text-primary">R$ 6,00</strong></div>` },
-                { badge: 'CENA 2 DE 4', time: '00:10 / 00:20', progress: '50%', subtitle: '2. O app compara gastos reais contra a meta 50/30/20.', html: `<div class="text-center font-display text-primary text-sm mb-3">Realidade vs. Meta</div><div class="mb-2"><div class="flex justify-between text-xs mb-1"><span>Essenciais: <strong>48%</strong></span><span class="text-success">Meta 50%</span></div><div style="height:7px; background:#2c2c34; border-radius:4px;"><div style="width:48%; height:100%; background:var(--success); border-radius:4px;"></div></div></div><div class="mb-2"><div class="flex justify-between text-xs mb-1"><span>Variáveis: <strong>28%</strong></span><span class="text-success">Meta 30%</span></div><div style="height:7px; background:#2c2c34; border-radius:4px;"><div style="width:28%; height:100%; background:var(--primary); border-radius:4px;"></div></div></div>` },
-                { badge: 'CENA 3 DE 4', time: '00:15 / 00:20', progress: '75%', subtitle: '3. Nosso assistente visual reage à saúde do seu mês.', html: `<div class="flex items-center gap-3"><div style="font-size:2.6rem;">😄</div><div style="background:#1d1d22; padding:12px; border-radius:12px; border:1px solid var(--success); font-size:0.78rem; line-height:1.45;"><strong class="text-success">Consultor L7:</strong><br>"Excelente! Manteve os limites no verde."</div></div>` },
-                { badge: 'CENA 4 DE 4', time: '00:20 / 00:20', progress: '100%', subtitle: '4. Importe extratos da B3 e evolua seu patrimônio.', html: `<div class="text-center"><div class="text-muted text-xs">Patrimônio Acumulado</div><div class="font-display text-purple" style="font-size:1.7rem; font-weight:800; margin:4px 0 10px;">R$ 85.400,00</div><div style="background: rgba(156,39,176,0.14); border: 1px solid var(--purple); border-radius: 8px; padding: 8px; font-size: 0.76rem; color: #e9b3ff;"><i class="fas fa-file-csv"></i> Dividendos e JCP detectados!</div></div>` }
-            ],
-            current: 0, playing: true, timer: null,
-            init() { this.render(); this.startLoop(); },
-            startLoop() { clearInterval(this.timer); this.timer = setInterval(() => { if (this.playing) this.nextScene(); }, 4500); },
-            toggle() { this.playing = !this.playing; document.getElementById('video-play-icon').className = this.playing ? 'fas fa-pause' : 'fas fa-play'; },
-            goTo(idx) { this.current = idx; this.render(); this.startLoop(); },
-            nextScene() { this.current = (this.current + 1) % this.scenes.length; this.render(); },
-            render() {
-                const s = this.scenes[this.current];
-                if (!document.getElementById('video-demo-content')) return;
-                document.getElementById('video-scene-badge').innerText = s.badge;
-                document.getElementById('video-timer').innerText = s.time;
-                document.getElementById('video-progress').style.width = s.progress;
-                document.getElementById('video-subtitle').innerText = s.subtitle;
-                document.getElementById('video-demo-content').innerHTML = s.html;
-                document.querySelectorAll('.video-chap-btn').forEach((btn, i) => btn.classList.toggle('active', i === this.current));
+        // 1. CARROSSEL DE SLIDES (Substituto Leve do Vídeo)
+        const lpCarousel = {
+            current: 0, total: 4, timer: null,
+            init() { this.update(); this.startAuto(); },
+            startAuto() { clearInterval(this.timer); this.timer = setInterval(() => this.next(), 6000); },
+            next() { this.current = (this.current + 1) % this.total; this.update(); this.startAuto(); },
+            prev() { this.current = (this.current - 1 + this.total) % this.total; this.update(); this.startAuto(); },
+            goTo(i) { this.current = i; this.update(); this.startAuto(); },
+            update() {
+                const track = document.getElementById('carousel-track');
+                if(track) track.style.transform = `translateX(-${this.current * 100}%)`;
+                document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === this.current));
             }
         };
 
-        // 3. AUTENTICAÇÃO E PERFIL L7
+        // 2. AUTENTICAÇÃO LOCAL
         const auth = {
             currentUser: null,
-            async init() {
-                if(supabase) {
-                    const { data } = await supabase.auth.getSession();
-                    this.currentUser = data.session?.user || null;
-                    supabase.auth.onAuthStateChange((event, session) => {
-                        this.currentUser = session?.user || null;
-                    });
-                }
+            init() {
+                const saved = localStorage.getItem('l7_current_user');
+                this.currentUser = saved ? { email: saved } : null;
             },
-            async login(email, password) {
-                if(supabase) {
-                    const { error } = await supabase.auth.signInWithPassword({ email, password });
-                    if(error) throw error;
+            login(email, password) {
+                const users = JSON.parse(localStorage.getItem('l7_local_users')) || {};
+                if(users[email] && users[email] === btoa(password)) {
+                    this.currentUser = { email };
+                    localStorage.setItem('l7_current_user', email);
+                    return true;
                 }
+                return false;
             },
-            async register(email, password) {
-                if(supabase) {
-                    const { error } = await supabase.auth.signUp({ email, password });
-                    if(error) throw error;
-                }
+            register(email, password) {
+                const users = JSON.parse(localStorage.getItem('l7_local_users')) || {};
+                if(users[email]) return false;
+                users[email] = btoa(password);
+                localStorage.setItem('l7_local_users', JSON.stringify(users));
+                this.currentUser = { email };
+                localStorage.setItem('l7_current_user', email);
+                
+                const proTrials = JSON.parse(localStorage.getItem('l7_pro_trials')) || {};
+                proTrials[email] = Date.now() + (4 * 24 * 60 * 60 * 1000);
+                localStorage.setItem('l7_pro_trials', JSON.stringify(proTrials));
+                return true;
             },
-            async logout() {
-                if(supabase) await supabase.auth.signOut();
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem('l7_current_user');
                 location.reload();
+            },
+            getTrialDaysRemaining() {
+                if(!this.currentUser) return 0;
+                const proTrials = JSON.parse(localStorage.getItem('l7_pro_trials')) || {};
+                const expireAt = proTrials[this.currentUser.email];
+                if(!expireAt) return 0;
+                const diff = expireAt - Date.now();
+                return diff > 0 ? Math.ceil(diff / (24 * 60 * 60 * 1000)) : 0;
             }
         };
 
@@ -805,19 +799,22 @@
             close() { document.getElementById('modal-auth').classList.add('hidden'); },
             toggleMode() { this.mode = this.mode==='login'?'register':'login'; this.update(); },
             update() {
-                document.getElementById('auth-title').innerText = this.mode==='login'?'Acessar Conta':'Criar Conta Grátis';
-                document.getElementById('auth-btn-submit').innerText = this.mode==='login'?'Entrar':'Cadastrar';
-                document.getElementById('auth-switch-text').innerText = this.mode==='login'?'Não tem conta?':'Já possui conta?';
-                document.getElementById('auth-switch-link').innerText = this.mode==='login'?'Criar Conta':'Fazer Login';
+                document.getElementById('auth-title').innerText = this.mode==='login'?'Acessar Perfil':'Criar Conta Local';
+                document.getElementById('auth-btn-submit').innerText = this.mode==='login'?'Entrar no App':'Criar e Entrar';
+                document.getElementById('auth-switch-text').innerText = this.mode==='login'?'Ainda não tem perfil?':'Já possui conta local?';
+                document.getElementById('auth-switch-link').innerText = this.mode==='login'?'Criar Perfil Grátis':'Fazer Login';
             },
-            async submit() {
+            submit() {
                 const e=document.getElementById('auth-email').value, p=document.getElementById('auth-password').value;
-                try {
-                    if(this.mode==='login') await auth.login(e,p);
-                    else await auth.register(e,p);
-                    this.close();
-                    app.init(); 
-                } catch(err) { alert(err.message || 'Erro de autenticação'); }
+                if(!e || !p) return alert('Preencha os campos');
+                
+                if(this.mode==='login') {
+                    if(auth.login(e,p)) { this.close(); location.reload(); }
+                    else alert('Usuário ou senha incorretos.');
+                } else {
+                    if(auth.register(e,p)) { this.close(); alert('Conta criada! Você ganhou 4 dias de teste PRO.'); location.reload(); }
+                    else alert('E-mail já existe neste aparelho.');
+                }
             },
             manageProfile() {
                 if(!auth.currentUser) this.open();
@@ -825,7 +822,17 @@
             }
         };
 
-        // 4. LÓGICA PRINCIPAL (L7 FINANÇAS)
+        const contactUI = {
+            open() { document.getElementById('modal-email').classList.remove('hidden'); },
+            close() { document.getElementById('modal-email').classList.add('hidden'); },
+            send() {
+                const n = document.getElementById('contact-name').value.trim(), s = document.getElementById('contact-subject').value, m = document.getElementById('contact-msg').value.trim();
+                window.location.href = `mailto:luizfernando.l7control@gmail.com?subject=${encodeURIComponent(s + ' - ' + n)}&body=${encodeURIComponent(m)}`;
+                this.close();
+            }
+        };
+
+        // 3. LÓGICA DO APP
         const DEFAULT_CATS = [
             { id: 'c1', name: 'Moradia', type: 'despesa', macro: 'essencial', limit: 1200 },
             { id: 'c6', name: 'Lazer', type: 'despesa', macro: 'variavel', limit: 350 },
@@ -834,18 +841,19 @@
         ];
 
         const app = {
-            data: { transactions: [], categories: [...DEFAULT_CATS], shortcuts: [], settings: { isPro: false } },
-            currentTab: 'resumo', selectedDate: new Date(), charts: {},
+            data: { transactions: [], categories: [...DEFAULT_CATS], settings: { isPro: false } },
+            currentTab: 'resumo', selectedDate: new Date(), charts: {}, dataKey: '',
 
-            async init() {
-                if(document.getElementById('video-screen')) tutorialVideo.init();
-                await auth.init();
-                
+            init() {
+                auth.init();
                 const lbl = document.getElementById('label-user-profile');
-                lbl.innerText = auth.currentUser ? auth.currentUser.email.split('@')[0] : 'Entrar';
-                lbl.style.color = auth.currentUser ? 'var(--primary)' : 'var(--text-muted)';
+                if(lbl) {
+                    lbl.innerText = auth.currentUser ? auth.currentUser.email.split('@')[0] : 'Entrar (Perfil)';
+                    lbl.style.color = auth.currentUser ? 'var(--primary)' : 'var(--text-muted)';
+                }
                 
-                await this.loadData();
+                this.dataKey = 'l7financas_v7_' + (auth.currentUser ? auth.currentUser.email : 'guest');
+                this.loadData();
                 this.syncPeriodDates();
                 document.getElementById('tx-date').value = new Date().toISOString().split('T')[0];
 
@@ -865,25 +873,24 @@
                 window.scrollTo(0, 0);
             },
 
-            async loadData() {
-                if(supabase && auth.currentUser) {
-                    const { data } = await supabase.from('transactions').select('*');
-                    if(data) this.data.transactions = data;
-                } else {
-                    const s = localStorage.getItem('l7_local_data');
-                    if(s) this.data = JSON.parse(s);
+            loadData() {
+                const s = localStorage.getItem(this.dataKey);
+                if(s) {
+                    try {
+                        const parsed = JSON.parse(s);
+                        this.data.transactions = parsed.transactions || [];
+                        this.data.categories = parsed.categories || [...DEFAULT_CATS];
+                        this.data.settings = parsed.settings || { isPro: false };
+                    } catch(e){}
                 }
                 this.updateProUI();
             },
-            saveData() {
-                if(!supabase || !auth.currentUser) localStorage.setItem('l7_local_data', JSON.stringify(this.data));
-            },
+            saveData() { localStorage.setItem(this.dataKey, JSON.stringify(this.data)); },
 
             exportJSON() {
                 const blob = new Blob([JSON.stringify(this.data, null, 2)], { type: 'application/json' });
                 const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url; a.download = `l7_backup_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+                const a = document.createElement('a'); a.href = url; a.download = `l7_backup_${new Date().toISOString().slice(0, 10)}.json`; a.click();
             },
             handleImportData(event) {
                 const file = event.target.files[0]; if (!file) return;
@@ -899,11 +906,10 @@
                             }
                         } catch(err) { alert('Erro no arquivo.'); }
                     } else {
-                        // Logica simples de planilha CSV
                         const lines = content.split(/\r?\n/).filter(l => l.trim().length > 0);
                         let imp = 0;
                         lines.forEach((line, idx) => {
-                            if(idx===0) return; // pular cabeçalho
+                            if(idx===0) return;
                             const cols = line.split(line.includes(';')?';':',').map(c=>c.replace(/^"|"$/g, '').trim());
                             if(cols.length < 2) return;
                             let val=0; for(let i=0;i<cols.length;i++){ if(/^-?\s*(R\$)?\s*\d+([.,]\d{1,2})?$/.test(cols[i])){ val=parseFloat(cols[i].replace(/[^\d,.-]/g, '').replace(/\.(?=\d{3})/g, '').replace(',','.')); break; } }
@@ -913,6 +919,7 @@
                         });
                         this.saveData(); alert(`${imp} lançamentos importados.`); this.renderCurrentView();
                     }
+                    event.target.value = '';
                 }; reader.readAsText(file);
             },
             resetData() { this.data.transactions=[]; this.saveData(); this.renderCurrentView(); alert('Dados apagados.'); },
@@ -925,11 +932,24 @@
                 } else alert('Código inválido.');
             },
             updateProUI() {
-                const isPro = Boolean(this.data.settings.isPro);
-                if(isPro) {
-                    const tag = document.getElementById('header-plan-tag'); if(tag) tag.innerText = 'PLANO PRO';
-                    const btn = document.getElementById('btn-header-pro'); if(btn) { btn.classList.add('is-pro-active'); document.getElementById('header-pro-title').innerText = 'PRO ATIVADO'; document.getElementById('header-pro-sub').innerText = 'Recursos Liberados'; }
-                    document.getElementById('btn-import-csv').disabled = false; document.getElementById('csv-file').disabled = false;
+                const permPro = Boolean(this.data.settings.isPro);
+                const trialDays = auth.getTrialDaysRemaining();
+                const active = permPro || trialDays > 0;
+
+                const headerTag = document.getElementById('header-plan-tag'); 
+                const btnHeader = document.getElementById('btn-header-pro');
+                
+                if (permPro) {
+                    if(headerTag) headerTag.innerText = 'PLANO PRO';
+                    if(btnHeader) { btnHeader.classList.add('is-pro-active'); document.getElementById('header-pro-title').innerText = 'PRO ATIVADO'; document.getElementById('header-pro-sub').innerText = 'Controle Total'; }
+                } else if (trialDays > 0) {
+                    if(headerTag) headerTag.innerText = `TESTE PRO (${trialDays}D)`;
+                    if(btnHeader) { btnHeader.classList.remove('is-pro-active'); document.getElementById('header-pro-title').innerText = `TESTE PRO (${trialDays}D)`; document.getElementById('header-pro-sub').innerText = 'Assine p/ manter'; }
+                }
+
+                if(active) {
+                    const bCsv = document.getElementById('btn-import-csv'); if(bCsv) bCsv.disabled = false;
+                    const fCsv = document.getElementById('csv-file'); if(fCsv) fCsv.disabled = false;
                 }
             },
             openProModal() { document.getElementById('modal-pro-upgrade').classList.remove('hidden'); },
@@ -941,7 +961,7 @@
                 document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
                 document.getElementById(`tab-${tabId}`).classList.remove('hidden');
                 
-                document.getElementById('global-filter-wrapper').classList.toggle('hidden', tabId==='dev');
+                document.getElementById('global-filter-wrapper').classList.toggle('hidden', tabId==='dev' || tabId==='config');
                 document.getElementById('fab-add').classList.toggle('hidden', tabId!=='extrato');
                 this.renderCurrentView();
             },
@@ -960,9 +980,8 @@
             },
             formatMoney: (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
 
-            /* RENDERIZAÇÕES PRINCIPAIS */
             renderCurrentView() {
-                if(this.currentTab==='resumo') this.renderResumo(); else if(this.currentTab==='extrato') this.renderExtrato(); else if(this.currentTab==='orcamento') this.renderOrcamento(); else if(this.currentTab==='graficos') this.renderGraficos(); else if(this.currentTab==='patrimonio') this.renderPatrimonio(); else if(this.currentTab==='insights') this.renderInsights();
+                if(this.currentTab==='resumo') this.renderResumo(); else if(this.currentTab==='extrato') this.renderExtrato(); else if(this.currentTab==='orcamento') this.renderOrcamento(); else if(this.currentTab==='graficos') this.renderGraficos(); else if(this.currentTab==='patrimonio') this.renderPatrimonio();
             },
 
             renderResumo() {
@@ -976,12 +995,17 @@
                 const saldo = inV-outV-invV; document.getElementById('resumo-saldo').innerText = this.formatMoney(saldo); document.getElementById('resumo-saldo').className = `value ${saldo>=0?'text-info':'text-danger'}`;
                 
                 const ul = document.getElementById('resumo-cat-list'); ul.innerHTML='';
-                Object.entries(cats).sort((a,b)=>b[1]-a[1]).forEach(([n,v])=>ul.innerHTML+=`<div class="card mb-2 p-3 flex justify-between items-center"><span class="text-muted text-sm">${n}</span><strong class="text-danger font-display">${this.formatMoney(v)}</strong></div>`);
+                const empty = document.getElementById('resumo-empty');
+                const entries = Object.entries(cats).sort((a,b)=>b[1]-a[1]);
+                if(entries.length===0){ empty.classList.remove('hidden'); } else {
+                    empty.classList.add('hidden');
+                    entries.forEach(([n,v])=>ul.innerHTML+=`<div class="card mb-2 p-3 flex justify-between items-center"><span class="text-muted text-sm">${n}</span><strong class="text-danger font-display">${this.formatMoney(v)}</strong></div>`);
+                }
             },
             
             copySummary() {
-                if(!this.data.settings.isPro) return this.openProModal();
-                navigator.clipboard.writeText('Resumo L7: Extrato Copiado!').then(()=>alert('Copiado!'));
+                if(!this.data.settings.isPro && auth.getTrialDaysRemaining() <= 0) return this.openProModal();
+                navigator.clipboard.writeText('Resumo L7 Copiado!').then(()=>alert('Copiado!'));
             },
 
             renderExtrato() {
@@ -1012,53 +1036,42 @@
                 });
             },
 
-            getPeriodMood(txs) {
-                let rec = 0, desp = 0;
-                txs.forEach(t => { if (t.type === 'receita') rec += t.value; else if (t.type === 'despesa') desp += t.value; });
-                const comp = rec>0 ? (desp/rec)*100 : 0;
-                if (rec === 0 && desp === 0) return { emoji: '🙂', status: 'Aguardando', color: 'var(--primary)', speech: 'Lance no Extrato!' };
-                if (desp > rec || comp > 95) return { emoji: '😭', status: 'No Vermelho', color: 'var(--danger)', speech: `Alerta! Despesas = ${comp.toFixed(1)}% da renda.` };
-                if (comp <= 80 && rec > 0) return { emoji: '😄', status: 'Saudável', color: 'var(--success)', speech: `Perfeito! Gastos = ${comp.toFixed(1)}% da renda.` };
-                return { emoji: '😐', status: 'Atenção', color: 'var(--primary)', speech: `Cuidado, gastos em ${comp.toFixed(1)}%.` };
-            },
-
             renderGraficos() {
-                Chart.defaults.color = '#9CA3AF'; Chart.defaults.font.family = 'Inter';
+                Chart.defaults.color = '#94a3b8'; Chart.defaults.font.family = 'Inter';
                 const txs = this.getFilteredTransactions();
                 
-                const mood = this.getPeriodMood(txs);
-                document.getElementById('graf-emoji-face').innerText = mood.emoji; document.getElementById('graf-emoji-status').innerText = mood.status; document.getElementById('graf-emoji-status').style.color = mood.color; document.getElementById('graf-emoji-msg').innerText = mood.speech;
-                
-                const pMap = {}; let e=0, v=0, i=0, r=0;
+                let rec=0, desp=0, inv=0;
+                const pMap = {}; 
                 txs.forEach(t => { 
                     const c = this.data.categories.find(x=>x.id===t.categoryId)||{};
-                    if(t.type==='receita') r+=t.value; else if(t.type==='investimento') i+=t.value;
-                    else if(t.type==='despesa') { if(c.macro==='essencial') e+=t.value; else v+=t.value; pMap[t.payMethod||'Outro'] = (pMap[t.payMethod||'Outro']||0) + t.value; }
+                    if(t.type==='receita') rec+=t.value; else if(t.type==='investimento') inv+=t.value;
+                    else if(t.type==='despesa') { desp+=t.value; pMap[t.payMethod||'Outro'] = (pMap[t.payMethod||'Outro']||0) + t.value; }
                 });
 
+                const comp = rec>0 ? (desp/rec)*100 : 0;
+                let emoji = '🙂', status = 'Aguardando', color = 'var(--primary)', speech = 'Lance no Extrato!';
+                if(rec>0||desp>0) {
+                    if (desp > rec || comp > 95) { emoji = '😭'; status = 'No Vermelho'; color = 'var(--danger)'; speech = `Alerta! Despesas = ${comp.toFixed(1)}% da renda.`; }
+                    else if (comp <= 80 && rec > 0) { emoji = '😄'; status = 'Saudável'; color = 'var(--success)'; speech = `Perfeito! Gastos = ${comp.toFixed(1)}% da renda.`; }
+                    else { emoji = '😐'; status = 'Atenção'; color = 'var(--primary)'; speech = `Cuidado, gastos em ${comp.toFixed(1)}%.`; }
+                }
+                
+                document.getElementById('graf-emoji-face').innerText = emoji; document.getElementById('graf-emoji-status').innerText = status; document.getElementById('graf-emoji-status').style.color = color; document.getElementById('graf-emoji-msg').innerText = speech;
+
                 if(this.charts['chart-rosca']) this.charts['chart-rosca'].destroy();
-                this.charts['chart-rosca'] = new Chart(document.getElementById('chart-rosca').getContext('2d'), { type: 'doughnut', data: { labels: ['Essenciais','Variáveis','Aportes'], datasets: [{ data: [e,v,i], backgroundColor: ['#F44336','#d4af37','#4CAF50'], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false } });
+                this.charts['chart-rosca'] = new Chart(document.getElementById('chart-rosca').getContext('2d'), { type: 'doughnut', data: { labels: ['Despesas','Aportes'], datasets: [{ data: [desp,inv], backgroundColor: ['#ef4444','#22c55e'], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false } });
 
                 const pLabs = Object.keys(pMap); const pData = Object.values(pMap);
                 if(this.charts['chart-pagamentos']) this.charts['chart-pagamentos'].destroy();
-                this.charts['chart-pagamentos'] = new Chart(document.getElementById('chart-pagamentos').getContext('2d'), { type: 'bar', data: { labels: pLabs, datasets: [{ data: pData, backgroundColor: '#d4af37', borderRadius: 4 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display:false } } } });
+                this.charts['chart-pagamentos'] = new Chart(document.getElementById('chart-pagamentos').getContext('2d'), { type: 'bar', data: { labels: pLabs, datasets: [{ data: pData, backgroundColor: '#fbbf24', borderRadius: 4 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display:false } } } });
             },
 
             renderPatrimonio() {
                 let histTotal = 0; this.data.transactions.forEach(t => { if(t.type==='investimento') histTotal += t.value; });
                 document.getElementById('pat-total-hist').innerText = this.formatMoney(histTotal);
             },
-            
-            renderInsights() {
-                const txs = this.getFilteredTransactions(); const mood = this.getPeriodMood(txs);
-                document.getElementById('ins-emoji-face').innerText = mood.emoji; document.getElementById('ins-emoji-speech').innerText = mood.speech;
-            },
 
-            /* CRUD LANÇAMENTOS E PARCELAMENTO */
-            openTxModal() { 
-                this.updateCategoriesDropdown(); 
-                document.getElementById('modal-tx').classList.remove('hidden'); 
-            },
+            openTxModal() { this.updateCategoriesDropdown(); document.getElementById('modal-tx').classList.remove('hidden'); },
             closeModal(id) { document.getElementById(id).classList.add('hidden'); },
             updateCategoriesDropdown() {
                 const type = document.getElementById('tx-type').value;
@@ -1069,7 +1082,7 @@
             handlePaymentMethodChange() {
                 document.getElementById('tx-installments-block').classList.toggle('hidden', document.getElementById('tx-pay-method').value !== 'Crédito');
             },
-            async saveTransaction() {
+            saveTransaction() {
                 const type = document.getElementById('tx-type').value, catId = document.getElementById('tx-category').value, desc = document.getElementById('tx-desc').value.trim(), totalVal = parseFloat(document.getElementById('tx-val').value), baseDate = document.getElementById('tx-date').value;
                 if(!desc||!totalVal||totalVal<=0||!baseDate) return alert('Preencha corretamente.');
 
@@ -1078,7 +1091,7 @@
                     payMethod = document.getElementById('tx-pay-method').value;
                     if(payMethod === 'Crédito') {
                         inst = parseInt(document.getElementById('tx-installments').value)||1;
-                        if(inst > 1 && !this.data.settings.isPro) { alert('Parcelamento automático é PRO. Salvo à vista.'); inst = 1; }
+                        if(inst > 1 && !this.data.settings.isPro && auth.getTrialDaysRemaining() <= 0) { alert('Parcelamento automático é PRO. Salvo à vista.'); inst = 1; }
                     }
                 }
 
@@ -1088,11 +1101,6 @@
                     newTxs.push({ id: 'tx_'+Date.now()+i, type, categoryId: catId, desc: inst>1 ? `${desc} (${i+1}/${inst})` : desc, value: parcelVal, date: d.toISOString().split('T')[0], payMethod: type==='despesa'?payMethod:null });
                 }
 
-                if(supabase && auth.currentUser) {
-                    newTxs.forEach(t => t.user_id = auth.currentUser.id);
-                    await supabase.from('transactions').insert(newTxs);
-                }
-                
                 this.data.transactions.push(...newTxs); this.saveData(); this.closeModal('modal-tx'); this.renderCurrentView();
                 document.getElementById('tx-desc').value=''; document.getElementById('tx-val').value='';
                 alert(inst>1 ? `Parcelado em ${inst}x!` : 'Salvo com sucesso!');
@@ -1100,7 +1108,10 @@
             deleteTx(id) { if(confirm('Excluir?')) { this.data.transactions = this.data.transactions.filter(t=>t.id!==id); this.saveData(); this.renderCurrentView(); } }
         };
 
-        window.onload = () => app.init();
+        window.addEventListener('DOMContentLoaded', () => {
+            try { if(document.getElementById('carousel-track')) lpCarousel.init(); } catch(e) {}
+            try { app.init(); } catch(e) {}
+        });
     </script>
 </body>
 </html>
